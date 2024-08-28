@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "./layout";
 import Link from "next/link";
 import { GitCommitVertical } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const Footer = () => {
   return (
@@ -74,6 +75,7 @@ const Footer = () => {
         <div>
             <GitCommitVertical className="text-gray-600  dark:hover:text-white"/>
         </div>
+        <ThemeToggle/>
       </div>
 
     </Layout>
