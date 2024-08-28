@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="flex  mx-2 space-x-3 sm:justify-center sm:mt-0 items-center">
           <Link
             href="#"
-            className="p-1.5 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
+            className="p-1.5 text-neutral-700 dark:text-neutral-400 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
           >
             <svg
               className="w-4 h-4"
@@ -37,7 +37,7 @@ const Footer = () => {
           </Link>
           <Link
             href="#"
-            className="p-1.5 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
+            className="p-1.5 text-neutral-700 dark:text-gray-400 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
           >
             <svg
               className="w-4 h-4"
@@ -52,7 +52,7 @@ const Footer = () => {
           </Link>
           <Link
             href="#"
-            className="p-1.5 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
+            className="p-1.5 text-neutral-700 dark:text-gray-400 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
           >
             <svg
               className="w-4 h-4"
