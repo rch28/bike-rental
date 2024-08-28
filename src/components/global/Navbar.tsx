@@ -11,6 +11,7 @@ import { Menu } from "lucide-react";
 import Layout from './Layout'
 import { Style } from "@/lib/Style";
 import { Navlinks } from "@/lib/Navlink";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const [navToggle, setNavToggle] = useState(false);
@@ -35,11 +36,11 @@ const Navbar = () => {
     variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
     animate={hidden ? "hidden" : "visible"}
     transition={{ duration: 0.35, ease: "easeInOut" }}
-    className={`sticky top-0 left-0 z-50 border-b dark:border-white/25 border-black/15 shadow-md  dark:shadow-white/25  md:py-2 ${Style.bgPrimary}   `}
+    className={`sticky top-0 left-0 z-50 border-b dark:border-white/25 border-black/15 shadow-md  dark:shadow-sm dark:shadow-white/25  md:py-2 ${Style.bgPrimary}   `}
     >
         <Layout>
         <div className=" flex  justify-between items-center relative  ">
-          {/* <Logo /> */}
+          <Logo />
           <div className="flex items-center justify-between ">
             {/* NavItems */}
             <ul
