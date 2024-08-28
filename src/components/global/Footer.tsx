@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "./layout";
+import Layout from "./Layout";
 import Link from "next/link";
 import { GitCommitVertical } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
