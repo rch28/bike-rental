@@ -7,7 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 const Footer = () => {
   return (
     <Layout>
-      <div className="text-sm text-black font-mono sm:text-center dark:text-gray-400 flex justify-end">
+      <div className="text-xs md:text-sm text-black font-mono sm:text-center dark:text-gray-300 flex justify-end flex-col-reverse gap-2 md:flex-row items-center">
         <div className="">
           © 2023{" "}
           <Link href="" className="hover:underline">
@@ -15,10 +15,10 @@ const Footer = () => {
           </Link>
           . All Rights Reserved.
         </div>
-        <div className="flex mt-4 mx-2 space-x-3 sm:justify-center sm:mt-0 items-center">
+        <div className="flex  mx-2 space-x-3 sm:justify-center sm:mt-0 items-center">
           <Link
             href="#"
-            className="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className="p-1.5 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
           >
             <svg
               className="w-4 h-4"
@@ -37,7 +37,7 @@ const Footer = () => {
           </Link>
           <Link
             href="#"
-            className="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className="p-1.5 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
           >
             <svg
               className="w-4 h-4"
@@ -52,7 +52,7 @@ const Footer = () => {
           </Link>
           <Link
             href="#"
-            className="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className="p-1.5 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
           >
             <svg
               className="w-4 h-4"
@@ -69,15 +69,14 @@ const Footer = () => {
             </svg>
             <span className="sr-only">Twitter page</span>
           </Link>
-          
-          
+          <div>
+            <GitCommitVertical className="text-gray-600  " />
+          </div>
+          <div className="mx-2">
+            <ThemeToggle />
+          </div>
         </div>
-        <div>
-            <GitCommitVertical className="text-gray-600  dark:hover:text-white"/>
-        </div>
-        <ThemeToggle/>
       </div>
-
     </Layout>
   );
 };

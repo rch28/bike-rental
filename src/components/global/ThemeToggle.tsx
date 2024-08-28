@@ -8,15 +8,15 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-1 rounded-full relative  dark:shadow-sm text-xl shadow-md   flex justify-center items-center shadow-gray-500 cursor-pointer gap-1 border border-gray-600 "
+      className="p-1.5 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500  dark:hover:bg-neutral-900 cursor-pointer "
     >
       {theme === "dark" ? (
         <Sun
-          size={15}
+          size={16}
           className=" text-white hover:animate-spin hover:text-yellow-200"
         />
       ) : (
-        <Moon size={15} className=" text-black hover:animate-pulse" />
+        <Moon size={16} className=" text-black hover:animate-pulse" />
       )}
     </button>
   );
