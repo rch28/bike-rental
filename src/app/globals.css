@@ -2,4 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
+.logo{
+    clip-path: polygon(20% 0%, 76% 0, 88% 48%, 100% 100%, 65% 100%, 20% 100%, 0 100%, 0 0);
+}

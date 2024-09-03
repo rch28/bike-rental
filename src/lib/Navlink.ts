@@ -7,16 +7,16 @@ export const Navlinks=[
     
     },
     {
-        name:"About",
-        url:"/about"
-    },
-    {
-        name:"Menu",
-        url:"/menu"
+        name:"Bike",
+        url:"/bike-on-rent"
     },
     {
         name:"Blog",
         url:"/blog"
+    },
+    {
+        name:"Contact",
+        url:"/contact"
     }
     
 ]
