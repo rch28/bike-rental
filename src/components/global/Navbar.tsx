@@ -36,7 +36,7 @@ const Navbar = () => {
     variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
     animate={hidden ? "hidden" : "visible"}
     transition={{ duration: 0.35, ease: "easeInOut" }}
-    className={`sticky top-0 left-0 z-50 border-b dark:border-white/25 border-black/15 shadow-md  dark:shadow-sm dark:shadow-white/25  md:py-2 ${Style.bgPrimary}   `}
+    className={`sticky top-0 left-0 z-50  ${Style.bgPrimary}  py-5 mt-5  `}
     >
         <Layout>
         <div className=" flex  justify-between items-center relative  ">
@@ -60,7 +60,7 @@ const Navbar = () => {
                       isActive
                         ? " md:text-orange-500 dark:md:text-orange-500 dark:md:bg-transparent md:bg-transparent  font-bold  bg-green-500 dark:bg-green-700  rounded-md text-white border-none "
                         : `hover:text-orange-400  font-semibold text-black/80 `
-                    } border-b border-gray-700  w-11/12 text-left pl-4 md:pl-0 py-1  md:border-none  dark:text-white/80 font-bold  transition-colors duration-300 ease-linear   `}
+                    } border-b border-gray-700  w-11/12 text-left pl-4 md:pl-0 py-1  md:border-none  dark:text-white/80 font-bold  transition-colors duration-300 ease-linear   text-xl `}
                   >
                     {item.name}
                   </Link>
