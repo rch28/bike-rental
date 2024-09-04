@@ -8,7 +8,7 @@ const Logo = () => {
       className="  absolute top-0 "
     >
       <Link href="/" className="text-4xl">
-      <Image src={WithMyBike} alt="with my bike" className="w-80" />
+      <Image src={WithMyBike} alt="with my bike" className=" w-48  md:w-64 lg:w-80  transition-all ease-linear duration-100" />
 
       </Link>
     </div>

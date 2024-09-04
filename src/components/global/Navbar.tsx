@@ -14,6 +14,7 @@ import { MdMenu } from "react-icons/md";
 import { Navlinks } from "@/lib/Navlink";
 import Logo from "./Logo";
 import ContactNumber from "./ContactNumber";
+import { Button } from "../utils/Button";
 
 const Navbar = () => {
   const [navToggle, setNavToggle] = useState(false);
@@ -39,11 +40,11 @@ const Navbar = () => {
       transition={{ duration: 0.35, ease: "easeInOut" }}
       className={`sticky top-0 left-0 z-50  bg-gradient-to-r from-blue-200 to-pink-100   `}
     >
-      <div className=" flex  justify-between  relative items-center h-24 ">
-        <div className="realtive w-80">
+      <div className=" flex  justify-between  relative items-center h-14 md:h-20 lg:h-24 transition-all ease-linear duration-100 ">
+        <div className="realtive md:w-80">
           <Logo />
         </div>
-        <div className="flex items-center  w-full  justify-end mr-16   ">
+        <div className="flex items-center  w-full  justify-end    ">
           {/* NavItems */}
           <ul
             className={ ` hidden md:flex gap-4 justify-center items-center border-gray-100 dark:border-gray-700   md:flex-row    `}
@@ -69,14 +70,17 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center ">
             {/* Contact Number */}
             <ContactNumber />
-            <button className=" px-4 py-3  bg-orange-600 flex justify-center items-center rounded-lg text-white font-bold">
-              Explore Bikes
-            </button>
+
+            {/* Explore Bikes */}
+            <Button title="Explore Bikes" path="/bike-on-rent" />
+          </div>
+          <div className=" mx-4">
+            <Button title="Login" path="/login"  className="py-1.5  lg:py-[10px] hidden md:flex rounded-md lg:rounded-xl "/>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2  mr-6">
           <MdMenu
-            className="text-2xl dark:text-white/80 text-black  transition ease-linear duration-500 md:hidden"
+            className="text-3xl dark:text-white/80 text-black  transition ease-linear duration-500 md:hidden"
             onClick={() => setNavToggle(!navToggle)}
           />
         </div>
