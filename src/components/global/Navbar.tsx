@@ -10,12 +10,10 @@ import {
   useMotionValueEvent,
   MotionValue,
 } from "framer-motion";
-import { Menu } from "lucide-react";
-
-import Layout from "./Layout";
-import { Style } from "@/lib/Style";
+import { MdMenu } from "react-icons/md";
 import { Navlinks } from "@/lib/Navlink";
 import Logo from "./Logo";
+import ContactNumber from "./ContactNumber";
 
 const Navbar = () => {
   const [navToggle, setNavToggle] = useState(false);
@@ -39,19 +37,16 @@ const Navbar = () => {
       variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className={`sticky top-0 left-0 z-50  bg-gradient-to-r from-blue-200 to-pink-100  py-2   `}
+      className={`sticky top-0 left-0 z-50  bg-gradient-to-r from-blue-200 to-pink-100   `}
     >
-      <div className=" flex  justify-between items-center relative  ">
-       
-        <Logo />
-        <div className="flex items-center justify-between ">
+      <div className=" flex  justify-between  relative items-center h-24 ">
+        <div className="realtive w-80">
+          <Logo />
+        </div>
+        <div className="flex items-center  w-full  justify-end mr-16   ">
           {/* NavItems */}
           <ul
-            className={`flex gap-4 justify-center items-center border-gray-100 dark:border-gray-700   md:flex-row  ${
-              navToggle
-                ? " flex-col absolute  dark:bg-black bg-slate-200 md:bg-transparent w-full border top-14 left-0 rounded-md py-5 "
-                : "hidden md:flex "
-            } md:relative md:border-none md:top-0  `}
+            className={ ` hidden md:flex gap-4 justify-center items-center border-gray-100 dark:border-gray-700   md:flex-row    `}
           >
             {Navlinks.map((item, index) => {
               let isActive = pathname === item.url;
@@ -61,24 +56,26 @@ const Navbar = () => {
                   key={index}
                   className={`cursor-pointer ${
                     isActive
-                      ? " md:text-orange-500 dark:md:text-orange-500 dark:md:bg-transparent md:bg-transparent  font-bold  bg-green-500 dark:bg-green-700  rounded-md text-white border-none "
-                      : `hover:text-orange-400  font-semibold text-black/80 `
-                  } border-b border-gray-700  w-11/12 text-left pl-4 md:pl-0 py-1  md:border-none  dark:text-white/80 font-bold  transition-colors duration-300 ease-linear   text-xl `}
+                      ? " text-primary dark:md:text-primary  font-bold "
+                      : `hover:text-primary  font-semibold text-black/80 `
+                  }   dark:text-white/80 font-bold  transition-colors duration-300 ease-linear  text-lg `}
                 >
                   {item.name}
                 </Link>
               );
             })}
           </ul>
+
+          <div className="hidden lg:flex items-center ">
+            {/* Contact Number */}
+            <ContactNumber />
+            <button className=" px-4 py-3  bg-orange-600 flex justify-center items-center rounded-lg text-white font-bold">
+              Explore Bikes
+            </button>
+          </div>
         </div>
         <div className="flex items-center gap-2">
-          {/* <div className="mx-4">
-              <CartBox />
-            </div>
-           */}
-          {/* <ProfileAvatar /> */}
-
-          <Menu
+          <MdMenu
             className="text-2xl dark:text-white/80 text-black  transition ease-linear duration-500 md:hidden"
             onClick={() => setNavToggle(!navToggle)}
           />
