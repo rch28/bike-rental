@@ -1,8 +1,8 @@
 import React from "react";
 import Layout from "./Layout";
 import Link from "next/link";
-import { GitCommitVertical } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { CgGitCommit } from "react-icons/cg";
 
 const Footer = () => {
   return (
@@ -70,7 +70,7 @@ const Footer = () => {
             <span className="sr-only">Twitter page</span>
           </Link>
           <div>
-            <GitCommitVertical className="text-gray-600  " />
+            <CgGitCommit size={24} className="text-gray-600  " />
           </div>
           <div className="mx-2">
             <ThemeToggle />
