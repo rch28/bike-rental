@@ -15,9 +15,11 @@ import { Navlinks } from "@/lib/Navlink";
 import Logo from "./Logo";
 import ContactNumber from "./ContactNumber";
 import { Button } from "../utils/Button";
+import MobileNavigation from "./MobileNavigation";
 
 const Navbar = () => {
-  const [navToggle, setNavToggle] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(false);
+  const [navbarWidth, setNavbarWidth] = useState("translate-x-full");
   const [hidden, setHidden] = useState(false);
   const { scrollY }: { scrollY: MotionValue<number> } = useScroll();
   const pathname = usePathname();
@@ -33,6 +35,12 @@ const Navbar = () => {
     }
   });
 
+  const closeNavbar = () => {
+    setNavbarWidth("translate-x-full");
+    setTimeout(() => {
+      setShowNavbar(false);
+    }, 300);
+  };
   return (
     <motion.nav
       variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
@@ -72,16 +80,23 @@ const Navbar = () => {
             <ContactNumber />
 
             {/* Explore Bikes */}
-            <Button title="Explore Bikes" path="/bike-on-rent" />
+            <Button title="Explore Bikes" path="/bike-on-rent" className="text-white" />
           </div>
           <div className=" mx-4">
-            <Button title="Login" path="/login"  className="py-1.5  lg:py-[10px] hidden md:flex rounded-md lg:rounded-xl "/>
+            <Button title="Login" path="/login"  className="py-1.5  lg:py-[10px] hidden md:flex rounded-md lg:rounded-xl text-white "/>
           </div>
         </div>
+
+        {/* Mobile navigation */}
+            <MobileNavigation  showNavBar={showNavbar} navbarWidth={navbarWidth} closeNavbar={closeNavbar}  />
+
         <div className="flex items-center gap-2  mr-6">
           <MdMenu
             className="text-3xl dark:text-white/80 text-black  transition ease-linear duration-500 md:hidden"
-            onClick={() => setNavToggle(!navToggle)}
+            onClick={() => {
+              setShowNavbar(!showNavbar)
+              setNavbarWidth("translate-x-0");
+            }}
           />
         </div>
       </div>
