@@ -16,7 +16,11 @@ export const Hero = () => {
         className="w-full object-cover  h-full  "
       />
 
-      <div className="w-full md:w-3/4 lg:w-3/5 h-full  absolute top-0 left-0 bg-black bg-opacity-50 backdrop-blur-[1px]">
+      <motion.div 
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      transition={{duration:0.5}}
+      className="w-full md:w-3/4 lg:w-3/5 h-full  absolute top-0 left-0 bg-black bg-opacity-50 backdrop-blur-[1px]">
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
@@ -52,7 +56,7 @@ export const Hero = () => {
             />
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 };
