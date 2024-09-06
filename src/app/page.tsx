@@ -1,4 +1,5 @@
 import { AboutUs } from "@/components/global/AboutUs";
+import FAQComponent from "@/components/global/FQAComponent";
 import Layout from "@/components/global/Layout";
 import { Process } from "@/components/global/Process";
 import { RentBikeForm } from "@/components/global/RentBikeForm";
@@ -31,6 +32,12 @@ export default function Home() {
       </Layout>
       {/* How It works */}
       <Process/>
+
+      <Layout>
+        {/* FQA Section */}
+        <FAQComponent/>
+      </Layout>
+
     </main>
   );
 }
