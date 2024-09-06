@@ -1,3 +1,4 @@
+import { AboutUs } from "@/components/global/AboutUs";
 import Layout from "@/components/global/Layout";
 import { RentBikeForm } from "@/components/global/RentBikeForm";
 import { Hero } from "@/components/Home/Hero";
@@ -16,6 +17,11 @@ export default function Home() {
         {/* Services info */}
 
         <ServicesInfo/>
+
+        {/* About us */}
+        <AboutUs/>
+
+        
       </Layout>
     </main>
   );
