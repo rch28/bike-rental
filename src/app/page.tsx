@@ -1,5 +1,6 @@
 import { AboutUs } from "@/components/global/AboutUs";
 import Layout from "@/components/global/Layout";
+import { Process } from "@/components/global/Process";
 import { RentBikeForm } from "@/components/global/RentBikeForm";
 import { FeaturedBikes } from "@/components/Home/FeaturedBikes";
 import { Hero } from "@/components/Home/Hero";
@@ -26,7 +27,10 @@ export default function Home() {
         <FeaturedBikes/>
 
 
+
       </Layout>
+      {/* How It works */}
+      <Process/>
     </main>
   );
 }
