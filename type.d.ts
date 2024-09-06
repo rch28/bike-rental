@@ -1,7 +1,7 @@
 
 interface ButtonProps {
     className?: string,
-    path:string,
+    path?:string,
     title:string,
     icon?:any
   }
