@@ -100,7 +100,7 @@ const Footer = () => {
         <div className="">
           © {new Date().getFullYear()}{" "}
           <Link href="" className="hover:underline">
-            BikeHub™
+            WithMyBike™
           </Link>
           . All Rights Reserved.
         </div>
