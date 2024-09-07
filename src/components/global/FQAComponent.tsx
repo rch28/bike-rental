@@ -48,7 +48,7 @@ const FAQComponent = () => {
           />
         </div>
 
-        <div className="p-4 flex-1 align-middle  ">
+        <div className=" md:p-4 flex-1 align-middle  ">
           {faqData.map((faq, index) => (
             <FAQItem key={index} question={faq.question} answer={faq.answer} />
           ))}

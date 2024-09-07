@@ -27,7 +27,7 @@ export const Process = () => {
       icon: <SiCashapp />,
     },
     {
-      id: 3,
+      id: 4,
       title: "Enjoy Your Bike Ride",
       description:
         "Enjoy your ride. We provide the best service to make your ride memorable.",

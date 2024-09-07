@@ -13,17 +13,17 @@ export const FAQItem = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-white rounded-md  my-4 p-4 transition-all ease-linear duration-500">
+    <div className="bg-white rounded-md  my-4 p-2  sm:p-4 transition-all ease-linear duration-500">
       <button
-        className="flex justify-between items-center w-full text-left"
+        className="flex justify-between md:items-center w-full text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex gap-4 items-center ">
-          <span className="w-10 h-10 bg-primary text-white grid place-items-center  rounded-md">
-            <FaQuestion />
+        <div className="flex gap-2 md:items-center ">
+          <span className=" w-6 h-6 md:w-10 md:h-10 bg-primary text-white grid place-items-center  rounded-md">
+            <FaQuestion className="text-xs md:text-base" />
           </span>
           <span
-            className={`text-xl font-bold  ${
+            className={`md:text-xl font-bold  flex-1 ${
               isOpen ? "text-primary " : "text-gray-900"
             } `}
           >

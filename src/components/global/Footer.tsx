@@ -3,13 +3,102 @@ import Layout from "./Layout";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import { CgGitCommit } from "react-icons/cg";
+import { FaPlay } from "react-icons/fa6";
 
 const Footer = () => {
   return (
     <Layout>
+        {/* upper section */}
+
+        <div className="flex flex-col md:flex-row  gap-6 py-6  ">
+          {/* Logo and Description */}
+          <div className="  flex-1 w-full   mb-6 md:mb-0">
+            <h2 className="flex items-center gap-2 text-3xl  font-bold  uppercase  ">
+            With My Bike 
+            </h2>
+            <p className=" max-w-80 text-neutral-700">
+            If you plan to holiday and looking for a bike or car on rent, reserve online of your choice today and make your holiday memorable.
+            </p>
+          </div>
+
+          <div className="  flex flex-1 w-full  md:flex-row md:mx-5 ">
+            {/* Quick Links */}
+            <div className="w-full  mb-6 md:mb-0">
+              <h3 className="font-bold mb-3">Quick links</h3>
+              <ul className="space-y-3 text-neutral-700">
+                <li className="flex gap-2 items-center hover:translate-x-3 transition-all duration-500 ease-in-out hover:text-primary ">
+                  <FaPlay className="text-primary"/>
+                  <Link href="/about" className="hover:text-primary ">
+                    About Us
+                  </Link>
+                </li>
+                <li className="flex gap-2 items-center hover:translate-x-3 transition-all duration-500 ease-in-out hover:text-primary ">
+                  <FaPlay className="text-primary"/>
+                  <Link href="/contact" className="hover:text-primary ">
+                    Contact Us
+                  </Link>
+                </li>
+                <li className="flex gap-2 items-center hover:translate-x-3 transition-all duration-500 ease-in-out hover:text-primary ">
+                  <FaPlay className="text-primary"/>
+                  <Link href="/terms-condition" className="hover:text-primary ">
+                   Terms & Conditions
+                  </Link>
+                </li>
+                <li className="flex gap-2 items-center hover:translate-x-3 transition-all duration-500 ease-in-out hover:text-primary ">
+                  <FaPlay className="text-primary"/>
+                  <Link href="/privacy-policy" className="hover:text-primary ">
+                   Privacy policy
+                  </Link>
+                </li>
+                <li className="flex gap-2 items-center hover:translate-x-3 transition-all duration-500 ease-in-out hover:text-primary ">
+                  <FaPlay className="text-primary"/>
+                  <Link href="/privacy-policy" className="hover:text-primary ">
+                   Cancellation policy
+                  </Link>
+                </li>
+               
+              </ul>
+            </div>
+
+            {/* Related pages */}
+            <div className="w-full  mb-6 md:mb-0">
+              <h3 className="font-bold mb-3">Related Pages</h3>
+              <ul className=" text-neutral-700 space-y-3">
+                <li className="flex gap-2 items-center hover:translate-x-3 transition-all duration-500 ease-in-out hover:text-primary ">
+                  <FaPlay className="text-primary"/>
+                  <Link href="/bike-on-rent" className="hover:text-primary ">
+                   Bikes
+                  </Link>
+                </li>
+               
+                <li className="flex gap-2 items-center hover:translate-x-3 transition-all duration-500 ease-in-out hover:text-primary ">
+                  <FaPlay className="text-primary"/>
+                  <Link href="/blog" className="hover:text-primary ">
+                    Blog
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+           
+          </div>
+
+          {/* Newsletter */}
+
+          {/* <div className="max-w-md mx-auto md:w-full">
+            <StayConnected
+              title={" Newsletter"}
+              desc={" Subscribe to our newsletter to get more free tips."}
+            >
+              <FooterForm buttonName={"Subscribe"} />
+            </StayConnected>
+          </div> */}
+        </div>
+
+      {/* bottom section */}
       <div className="text-xs md:text-sm text-black font-mono sm:text-center dark:text-gray-300 flex justify-end flex-col-reverse gap-2 md:flex-row items-center">
         <div className="">
-          © 2023{" "}
+          © {new Date().getFullYear()}{" "}
           <Link href="" className="hover:underline">
             BikeHub™
           </Link>
@@ -18,7 +107,7 @@ const Footer = () => {
         <div className="flex  mx-2 space-x-3 sm:justify-center sm:mt-0 items-center">
           <Link
             href="#"
-            className="p-1.5 text-neutral-700 dark:text-neutral-400 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
+            className="p-1.5 text-primary  bg-white rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500  cursor-pointer "
           >
             <svg
               className="w-4 h-4"
@@ -37,7 +126,7 @@ const Footer = () => {
           </Link>
           <Link
             href="#"
-            className="p-1.5 text-neutral-700 dark:text-gray-400 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
+            className="p-1.5 text-primary  bg-white rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500  cursor-pointer "
           >
             <svg
               className="w-4 h-4"
@@ -52,7 +141,7 @@ const Footer = () => {
           </Link>
           <Link
             href="#"
-            className="p-1.5 text-neutral-700 dark:text-gray-400 rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500 dark:hover:bg-neutral-900 cursor-pointer "
+            className="p-1.5 text-primary  bg-white rounded-full relative  dark:shadow-sm  shadow-md  flex justify-center items-center shadow-gray-500  cursor-pointer "
           >
             <svg
               className="w-4 h-4"
