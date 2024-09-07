@@ -6,6 +6,14 @@
  */
 export const publicRoutes = [
     "/",
+    "/bike-on-rent",
+    "/bike-on-rent/:bikeId",
+    "/about",
+    "/contact",
+    "/privacy-policy",
+    "/terms-conditions",
+    "cancellation-policy",
+    "/blog"
 ];
 
 /**
