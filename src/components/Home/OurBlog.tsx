@@ -1,7 +1,7 @@
 import React from "react";
 import { Blog } from "../global/Blog";
 
-export default function OurBlog() {
+export const  OurBlog =()=> {
   const blogInfo = [
     {
       id: 1,
