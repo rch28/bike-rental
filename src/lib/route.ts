@@ -7,13 +7,15 @@
 export const publicRoutes = [
     "/",
     "/bike-on-rent",
-    "/bike-on-rent/:bikeId",
+    /^\/bike-on-rent\/[a-zA-Z0-9]+$/,
     "/about",
     "/contact",
     "/privacy-policy",
     "/terms-conditions",
     "cancellation-policy",
-    "/blog"
+    "/blog",
+    /^\/blog\/[^/]+$/,
+
 ];
 
 /**
