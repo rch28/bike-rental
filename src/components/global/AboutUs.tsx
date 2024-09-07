@@ -8,7 +8,7 @@ export const AboutUs = () => {
   return (
     <div
       id="aboutus"
-      className=" relative flex flex-col lg:flex-row  items-center justify-between gap-6 my-24 lg:mt-40"
+      className=" relative flex flex-col lg:flex-row  items-center justify-between gap-6 my-24 "
     >
       <div className="flex-1 lg:flex-[0.7] xl:flex-1 flex items-center">
         {/* image  */}

@@ -5,7 +5,7 @@ import { Process } from "@/components/global/Process";
 import { RentBikeForm } from "@/components/global/RentBikeForm";
 import { FeaturedBikes } from "@/components/Home/FeaturedBikes";
 import { Hero } from "@/components/Home/Hero";
-import {OurBlog} from "@/components/Home/OurBlog";
+import { OurBlog } from "@/components/Home/OurBlog";
 import { ServicesInfo } from "@/components/Home/ServicesInfo";
 export default function Home() {
   return (
@@ -14,34 +14,31 @@ export default function Home() {
       <Hero />
 
       <Layout>
-
         {/* Serach Bike form */}
         <RentBikeForm />
 
         {/* Services info */}
 
-        <ServicesInfo/>
+        <ServicesInfo />
 
         {/* About us */}
-        <AboutUs/>
+        <div className="lg:mt-40">
+          <AboutUs />
+        </div>
 
         {/* Featured Bikes */}
-        <FeaturedBikes/>
-
-
-
+        <FeaturedBikes />
       </Layout>
       {/* How It works */}
-      <Process/>
+      <Process />
 
       <Layout>
         {/* FQA Section */}
-        <FAQComponent/>
+        <FAQComponent />
 
-      {/* Our Blog section */}
-      <OurBlog/>
+        {/* Our Blog section */}
+        <OurBlog />
       </Layout>
-
     </main>
   );
 }

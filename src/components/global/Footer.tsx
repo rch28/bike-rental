@@ -4,6 +4,8 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import { CgGitCommit } from "react-icons/cg";
 import { FaPlay } from "react-icons/fa6";
+import Image from "next/image";
+import { LogoTransparent } from "@/assets";
 
 const Footer = () => {
   return (
@@ -12,10 +14,11 @@ const Footer = () => {
 
         <div className="flex flex-col md:flex-row  gap-6 py-6  ">
           {/* Logo and Description */}
-          <div className="  flex-1 w-full   mb-6 md:mb-0">
-            <h2 className="flex items-center gap-2 text-3xl  font-bold  uppercase  ">
+          <div className="  flex-1 w-full space-y-5  mb-6 md:mb-0">
+            <h2 className="max-w-80 text-3xl  font-bold  p-4 text-center rounded-md uppercase  text-white  bg-primary">
             With My Bike 
             </h2>
+            {/* <Image src={LogoTransparent} alt="logo" className="bg-primary max-w-80  rounded-lg" /> */}
             <p className=" max-w-80 text-neutral-700">
             If you plan to holiday and looking for a bike or car on rent, reserve online of your choice today and make your holiday memorable.
             </p>
@@ -83,20 +86,10 @@ const Footer = () => {
            
           </div>
 
-          {/* Newsletter */}
-
-          {/* <div className="max-w-md mx-auto md:w-full">
-            <StayConnected
-              title={" Newsletter"}
-              desc={" Subscribe to our newsletter to get more free tips."}
-            >
-              <FooterForm buttonName={"Subscribe"} />
-            </StayConnected>
-          </div> */}
         </div>
 
       {/* bottom section */}
-      <div className="text-xs md:text-sm text-black font-mono sm:text-center dark:text-gray-300 flex justify-end flex-col-reverse gap-2 md:flex-row items-center">
+      <div className="text-xs md:text-sm text-black font-mono sm:text-center dark:text-gray-300 flex justify-end flex-col-reverse gap-2 md:flex-row items-center border-t  border-gray-400 pt-2">
         <div className="">
           © {new Date().getFullYear()}{" "}
           <Link href="" className="hover:underline">
