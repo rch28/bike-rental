@@ -12,6 +12,8 @@ import LogoTransparent from "./logo/brslogot.png";
 import Contact from "./Contact.jpg";
 import GetInTouch from "./GetInTouch.jpg";
 
+import SignUpBg from "./SignUpBg.jpg"
+
 export {
   WithMyBike,
   HeroImg,
@@ -23,4 +25,5 @@ export {
   LogoTransparent,
   Contact,
   GetInTouch,
+  SignUpBg
 };
