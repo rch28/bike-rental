@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LuCheck, LuEye, LuEyeOff, LuX } from "react-icons/lu";
 import { FaInfoCircle } from "react-icons/fa";
+import toast from "react-hot-toast";
+import Loading from "../utils/Loading";
 
 // password regex
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -110,52 +112,53 @@ const Register: React.FC = () => {
     e.preventDefault();
     // if button is some how enable
     const p = PWD_REGEX.test(password);
-    // if (!u || !p) {
-    //   toast.error("Invalid credentials!");
-    //   return;
-    // }
+    if ( !p) {
+      toast.error("Invalid credentials!");
+      return;
+    }
 
-    // const newPromise = new Promise(async (resolve, reject) => {
-    //   try {
-    //     const response = await fetch(
-    //       `${process.env.NEXT_PUBLIC_API_URL}/auth/register/`,
-    //       {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({
-    //           username,
-    //           email,
-    //           password,
-    //         }),
-    //       }
-    //     );
-    //     const data = await response.json();
-    //     if (response.ok) {
-    //       router.push("/auth/login");
-    //       resolve(data.success);
-    //     } else {
-    //       let error;
-    //       if (data?.username) {
-    //         error = data.username[0];
-    //         userRef.current?.focus();
-    //       } else if (data?.email) {
-    //         error = data.email[0];
-    //         emailRef.current?.focus();
-    //       }
-    //       reject(error);
-    //     }
-    //   } catch (error) {
-    //     reject(error.message);
-    //   }
-    // });
+    const newPromise = new Promise<string | undefined>(async (resolve, reject) => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/register/user/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              first_name: firstName,
+              last_name: lastName,
+              email:email,
+              password:password,
+            }),
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+        if (response.ok) {
+          router.push("/auth/login");
+          resolve(data.success);
+        } else {
+          let error;
+          if (data?.email) {
+            error = data.email[0];
+            emailRef.current?.focus();
+          }else{
+            error = data.detail;
+          }
+          reject(error);
+        }
+      } catch (error :any) {
+        reject(error);
+      }
+    });
 
-    // toast.promise(newPromise, {
-    //   loading: "Creating Account...",
-    //   success: (data) => `${data}`,
-    //   error: (error) => error,
-    // });
+    toast.promise(newPromise, {
+      loading: <p> <Loading/> Creating Account.. </p>,
+      success: (data) => `${data}`,
+      error: (error) => error,
+    });
   };
 
 
