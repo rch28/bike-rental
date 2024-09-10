@@ -3,6 +3,7 @@ import "./globals.css";
 import { Style } from "@/lib/Style";
 import Footer from "@/components/global/Footer";
 import Navbar from "@/components/global/Navbar";
+import { Toaster } from "react-hot-toast";
 export const metadata: Metadata = {
   title: "Bike Rental System",
   description: "Bike Rental System",
@@ -30,6 +31,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
       </head>
       <body className={Style.bgPrimary}>
+      <Toaster position="top-center" reverseOrder={false} />
         <div className="flex flex-col min-h-screen  ">
           <Navbar/>
           <div className="h-3 w-full bg-primary"></div>

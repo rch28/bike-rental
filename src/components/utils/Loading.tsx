@@ -2,13 +2,15 @@ import { PiSpinnerGap } from "react-icons/pi";
 
 interface LoadingProps {
   className?: string;
+  msg?: string;
 }
 
-const Loading = ({className}:LoadingProps) => {
+const Loading = ({className, msg}:LoadingProps) => {
   return (
-    <>
+    <span className="flex gap-2 items-center">
       <PiSpinnerGap  className={`animate-spin  text-4xl ${className} `} />
-    </>
+      <span className="text-center">{msg}</span>
+    </span>
   );
 };
 

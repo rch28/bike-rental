@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { LuCheck, LuEye, LuEyeOff, LuX } from "react-icons/lu";
 import { FaInfoCircle } from "react-icons/fa";
 import toast from "react-hot-toast";
-import Loading from "../utils/Loading";
 
 // password regex
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -74,7 +73,7 @@ const Register: React.FC = () => {
   }, [password, confirmPassword]);
 
   useEffect(() => {
-    if (validPassword && validEmail && validConfirmPassword) {
+    if ( firstName && lastName && validPassword && validEmail && validConfirmPassword) {
       setDisable(false);
     } else {
       setDisable(true);
@@ -83,6 +82,9 @@ const Register: React.FC = () => {
     validConfirmPassword,
     validPassword,
     validEmail,
+    firstName,
+    lastName
+
 
   ]);
 
@@ -135,8 +137,13 @@ const Register: React.FC = () => {
           }
         );
         const data = await response.json();
-        console.log(data);
         if (response.ok) {
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+
           router.push("/auth/login");
           resolve(data.success);
         } else {
@@ -155,7 +162,7 @@ const Register: React.FC = () => {
     });
 
     toast.promise(newPromise, {
-      loading: <p> <Loading/> Creating Account.. </p>,
+      loading: "Creating Account...",
       success: (data) => `${data}`,
       error: (error) => error,
     });
