@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { LuCheck, LuEye, LuEyeOff, LuX } from "react-icons/lu";
 import { FaInfoCircle } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { Button } from "../utils/Button";
+import Link from "next/link";
 
 // password regex
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -24,7 +26,6 @@ const Register: React.FC = () => {
 
   //  Last Name state
   const [lastName, setLastName] = useState("");
-
 
   //   Email state
   const [email, setEmail] = useState("");
@@ -57,8 +58,6 @@ const Register: React.FC = () => {
     userRef.current?.focus();
   }, []);
 
-
-
   useEffect(() => {
     const result = EMAIL_REGEX.test(email);
     setValidEmail(result);
@@ -73,20 +72,18 @@ const Register: React.FC = () => {
   }, [password, confirmPassword]);
 
   useEffect(() => {
-    if ( firstName && lastName && validPassword && validEmail && validConfirmPassword) {
+    if (
+      firstName &&
+      lastName &&
+      validPassword &&
+      validEmail &&
+      validConfirmPassword
+    ) {
       setDisable(false);
     } else {
       setDisable(true);
     }
-  }, [
-    validConfirmPassword,
-    validPassword,
-    validEmail,
-    firstName,
-    lastName
-
-
-  ]);
+  }, [validConfirmPassword, validPassword, validEmail, firstName, lastName]);
 
   // show password click handler
   const handleShowPassword = () => {
@@ -114,52 +111,54 @@ const Register: React.FC = () => {
     e.preventDefault();
     // if button is some how enable
     const p = PWD_REGEX.test(password);
-    if ( !p) {
+    if (!p) {
       toast.error("Invalid credentials!");
       return;
     }
 
-    const newPromise = new Promise<string | undefined>(async (resolve, reject) => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/register/user/`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              first_name: firstName,
-              last_name: lastName,
-              email:email,
-              password:password,
-            }),
-          }
-        );
-        const data = await response.json();
-        if (response.ok) {
-          setFirstName("");
-          setLastName("");
-          setEmail("");
-          setPassword("");
-          setConfirmPassword("");
+    const newPromise = new Promise<string | undefined>(
+      async (resolve, reject) => {
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/register/user/`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password,
+              }),
+            }
+          );
+          const data = await response.json();
+          if (response.ok) {
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
 
-          router.push("/auth/login");
-          resolve(data.success);
-        } else {
-          let error;
-          if (data?.email) {
-            error = data.email[0];
-            emailRef.current?.focus();
-          }else{
-            error = data.detail;
+            router.push("/auth/login");
+            resolve(data.success);
+          } else {
+            let error;
+            if (data?.email) {
+              error = data.email[0];
+              emailRef.current?.focus();
+            } else {
+              error = data.detail;
+            }
+            reject(error);
           }
+        } catch (error: any) {
           reject(error);
         }
-      } catch (error :any) {
-        reject(error);
       }
-    });
+    );
 
     toast.promise(newPromise, {
       loading: "Creating Account...",
@@ -167,7 +166,6 @@ const Register: React.FC = () => {
       error: (error) => error,
     });
   };
-
 
   return (
     <form className="flex flex-col  gap-4" onSubmit={handleSubmit}>
@@ -204,10 +202,8 @@ const Register: React.FC = () => {
           >
             Last Name :
             <LuCheck
-              className={lastName !=="" ? "text-green-500 text-2xl" : "hidden"}
+              className={lastName !== "" ? "text-green-500 text-2xl" : "hidden"}
             />
-          
-           
           </label>
           <input
             ref={userRef}
@@ -446,6 +442,13 @@ const Register: React.FC = () => {
         >
           Register
         </button>
+
+        <div className=" py-4">
+          <span className="inline-flex text-gray-700 dark:text-gray-400 text-sm  ">
+            Already have an account?
+          </span>
+          <Link href="/auth/login" className="underline italic text-sm text-primary pl-1"> login</Link>
+        </div>
       </div>
     </form>
   );
