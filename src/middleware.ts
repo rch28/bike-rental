@@ -15,7 +15,15 @@ export async function middleware(request:NextRequest) {
   const { nextUrl } = request;
   const response = NextResponse.next();
 
+  const access_token = request.cookies.get("access_token")?.value;
+  const refresh_token = request.cookies.get("refresh_token")?.value;
+
   let userLoggedIn = false;
+
+  if(access_token && refresh_token) {
+    userLoggedIn = true;
+  }
+
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublic = isPublicRoute(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
