@@ -33,31 +33,36 @@ const Login: React.FC = () => {
     }
     const newPromise = new Promise<string | undefined>(
       async (resolve, reject) => {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/login/user/`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-            credentials: "include",
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/login/user/`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+              credentials: "include",
+            }
+          );
+          
+          const data = await response.json();
+          if (!response.ok) {
+            reject(data);
+            return;
           }
-        );
-
-        const data = await response.json();
-        if (!response.ok) {
-          reject(data);
+          if (data?.otp_created_at) {
+            localStorage.setItem("otp_created_at", data.otp_created_at);
+            router.push("/auth/login/verify-otp");
+          } else {
+            router.push("/");
+          }
+          setEmail("");
+          setPassword("");
+          resolve(data.success);
+        } catch (error) {
+          console.log(error);
         }
-        if (data?.otp_created_at) {
-          localStorage.setItem("otp_created_at", data.otp_created_at);
-          router.push("/auth/login/verify-otp");
-        } else {
-          router.push("/");
-        }
-        setEmail("");
-        setPassword("");
-        resolve(data.success);
       }
     );
 
