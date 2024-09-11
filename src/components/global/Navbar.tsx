@@ -16,6 +16,8 @@ import Logo from "./Logo";
 import ContactNumber from "./ContactNumber";
 import { Button } from "../utils/Button";
 import MobileNavigation from "./MobileNavigation";
+import { useStore } from "@/store/store";
+import ProfileAvatar from "./ProfileAvatar";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
@@ -23,6 +25,9 @@ const Navbar = () => {
   const [hidden, setHidden] = useState(false);
   const { scrollY }: { scrollY: MotionValue<number> } = useScroll();
   const pathname = usePathname();
+
+
+
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
@@ -41,6 +46,7 @@ const Navbar = () => {
       setShowNavbar(false);
     }, 300);
   };
+
   return (
     <motion.nav
       variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
@@ -55,7 +61,7 @@ const Navbar = () => {
         <div className="flex items-center  w-full  justify-end    ">
           {/* NavItems */}
           <ul
-            className={ ` hidden md:flex gap-4 justify-center items-center border-gray-100 dark:border-gray-700   md:flex-row    `}
+            className={` hidden md:flex gap-4 justify-center items-center border-gray-100 dark:border-gray-700   md:flex-row    `}
           >
             {Navlinks.map((item, index) => {
               let isActive = pathname === item.url;
@@ -80,21 +86,27 @@ const Navbar = () => {
             <ContactNumber />
 
             {/* Explore Bikes */}
-            <Button title="Explore Bikes" path="/bike-on-rent" className="text-white" />
+            <Button
+              title="Explore Bikes"
+              path="/bike-on-rent"
+              className="text-white"
+            />
           </div>
-          <div className=" mx-4">
-            <Button title="Login" path="/auth/login"  className="py-1.5  lg:py-[10px] hidden md:flex rounded-md lg:rounded-xl text-white "/>
-          </div>
+          <ProfileAvatar/>
         </div>
 
         {/* Mobile navigation */}
-            <MobileNavigation  showNavBar={showNavbar} navbarWidth={navbarWidth} closeNavbar={closeNavbar}  />
+        <MobileNavigation
+          showNavBar={showNavbar}
+          navbarWidth={navbarWidth}
+          closeNavbar={closeNavbar}
+        />
 
         <div className="flex items-center gap-2  mr-6">
           <MdMenu
             className="text-3xl dark:text-white/80 text-black  transition ease-linear duration-500 md:hidden"
             onClick={() => {
-              setShowNavbar(!showNavbar)
+              setShowNavbar(!showNavbar);
               setNavbarWidth("translate-x-0");
             }}
           />
