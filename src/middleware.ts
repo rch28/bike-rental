@@ -6,10 +6,10 @@ import {
   DEFAULT_LOGIN_REDIRECT,
   publicRoutes,
 } from "./lib/route";
+import { verifyUser } from "./lib/auth";
 
-const SECRET_KEY = new TextEncoder().encode(
-  process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET
-);
+const SECRET_KEY =   process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET
+
 
 export async function middleware(request:NextRequest) {
   const { nextUrl } = request;
@@ -20,9 +20,21 @@ export async function middleware(request:NextRequest) {
 
   let userLoggedIn = false;
 
-  if(access_token && refresh_token) {
-    userLoggedIn = true;
+  if (access_token && refresh_token && SECRET_KEY) {
+    const userData = await verifyUser(access_token, SECRET_KEY);
+    if (userData && userData.user_id) {
+      userLoggedIn = true;
+    }else{
+      userLoggedIn = false;
+    }
   }
+
+  response.cookies.set('user_logged_in', userLoggedIn.toString(), {
+    path: '/',
+    maxAge: 60 * 60 * 24, // 1 day
+    sameSite: 'lax', // Adjust according to your needs
+    secure: process.env.NODE_ENV === 'production' // Set to true in production
+  });
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublic = isPublicRoute(nextUrl.pathname);
