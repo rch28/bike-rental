@@ -47,7 +47,7 @@ export async function middleware(request:NextRequest) {
     if (userLoggedIn) {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
-    return;
+    return response;
   }
 
   if (!userLoggedIn && !isPublic) {
@@ -64,7 +64,7 @@ export async function middleware(request:NextRequest) {
       return false;
     });
   }
-  return;
+  return response;
 }
 
 export const config = {
