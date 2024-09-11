@@ -83,7 +83,7 @@ const Navbar = () => {
             <Button title="Explore Bikes" path="/bike-on-rent" className="text-white" />
           </div>
           <div className=" mx-4">
-            <Button title="Login" path="/login"  className="py-1.5  lg:py-[10px] hidden md:flex rounded-md lg:rounded-xl text-white "/>
+            <Button title="Login" path="/auth/login"  className="py-1.5  lg:py-[10px] hidden md:flex rounded-md lg:rounded-xl text-white "/>
           </div>
         </div>
 
