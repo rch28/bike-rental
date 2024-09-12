@@ -35,6 +35,14 @@ export const authRoutes = [
 ];
 
 /**
+ * @description Prefix for all admin routes
+ * Routes that start with this prefix are used for admin dashboard
+ * @type {string}
+ */
+
+export const adminPrefix="/admin";
+
+/**
  * @description Prefix for all auth routes
  * Routes that start with this prefix are  used for API authentication process
  * @type {string}

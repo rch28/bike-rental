@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type {NextRequest} from 'next/server';
 import {
+  adminPrefix,
   apiAuthPrefix,
   authRoutes,
   DEFAULT_LOGIN_REDIRECT,
@@ -19,11 +20,14 @@ export async function middleware(request:NextRequest) {
   const refresh_token = request.cookies.get("refresh_token")?.value;
 
   let userLoggedIn = false;
-
+  let isSuperuser = false;
   if (access_token && refresh_token && SECRET_KEY) {
-    const userData = await verifyUser(access_token, SECRET_KEY);
-    if (userData && userData.user_id) {
+    const userData:any = await verifyUser(access_token, SECRET_KEY) ;
+    console.log(userData);
+    if (userData && userData?.user_id) {
+      
       userLoggedIn = true;
+      isSuperuser = userData.is_superuser
     }else{
       userLoggedIn = false;
     }
@@ -32,13 +36,20 @@ export async function middleware(request:NextRequest) {
   response.cookies.set('user_logged_in', userLoggedIn.toString(), {
     path: '/',
     maxAge: 60 * 60 * 24, // 1 day
-    sameSite: 'lax', // Adjust according to your needs
-    secure: process.env.NODE_ENV === 'production' // Set to true in production
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production'
+  });
+  response.cookies.set('isSuperuser', isSuperuser.toString(), {
+    path: '/',
+    maxAge: 60 * 60 * 24, // 1 day
+    sameSite: 'lax', 
+    secure: process.env.NODE_ENV === 'production' 
   });
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublic = isPublicRoute(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  const isAdminRoute = nextUrl.pathname.startsWith(adminPrefix);
   if (isApiAuthRoute) {
     return response;
   }
@@ -50,10 +61,16 @@ export async function middleware(request:NextRequest) {
     return response;
   }
 
-  if (!userLoggedIn && !isPublic) {
-    return Response.redirect(new URL("/auth/login", nextUrl));
+  if (isAdminRoute) {
+    if (!userLoggedIn) {
+      return NextResponse.redirect(new URL("/auth/login", nextUrl));
+    }
+    if (!isSuperuser) {
+      return NextResponse.redirect(new URL("/", nextUrl)); 
+    }
+  } else if (!userLoggedIn && !isPublic) {
+    return NextResponse.redirect(new URL("/auth/login", nextUrl));
   }
-
   function isPublicRoute(url:string) {
     return publicRoutes.some((route:any) => {
       if (typeof route === "string") {
