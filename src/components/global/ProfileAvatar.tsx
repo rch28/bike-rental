@@ -5,12 +5,23 @@ import { Button } from "../utils/Button";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { HeroImg } from "@/assets";
-
+import Cookies from "js-cookie";
 const ProfileAvatar = () => {
   const [mount, setMount] = useState(false);
 
   const isLogged = useStore((state) => state.isLogged);
+  const setLogged = useStore((state) => state.setLogged);
 
+  const userLoggedIn = Cookies.get("user_logged_in") === "true" ? true : false;
+  useEffect(() => {
+    if (userLoggedIn) {
+      setLogged(true);
+    } else {
+      setLogged(false);
+    }
+
+    setMount(true);
+  }, [userLoggedIn]);
   useEffect(() => {
     setMount(true);
   }, []);

@@ -1,12 +1,13 @@
 import { create } from 'zustand'
-import Cookies from 'js-cookie'
 type State = {
-   isLogged: string | undefined
+   isLogged: boolean
   }
 
 type Action = {
+  setLogged: (value: boolean) => void
     
   }
 export const useStore = create<State & Action>((set) => ({
-  isLogged: Cookies.get('user_logged_in'),
+  isLogged: false,
+  setLogged: (value) => set({ isLogged: value }),
 }))
