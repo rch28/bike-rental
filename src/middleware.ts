@@ -23,7 +23,12 @@ export async function middleware(request:NextRequest) {
   let isSuperuser = false;
   if (access_token && refresh_token && SECRET_KEY) {
     const userData:any = await verifyUser(access_token, SECRET_KEY) ;
-    console.log(userData);
+    response.cookies.set('user_id', userData.user_id, {
+      path: '/',
+      maxAge: 60 * 60 * 24, // 1 day
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production'
+    })
     if (userData && userData?.user_id) {
       
       userLoggedIn = true;
