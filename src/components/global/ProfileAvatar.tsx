@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { HeroImg } from "@/assets";
 import Cookies from "js-cookie";
+import ProfileDropdown from "./ProfileDropdown";
 const ProfileAvatar = () => {
   const [mount, setMount] = useState(false);
+  const [profileToggle, setProfileToggle] = useState(false);
 
   const isLogged = useStore((state) => state.isLogged);
   const setLogged = useStore((state) => state.setLogged);
@@ -32,9 +34,11 @@ const ProfileAvatar = () => {
     );
 
   return (
-    <div className=" mx-4">
+    <div className=" mx-4 relative">
       {isLogged ? (
-        <div className=" w-10 h-10 lg:w-12 lg:h-12 cursor-pointer rounded-full shadow-md shadow-gray-500">
+        <button 
+        onClick={() => setProfileToggle(!profileToggle)}
+        className=" w-10 h-10 lg:w-12 lg:h-12 cursor-pointer rounded-full shadow-md shadow-gray-500">
           <Image
             src={HeroImg}
             alt="profile"
@@ -42,7 +46,7 @@ const ProfileAvatar = () => {
             height={100}
             className="rounded-full w-full h-full object-cover"
           />
-        </div>
+        </button>
       ) : (
         <div className="">
           <Button
@@ -52,6 +56,14 @@ const ProfileAvatar = () => {
           />
         </div>
       )}
+
+      {
+        profileToggle && isLogged && (
+          <div className="absolute top-14 right-0 bg-white dark:bg-gray-800 shadow-md rounded-md p-2">
+            <ProfileDropdown  setProfileToggle={setProfileToggle} />
+          </div>
+        )
+      }
     </div>
   );
 };
