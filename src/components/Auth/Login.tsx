@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+
+import Cookies from 'js-cookie'
 const Login: React.FC = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -55,6 +57,12 @@ const Login: React.FC = () => {
             localStorage.setItem("otp_created_at", data.otp_created_at);
             router.push("/auth/login/verify-otp");
           } else {
+            Cookies.set('user_logged_in', "true", {
+              path: '/',
+              expires: 1, // 1 day
+              sameSite: 'lax', 
+              secure: process.env.NODE_ENV === 'production' 
+            });
             router.push("/");
           }
           setEmail("");
