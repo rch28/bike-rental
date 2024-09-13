@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const setInitialTheme = `
+  const setInitialTheme = 
   (function() {
     const theme = localStorage.getItem('theme');
     if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -24,11 +24,11 @@ export default function RootLayout({
       document.documentElement.classList.remove('dark');
     }
   })();
-`;
+;
   return (
     <html lang="en">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
+        <script dangerouslySetInnerHTML={ __html: setInitialTheme } />
       </head>
       <body className={Style.bgPrimary}>
       <Toaster position="top-center" reverseOrder={false} />
@@ -36,7 +36,7 @@ export default function RootLayout({
           <Navbar/>
           <div className="h-3 w-full bg-primary"></div>
           <main className="flex-1">{children}</main>
-          <footer className={` w-full border-t border-neutral-400 dark:border-neutral-700 ${Style.bgPrimary} p-2`}><Footer/></footer>
+          <footer className={ `w-full border-t border-neutral-400 dark:border-neutral-700 ${Style.bgPrimary} p-2`}><Footer/></footer>
         </div>
       </body>
     </html>
