@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from 'next/headers';
 import "./globals.css";
 import { Style } from "@/lib/Style";
 import Footer from "@/components/global/Footer";
@@ -25,6 +26,9 @@ export default function RootLayout({
     }
   })();
 `;
+const pathname = headers().get('x-next-pathname');
+
+console.log("pathname", pathname);
   return (
     <html lang="en">
       <head>

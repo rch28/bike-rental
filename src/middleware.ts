@@ -13,9 +13,11 @@ const SECRET_KEY =   process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET
 
 
 export async function middleware(request:NextRequest) {
+  const requestHeaders = new Headers(request.headers);
   const { nextUrl } = request;
-  const response = NextResponse.next();
-
+  requestHeaders.set('x-next-pathname',nextUrl.pathname);
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
+  
   const access_token = request.cookies.get("access_token")?.value;
   const refresh_token = request.cookies.get("refresh_token")?.value;
 
