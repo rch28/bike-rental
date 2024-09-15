@@ -3,8 +3,8 @@ import { headers } from 'next/headers';
 import "./globals.css";
 import { Style } from "@/lib/Style";
 import Footer from "@/components/global/Footer";
-import Navbar from "@/components/global/Navbar";
 import { Toaster } from "react-hot-toast";
+import Main from "./Main";
 export const metadata: Metadata = {
   title: "Bike Rental System",
   description: "Bike Rental System",
@@ -37,9 +37,9 @@ console.log("pathname", pathname);
       <body className={Style.bgPrimary}>
       <Toaster position="top-center" reverseOrder={false} />
         <div className="flex flex-col min-h-screen  ">
-          <Navbar/>
-          <div className="h-3 w-full bg-primary"></div>
-          <main className="flex-1">{children}</main>
+          <Main>
+            {children}
+          </Main>
           <footer className={` w-full border-t border-neutral-400 dark:border-neutral-700 ${Style.bgPrimary} p-2`}><Footer/></footer>
         </div>
       </body>
