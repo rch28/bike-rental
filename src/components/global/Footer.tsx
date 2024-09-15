@@ -9,7 +9,7 @@ import { LogoTransparent } from "@/assets";
 
 const Footer = () => {
   return (
-    <Layout>
+    <div>
         {/* upper section */}
 
         <div className="flex flex-col md:flex-row  gap-6 py-6  ">
@@ -159,7 +159,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 
