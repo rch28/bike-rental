@@ -1,9 +1,18 @@
-import React from 'react'
+"use client"
+
+import { useState } from "react";
 
 const DashboardPage = () => {
+  const [navWidth, setNavWidth] = useState("-translate-x-full")
+  const handleShowNavigation = () => {
+      setNavWidth("translate-x-0")
+  }
   return (
-    <div>DashboardPage</div>
-  )
-}
+   <>
+    Dashboard
 
-export default DashboardPage
+   </>
+  );
+};
+
+export default DashboardPage;
