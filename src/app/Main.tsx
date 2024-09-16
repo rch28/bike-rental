@@ -20,10 +20,10 @@ const Main = ({
       {pathname.startsWith("/admin") ? (
         <div>
           <div>
-            <AdminNavbar />
             <div className="flex">
               <AdminSideBar />
               <div className="flex-1 flex flex-col">
+                 <AdminNavbar />
                 <main className="flex-1">{children}</main>
                 <footer
                   className={` w-full border-t border-neutral-400 dark:border-neutral-700  p-2`}
