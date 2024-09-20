@@ -11,14 +11,25 @@ type feature ={
   distance:string;
 }
 interface Bike {
-  id: number;
+  id: string;
   name: string;
-  image: string;
   rating: number;
-  features: feature;
-  price: string;
+  brand: string;
+  model: string;
+  year: number;
+  color: string;
+  features: Features;
+  price: number;
+  description: string;
+  image: string;
+  date: string;
 }
-
+interface BikeResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Bike[];
+}
 
 interface userData {
   email:string;
