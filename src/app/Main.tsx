@@ -1,7 +1,7 @@
 "use client";
 
 import AdminNavbar from "@/components/Admin/AdminNavbar";
-import AdminSideBar from "@/components/Admin/AdminSideBar";
+import AdminSideBar from "@/components/Admin/AdminDrawer";
 import Footer from "@/components/global/Footer";
 import Layout from "@/components/global/Layout";
 import Navbar from "@/components/global/Navbar";
