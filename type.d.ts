@@ -3,6 +3,7 @@ interface ButtonProps {
   path?: string;
   title: string;
   icon?: any;
+  onClick?: () => void | undefined;
 }
 
 type feature ={
