@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa6";
 import { RiDashboardLine } from "react-icons/ri";
@@ -17,8 +17,11 @@ const ProfileDropdown = ({
   setProfileToggle,
   userData,
 }: ProfileDropdownProps) => {
-  const isSuperuser = Cookies.get("isSuperuser") === "true" ? true : false;
-
+  const [isSuperuser, setIsSuperuser] = useState(false);
+  useEffect(()=>{
+    const isSuperuser = Cookies.get("isSuperuser") === "true" ? true : false;
+    setIsSuperuser(isSuperuser);
+  },[])
   const router = useRouter();
   const handleLogout = () => {
     const newPromise = new Promise<string | undefined>(
