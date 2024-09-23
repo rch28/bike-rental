@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { LuXCircle } from "react-icons/lu";
 import { Button } from "../utils/Button";
+import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 
 const AddBikeDrawer = () => {
   const drawerRef = useRef<HTMLDivElement | null>(null);
@@ -18,9 +20,11 @@ const AddBikeDrawer = () => {
     color: "",
     price: "",
     image: "",
-    start: "SELF_START_ONLY",
-    engine: "",
-    distance: "",
+    features:{
+      start: "SELF_START_ONLY",
+      engine: "",
+      distance: "",
+    },
     description: "",
   });
 
@@ -42,10 +46,49 @@ const AddBikeDrawer = () => {
       document.body.classList.remove("overflow-hidden");
     };
   }, []);
-
+  const accessToken = Cookies.get("access_token");
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("form submited", formValue);
+    const newPromise = new Promise(async (resolve, reject) => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/bike/create/`,
+          {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify(formValue),
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+        if (!response.ok) {
+          if (data.error) {
+            reject(data.error);
+          } else if (data.detail) {
+            reject(data.detail);
+          } else {
+            reject("Something went wrong");
+          }
+          return;
+        }
+        resolve(data.success);
+      } catch (err: any) {
+        reject(err.message);
+      }
+    })
+    toast.promise(newPromise, {
+      loading: "Adding bike...",
+      success: (data) => {
+        return typeof data === "string" ? data : "Bike added successfully!";
+      },
+      error: (err) => {
+        return err;
+      },
+    })
   };
   return (
     <AnimatePresence>
@@ -221,9 +264,9 @@ const AddBikeDrawer = () => {
               <select
                 name="start"
                 id="start"
-                value={formValue.start}
+                value={formValue.features.start}
                 className=" border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700 w-full"
-                onChange={(e) =>setFormValue({ ...formValue, start: e.target.value })}
+                onChange={(e) =>setFormValue({ ...formValue, features: { ...formValue.features, start: e.target.value } })}
               >
                 <option value="SELF_START_ONLY">Self Start Only</option>
                 <option value="KICK_AND_SELF_START">Kick & Self Start</option>
@@ -234,9 +277,9 @@ const AddBikeDrawer = () => {
                 type="text"
                 autoComplete="off"
                 name="engine"
-                value={formValue.engine}
+                value={formValue.features.engine}
                 onChange={(e) =>
-                  setFormValue({ ...formValue, engine: e.target.value })
+                  setFormValue({ ...formValue, features: { ...formValue.features, engine: e.target.value } })
                 }
                 id="engine"
                 placeholder="Engine"
@@ -246,9 +289,9 @@ const AddBikeDrawer = () => {
                 type="text"
                 autoComplete="off"
                 name="distance"
-                value={formValue.distance}
+                value={formValue.features.distance}
                 onChange={(e) =>
-                  setFormValue({ ...formValue, distance: e.target.value })
+                  setFormValue({ ...formValue, features: { ...formValue.features, distance: e.target.value } })
                 }
                 id="distance"
                 placeholder="Distance per day"
