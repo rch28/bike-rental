@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { LuXCircle } from "react-icons/lu";
 import { Button } from "../utils/Button";
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
 
 const AddBikeDrawer = () => {
   const drawerRef = useRef<HTMLDivElement | null>(null);
@@ -19,7 +18,7 @@ const AddBikeDrawer = () => {
     year: "",
     color: "",
     price: "",
-    image: "",
+    image: "" as string | File,
     features:{
       start: "SELF_START_ONLY",
       engine: "",
@@ -46,21 +45,53 @@ const AddBikeDrawer = () => {
       document.body.classList.remove("overflow-hidden");
     };
   }, []);
-  const accessToken = Cookies.get("access_token");
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if(!formValue.name){
+      toast.error("Name is required");
+      return;
+    }
+    if(!formValue.features.engine){
+      toast.error("Engine is required");
+      return;
+    }
+    if(!formValue.features.distance){
+      toast.error("Distance is required");
+      return;
+    }
+    if(!formValue.price){
+      toast.error("Price is required");
+      return;
+    }
+
     const newPromise = new Promise(async (resolve, reject) => {
       try {
+        const formData = new FormData();
+        formData.append("name", formValue.name);
+        formData.append("rating", formValue.rating);
+        formData.append("brand", formValue.brand);
+        formData.append("model", formValue.model);
+        formData.append("year", formValue.year);
+        formData.append("color", formValue.color);
+        formData.append("price", formValue.price);
+        formData.append("description", formValue.description);
+        
+        // Append image only if it's selected
+        if (formValue.image) {
+          formData.append("image", formValue.image as File);
+        }
+  
+        formData.append("features.start", formValue.features.start);
+        formData.append("features.engine", formValue.features.engine);
+        formData.append("features.distance", formValue.features.distance);
+  
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/bike/create/`,
           {
             method: "POST",
             credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-
-            body: JSON.stringify(formValue),
+            body: formData,
           }
         );
         const data = await response.json();
@@ -83,6 +114,7 @@ const AddBikeDrawer = () => {
     toast.promise(newPromise, {
       loading: "Adding bike...",
       success: (data) => {
+        setToggleAddBikeDrawer(false);
         return typeof data === "string" ? data : "Bike added successfully!";
       },
       error: (err) => {
@@ -110,7 +142,9 @@ const AddBikeDrawer = () => {
               className="cursor-pointer hover:text-primary transition-all duration-300 ease-linear"
             />
           </div>
-          <form className="p-4 pt-0 space-y-4" onSubmit={handleSubmit}>
+          <form className="p-4 pt-0 space-y-4" onSubmit={handleSubmit}
+            encType="multipart/form-data"
+           >
             <div className="grid grid-cols-2  w-full gap-4">
               <div>
                 <label htmlFor="name" className="hidden">
@@ -246,9 +280,11 @@ const AddBikeDrawer = () => {
                   type="file"
                   autoComplete="off"
                   name="image"
-                  value={formValue.image}
-                  onChange={(e) =>
-                    setFormValue({ ...formValue, image: e.target.value })
+                  onChange={(e) =>{
+                    if (e.target.files && e.target.files.length > 0) {
+                      setFormValue({ ...formValue, image: e.target.files[0] });
+                    }
+                  }
                   }
                   id="image"
                   placeholder="Image"
