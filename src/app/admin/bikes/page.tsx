@@ -22,7 +22,7 @@ const AdminBikesPage = () => {
   }, []);
   console.log(bikes);
   return (
-    <div className="mt-10">
+    <div className="mt-4">
       <div className="grid grid-cols-2 place-items-center md:grid-cols-3 xl:grid-cols-4 gap-4">
         {bikes?.map((bike, index) => (
           <BikeComponent key={index} bike={bike} admin={true} />
