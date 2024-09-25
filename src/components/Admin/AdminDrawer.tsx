@@ -11,14 +11,14 @@ const AdminSideBar = () => {
   return (
     <div className={`absolute md:relative`}>
       <aside
-        className={`z-40 border-r w-40  border-blue-200 transition-transform bg-blue-200 md:bg-transparent min-h-screen ${translateSideBar} md:translate-x-0 `}
+        className={`z-40 border-r border-blue-200 transition-transform bg-blue-200 md:bg-transparent min-h-screen ${translateSideBar} md:translate-x-0 `}
       >
         <div className="h-full px-3 pb-4 overflow-y-auto ">
           <ul className="space-y-2 font-medium mt-4">
             <li>
               <Link
                 href="/admin/dashboard"
-                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname === '/admin/dashboard' ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname.startsWith('/admin/dashboard') ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
               >
                 <svg
                   className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-white"
@@ -37,7 +37,7 @@ const AdminSideBar = () => {
             <li>
               <Link
                 href="/admin/inbox"
-                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname === '/admin/inbox' ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname.startsWith('/admin/inbox') ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-white"
@@ -57,7 +57,7 @@ const AdminSideBar = () => {
             <li>
               <Link
                 href="/admin/users"
-                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname === '/admin/users' ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname.startsWith('/admin/users') ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-white"
@@ -74,10 +74,19 @@ const AdminSideBar = () => {
             <li>
               <Link
                 href="/admin/bikes"
-                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname === '/admin/bikes' ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname.startsWith('/admin/bikes') ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
               >
                 <RiMotorbikeFill className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-white" />
                 <span className="flex-1 ms-3 whitespace-nowrap">Bikes</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/admin/featured-bikes"
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname.startsWith('/admin/featured-bikes') ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
+              >
+                <RiMotorbikeFill className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-white" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Featured Bikes</span>
               </Link>
             </li>
             
