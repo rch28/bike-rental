@@ -71,7 +71,7 @@ const ProfileDropdown = ({
   };
 
   return (
-    <div className="min-w-48 p-2">
+    <div className="min-w-48 p-2 z-50 relative bg-white">
       <div className="border-b border-gray-400">
         <h1 className="text-lg font-semibold text-neutral-800">
           <span className="pr-2">{userData.first_name}</span>
