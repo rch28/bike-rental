@@ -137,7 +137,7 @@ const AddBikeDrawer = () => {
           <div className="flex justify-between items-center p-4 mt-3">
             <h1 className="text-2xl font-bold ">Add New Bike</h1>
             <LuXCircle
-              size={32}
+              size={24}
               onClick={() => setToggleAddBikeDrawer(false)}
               className="cursor-pointer hover:text-primary transition-all duration-300 ease-linear"
             />
@@ -160,7 +160,7 @@ const AddBikeDrawer = () => {
                     setFormValue({ ...formValue, name: e.target.value })
                   }
                   placeholder="Name"
-                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700"
+                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700"
                 />
               </div>
               <div>
@@ -177,7 +177,7 @@ const AddBikeDrawer = () => {
                   }
                   id="rating"
                   placeholder="Rating"
-                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700"
+                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700"
                 />
               </div>
             </div>
@@ -196,7 +196,7 @@ const AddBikeDrawer = () => {
                   }
                   id="brand"
                   placeholder="Brand"
-                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700"
+                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700"
                 />
               </div>
               <div>
@@ -213,7 +213,7 @@ const AddBikeDrawer = () => {
                   }
                   id="model"
                   placeholder="Model"
-                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700"
+                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700"
                 />
               </div>
             </div>
@@ -233,7 +233,7 @@ const AddBikeDrawer = () => {
                   }
                   id="year"
                   placeholder="Year"
-                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700"
+                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700"
                 />
               </div>
               <div>
@@ -250,7 +250,7 @@ const AddBikeDrawer = () => {
                   }
                   id="color"
                   placeholder="Color"
-                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700"
+                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700"
                 />
               </div>
             </div>
@@ -269,7 +269,7 @@ const AddBikeDrawer = () => {
                   }
                   id="price"
                   placeholder="Price"
-                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700"
+                  className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700"
                 />
               </div>
               <div>
@@ -301,7 +301,7 @@ const AddBikeDrawer = () => {
                 name="start"
                 id="start"
                 value={formValue.features.start}
-                className=" border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700 w-full"
+                className=" border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700 w-full"
                 onChange={(e) =>setFormValue({ ...formValue, features: { ...formValue.features, start: e.target.value } })}
               >
                 <option value="SELF_START_ONLY">Self Start Only</option>
@@ -319,7 +319,7 @@ const AddBikeDrawer = () => {
                 }
                 id="engine"
                 placeholder="Engine"
-                className=" border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700"
+                className=" border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700"
               />
               <input
                 type="text"
@@ -331,7 +331,7 @@ const AddBikeDrawer = () => {
                 }
                 id="distance"
                 placeholder="Distance per day"
-                className=" border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700"
+                className=" border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700"
               />
             </div>
             <div>
@@ -346,7 +346,7 @@ const AddBikeDrawer = () => {
                   setFormValue({ ...formValue, description: e.target.value })
                 }
                 placeholder="Description"
-                className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none text-neutral-700"
+                className="w-full border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700"
               />
             </div>
             <div className="flex justify-end">
