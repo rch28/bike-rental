@@ -9,7 +9,7 @@ const AdminSideBar = () => {
   const pathname = usePathname()
 
   return (
-    <div className={`absolute md:relative`}>
+    <div className={`absolute md:relative z-40`}>
       <aside
         className={`z-40 border-r border-blue-200 transition-transform bg-blue-200 md:bg-transparent min-h-screen ${translateSideBar} md:translate-x-0 `}
       >
