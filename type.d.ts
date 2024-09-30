@@ -12,18 +12,18 @@ type feature ={
   distance:string;
 }
 interface Bike {
-  id: string;
+  id?: string;
   name: string;
-  rating: number;
-  brand: string;
-  model: string;
-  year: number;
-  color: string;
+  rating?: number;
+  brand?: string;
+  model?: string;
+  year?: number;
+  color?: string;
   features: Features;
   price: number;
-  description: string;
-  image: string;
-  date: string;
+  description?: string;
+  image?: string;
+  date?: string;
 }
 interface BikeResponse {
   count: number;
