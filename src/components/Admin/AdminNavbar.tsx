@@ -5,6 +5,8 @@ import Logo from "../global/Logo";
 import ProfileAvatar from "../global/ProfileAvatar";
 import { IoMenu } from "react-icons/io5";
 import { useStore } from "@/store/store";
+import Link from "next/link";
+import { TbArrowBack } from "react-icons/tb";
 const AdminNavbar = () => {
   const translateSideBar = useStore((state) => state.translateSiderbar);
   const setTranslateSiderbar = useStore((state) => state.setTranslateSiderbar);
@@ -20,8 +22,11 @@ const AdminNavbar = () => {
   return (
     <>
       <nav
-        className={` py-2 z-50 w-full  ${Style.bgPrimary} border-b border-blue-200 flex justify-between md:justify-end`}
+        className={` py-2 z-50 w-full  ${Style.bgPrimary} border-b border-blue-200 flex justify-between items-center`}
       >
+        <Link href="/" className="mx-6 px-3 py-1 rounded-full space-x-2 flex items-center bg-white">
+          <TbArrowBack className="w-5 h-5" /> <span>Back</span>
+        </Link>
         <div className="flex items-center justify-center  w-40 md:hidden">
           <button className="">
             <IoMenu
