@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { headers } from 'next/headers';
 import "./globals.css";
 import { Style } from "@/lib/Style";
 import Footer from "@/components/global/Footer";
@@ -15,7 +14,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const setInitialTheme = `
   (function() {
     const theme = localStorage.getItem('theme');
@@ -26,20 +24,16 @@ export default function RootLayout({
     }
   })();
 `;
-const pathname = headers().get('x-next-pathname');
 
-console.log("pathname", pathname);
   return (
     <html lang="en">
       <head>
         <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
       </head>
       <body className={Style.bgPrimary}>
-      <Toaster position="top-center" reverseOrder={false} />
+        <Toaster position="top-center" reverseOrder={false} />
         <div className="flex flex-col min-h-screen  ">
-          <Main>
-            {children}
-          </Main>
+          <Main>{children}</Main>
         </div>
       </body>
     </html>
