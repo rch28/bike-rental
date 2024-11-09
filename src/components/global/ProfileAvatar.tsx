@@ -26,7 +26,7 @@ const ProfileAvatar = () => {
   });
   useEffect(() => {
     setLogged(true);
-    localStorage.setItem("me", JSON.stringify(data));
+    localStorage.setItem("me", data ? JSON.stringify(data) : "");
   }, [data, userId]);
 
   useEffect(() => {
