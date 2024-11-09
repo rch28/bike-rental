@@ -25,7 +25,7 @@ interface Requests {
 
 const configureAxios = (): Requests => {
   const instance: AxiosInstance = axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_API_URL}+api/v1`,
+    baseURL: `${process.env.NEXT_PUBLIC_API_URL}api/v1`,
     withCredentials: true,
   });
 
