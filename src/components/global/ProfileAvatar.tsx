@@ -6,30 +6,28 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import ProfileDropdown from "./ProfileDropdown";
-import { fetchUserData } from "@/lib/fetchUserData";
 import { FaRegUser } from "react-icons/fa6";
+import { useQuery } from "@tanstack/react-query";
+import UserServices from "@/services/UserServices";
 const ProfileAvatar = () => {
   const [mount, setMount] = useState(false);
   const [profileToggle, setProfileToggle] = useState(false);
-  const [userData, setUserData] = useState<userData | null>(null);
-
   const isLogged = useStore((state) => state.isLogged);
   const setLogged = useStore((state) => state.setLogged);
 
   const userLoggedIn = Cookies.get("user_logged_in") === "true" ? true : false;
 
-  const userId = Cookies.get("user_id");
-
+  const userId = Cookies.get("user_id") as string;
+  const { data, isLoading } = useQuery({
+    queryKey: ["user", userId],
+    queryFn: () => UserServices.fetchUserData(userId),
+    enabled: !!userId,
+    select: (data) => data,
+  });
   useEffect(() => {
-    if (userId) {
-      const fetchData = async () => {
-        const data = await fetchUserData(userId);
-        setUserData(data);
-      };
-
-      fetchData();
-    }
-  }, [userId]);
+    setLogged(true);
+    localStorage.setItem("me", JSON.stringify(data));
+  }, [data, userId]);
 
   useEffect(() => {
     if (userLoggedIn) {
@@ -37,16 +35,14 @@ const ProfileAvatar = () => {
     } else {
       setLogged(false);
     }
-
     setMount(true);
   }, [userLoggedIn]);
-  useEffect(() => {
-    setMount(true);
-  }, []);
 
-  if (!mount)
+  if (isLoading || !mount)
     return (
-      <div className=" mx-2 w-10 h-10 cursor-pointer rounded-full shadow-md shadow-gray-400" />
+      <div className=" grid place-content-center w-10 h-10 lg:w-12 lg:h-12 cursor-pointer rounded-full shadow-md shadow-gray-500 mx-4">
+        <FaRegUser className="w-6 h-6 text-gray-600" />
+      </div>
     );
 
   return (
@@ -56,9 +52,9 @@ const ProfileAvatar = () => {
           onClick={() => setProfileToggle(!profileToggle)}
           className=" grid place-content-center w-10 h-10 lg:w-12 lg:h-12 cursor-pointer rounded-full shadow-md shadow-gray-500"
         >
-          {userData && userData?.profile_picture ? (
+          {data && data?.profile_picture ? (
             <Image
-              src={userData?.profile_picture}
+              src={data?.profile_picture}
               alt="profile"
               width={100}
               height={100}
@@ -78,11 +74,11 @@ const ProfileAvatar = () => {
         </div>
       )}
 
-      {profileToggle && isLogged && userData && (
+      {profileToggle && isLogged && data && (
         <div className="absolute top-14 right-0 bg-white dark:bg-gray-800 shadow-md rounded-md p-2">
           <ProfileDropdown
             setProfileToggle={setProfileToggle}
-            userData={userData}
+            userData={data}
           />
         </div>
       )}
