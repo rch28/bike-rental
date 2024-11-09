@@ -29,7 +29,7 @@ const Login: React.FC = () => {
             href="/auth/forgot-password"
             className="underline hover:text-primary/75"
           >
-            Forgot Password
+            Forgot Password?
           </Link>
         </div>
 
