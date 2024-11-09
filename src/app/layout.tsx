@@ -4,6 +4,7 @@ import { Style } from "@/lib/Style";
 import Footer from "@/components/global/Footer";
 import { Toaster } from "react-hot-toast";
 import Main from "./Main";
+import ContextProvider from "@/context/ContextProvider";
 export const metadata: Metadata = {
   title: "Bike Rental System",
   description: "Bike Rental System",
@@ -33,7 +34,9 @@ export default function RootLayout({
       <body className={Style.bgPrimary}>
         <Toaster position="top-center" reverseOrder={false} />
         <div className="flex flex-col min-h-screen  ">
-          <Main>{children}</Main>
+          <ContextProvider>
+            <Main>{children}</Main>
+          </ContextProvider>
         </div>
       </body>
     </html>
