@@ -1,10 +1,9 @@
-"use client";
 import Link from "next/link";
 import React from "react";
-import AutorenewIcon from "@mui/icons-material/Autorenew";
 import useLoginSubmit from "@/hooks/useLoginSubmit";
 import RHFTextField from "../../components/RHFComponents/RHFTextField";
 import { LoginSchemaType } from "@/Auth/types/LoginSchema";
+import Loading from "@/components/utils/Loading";
 const Login: React.FC = () => {
   const {
     handleSubmit,
@@ -32,7 +31,7 @@ const Login: React.FC = () => {
             type="submit"
             disabled={isSubmitting}
             className={`
-              w-full py-3 rounded-lg font-bold text-lg 
+              w-full py-3 rounded-lg font-bold text-lg  flex justify-center
               ${
                 isSubmitting
                   ? "bg-black/40 text-white"
@@ -40,14 +39,7 @@ const Login: React.FC = () => {
               }
             `}
           >
-            {isSubmitting ? (
-              <span>
-                {" "}
-                <AutorenewIcon className="animate-spin" /> Login In ...
-              </span>
-            ) : (
-              "Login"
-            )}
+            {isSubmitting ? <Loading msg="Loging in.." /> : "Login"}
           </button>
         </div>
 
