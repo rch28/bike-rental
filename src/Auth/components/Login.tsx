@@ -24,7 +24,14 @@ const Login: React.FC = () => {
           label="Password"
         />
         {/* Forgot Password */}
-        {/* TODO : Forget button */}
+        <div className="flex justify-end items-center text-sm mt-2 text-gray-600 font-medium">
+          <Link
+            href="/auth/forgot-password"
+            className="underline hover:text-primary/75"
+          >
+            Forgot Password
+          </Link>
+        </div>
 
         <div className="flex items-center justify-end">
           <button
