@@ -6,12 +6,13 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/lib/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode:"class",
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        'primary': '#ea580cff',
+        primary: "#ea580cff",
       },
 
       backgroundImage: {
