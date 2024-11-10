@@ -19,6 +19,14 @@ const UserServices = {
     return requests.post("/auth/login/user/verify-otp/", data);
   },
 
+  // logout user
+  logoutUser: async () => {
+    return requests.post("/auth/logout/user/", {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
   // get user data
   fetchUserData: async (userId: string) => {
     return requests.get(`/auth/user/retrieve/${userId}/`, {

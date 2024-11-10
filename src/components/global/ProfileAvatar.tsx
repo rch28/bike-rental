@@ -21,14 +21,13 @@ const ProfileAvatar = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["user", userId],
     queryFn: () => UserServices.fetchUserData(userId),
-    enabled: !!userId,
+    enabled: !!userId && userLoggedIn,
     select: (data) => data,
   });
   useEffect(() => {
     setLogged(true);
     localStorage.setItem("me", data ? JSON.stringify(data) : "");
   }, [data, userId]);
-
   useEffect(() => {
     if (userLoggedIn) {
       setLogged(true);
@@ -53,13 +52,15 @@ const ProfileAvatar = () => {
           className=" grid place-content-center w-10 h-10 lg:w-12 lg:h-12 cursor-pointer rounded-full shadow-md shadow-gray-500"
         >
           {data && data?.profile_picture ? (
-            <Image
-              src={data?.profile_picture}
-              alt="profile"
-              width={100}
-              height={100}
-              className="rounded-full w-full h-full object-cover"
-            />
+            <div>
+              <Image
+                src={data?.profile_picture}
+                alt="profile"
+                width={200}
+                height={200}
+                className="rounded-full w-10 h-10 drop-shadow-2xl object-cover "
+              />
+            </div>
           ) : (
             <FaRegUser className="w-6 h-6 text-gray-600" />
           )}
