@@ -5,6 +5,7 @@ import RHFTextField from "../../components/RHFComponents/RHFTextField";
 import Loading from "@/components/utils/Loading";
 import useLoginVerifySubmit from "@/hooks/useLoginVerifySubmit";
 import { LoginVerifySchemaType } from "../types/LoginVerifySchema";
+import RHFNumberField from "@/components/RHFComponents/RHFNumberField";
 const VerifyOtp: React.FC = () => {
   const {
     handleSubmit,
@@ -26,11 +27,7 @@ const VerifyOtp: React.FC = () => {
       >
         {/* Username field */}
         <RHFTextField<LoginVerifySchemaType> name="email" label="Email" />
-        <RHFTextField<LoginVerifySchemaType>
-          type="number"
-          name="otp"
-          label="Otp"
-        />
+        <RHFNumberField<LoginVerifySchemaType> name="otp" label="Otp" />
 
         <div className="flex items-center justify-end">
           <button

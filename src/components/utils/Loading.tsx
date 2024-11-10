@@ -5,10 +5,10 @@ interface LoadingProps {
   msg?: string;
 }
 
-const Loading = ({className, msg}:LoadingProps) => {
+const Loading = ({ className, msg }: LoadingProps) => {
   return (
-    <span className="flex gap-2 items-center">
-      <PiSpinnerGap  className={`animate-spin  text-4xl ${className} `} />
+    <span className="flex gap-2 items-center justify-center">
+      <PiSpinnerGap className={`animate-spin  text-4xl ${className} `} />
       <span className="text-center">{msg}</span>
     </span>
   );

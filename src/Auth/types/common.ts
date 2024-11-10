@@ -6,3 +6,7 @@ export type loginResponse = {
 export type signupResponse = {
   success: string;
 };
+
+export type verifyOtpResponse = {
+  success: string;
+};

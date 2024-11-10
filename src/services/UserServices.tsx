@@ -2,6 +2,7 @@ import { LoginSchemaType } from "@/Auth/types/LoginSchema";
 import configureAxios from "./axiosConfig";
 import { SignupSchemaType } from "@/Auth/types/SignupSchema";
 import { getCookies } from "./getCookies";
+import { LoginVerifySchemaType } from "@/Auth/types/LoginVerifySchema";
 
 const requests = configureAxios();
 
@@ -11,6 +12,11 @@ const UserServices = {
   },
   loginUser: (data: LoginSchemaType) => {
     return requests.post("/auth/login/user/", data);
+  },
+
+  // verify otp
+  verifyLoginOtp: (data: LoginVerifySchemaType) => {
+    return requests.post("/auth/login/user/verify-otp/", data);
   },
 
   // get user data
