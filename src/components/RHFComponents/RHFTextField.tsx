@@ -37,6 +37,7 @@ const RHFTextField = <T extends FieldValues>({
           type={type === "password" && !showPassword ? "password" : "text"}
           error={!!error}
           helperText={error?.message}
+          size="small"
           slotProps={{
             input: {
               endAdornment:
