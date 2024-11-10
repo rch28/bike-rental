@@ -20,8 +20,8 @@ const LoginPage = async (props: { searchParams: LoginPageProps }) => {
       <div className=" w-full h-full absolute top-0">
         <Layout>
           {/* Register */}
-          <div className="flex gap-4 max-w-3xl  mx-auto my-20  bg-pink-200 p-6 rounded-xl">
-            <div className="flex-1 flex justify-center items-center border-r-2 border-orange-500">
+          <div className="flex gap-4  w-fit md:max-w-3xl  mx-auto my-20  bg-pink-200 p-6 rounded-xl">
+            <div className="flex-1 hidden md:flex   justify-center items-center border-r-2 border-orange-500">
               <Image
                 src={loginImage}
                 className="  w-full h-full object-cover mr-4"
@@ -29,14 +29,14 @@ const LoginPage = async (props: { searchParams: LoginPageProps }) => {
               />
             </div>
             {verifyOtp ? (
-              <div className="flex-1">
+              <div className="md:flex-1">
                 <p className="text-center text-gray-800 text-2xl font-semibold">
                   Email Verification OTP
                 </p>
                 <VerifyLoginOtpProvider />
               </div>
             ) : (
-              <div className="flex-1">
+              <div className="md:flex-1">
                 <p className="text-center text-gray-800 text-2xl font-semibold">
                   Login to your account
                 </p>
