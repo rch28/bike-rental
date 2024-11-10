@@ -37,8 +37,9 @@ const useLoginSubmit = () => {
       success: (response: loginResponse) => {
         let msg;
         if (response?.otp_created_at) {
+          sessionStorage.setItem("email", data.email);
           msg = response?.success || "OTP sent to your email!";
-          router.push("/auth/verify-otp");
+          router.push("/auth/login?verifyOtp=true");
         } else {
           msg = response?.success || "Login successful!";
           router.push("/");
