@@ -3,6 +3,7 @@ import configureAxios from "./axiosConfig";
 import { SignupSchemaType } from "@/Auth/types/SignupSchema";
 import { getCookies } from "./getCookies";
 import { LoginVerifySchemaType } from "@/Auth/types/LoginVerifySchema";
+import { ForgotPasswordSchemaType } from "@/Auth/types/ForgotPasswordSchema";
 
 const requests = configureAxios();
 
@@ -25,6 +26,11 @@ const UserServices = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${await getCookies()}`,
     });
+  },
+  // Forgot password
+
+  forgotPassword: (data: ForgotPasswordSchemaType) => {
+    return requests.post("/auth/forgot-password/", data);
   },
 
   // get user data

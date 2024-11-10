@@ -1,38 +1,23 @@
+import RHFTextField from "@/components/RHFComponents/RHFTextField";
+import useForgotPassword from "@/hooks/useForgotPassword";
+import { ForgotPasswordSchemaType } from "../types/ForgotPasswordSchema";
 import Link from "next/link";
-import React from "react";
-import useLoginSubmit from "@/hooks/useLoginSubmit";
-import RHFTextField from "../../components/RHFComponents/RHFTextField";
-import { LoginSchemaType } from "@/Auth/types/LoginSchema";
 import Loading from "@/components/utils/Loading";
-const Login: React.FC = () => {
+
+const ForgotPassword = () => {
   const {
     handleSubmit,
     onSubmit,
     formState: { isSubmitting },
-  } = useLoginSubmit();
+  } = useForgotPassword();
+
   return (
     <>
       <form
         className="flex flex-col gap-4 mt-4 p-4 pt-0"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {/* Username field */}
-        <RHFTextField<LoginSchemaType> name="email" label="Email" />
-        <RHFTextField<LoginSchemaType>
-          type="password"
-          name="password"
-          label="Password"
-        />
-        {/* Forgot Password */}
-        <div className="flex justify-end items-center text-sm mt-2 text-gray-600 font-medium">
-          <Link
-            href="/auth/login?forgotPassword=true"
-            className="underline hover:text-primary/75"
-          >
-            Forgot Password?
-          </Link>
-        </div>
-
+        <RHFTextField<ForgotPasswordSchemaType> name="email" label="Email" />
         <div className="flex items-center justify-end">
           <button
             type="submit"
@@ -46,7 +31,7 @@ const Login: React.FC = () => {
               }
             `}
           >
-            {isSubmitting ? <Loading msg="Loging in.." /> : "Login"}
+            {isSubmitting ? <Loading msg="Sending.." /> : "Send"}
           </button>
         </div>
 
@@ -68,4 +53,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
