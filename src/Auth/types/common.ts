@@ -1,12 +1,4 @@
-export type loginResponse = {
+export type successResponse = {
   otp_created_at?: string;
-  success: string;
-};
-
-export type signupResponse = {
-  success: string;
-};
-
-export type verifyOtpResponse = {
   success: string;
 };
