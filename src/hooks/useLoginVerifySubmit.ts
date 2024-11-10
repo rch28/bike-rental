@@ -18,13 +18,13 @@ const useLoginVerifySubmit = () => {
           const response = await UserServices.verifyLoginOtp(data);
           resolve(response);
         } catch (error) {
-          if (error instanceof AxiosError && error.response?.data?.detail) {
-            const errMsg = error?.response?.data?.detail;
+          if (error instanceof AxiosError && error.response?.data) {
+            const errMsg = error?.response?.data;
             setError("otp", {
               type: "manual",
-              message: errMsg,
+              message: errMsg?.detail || errMsg?.error,
             });
-            reject(errMsg);
+            reject(errMsg?.detail || errMsg?.error);
           } else if (error instanceof Error) {
             reject(error?.message);
           } else {
