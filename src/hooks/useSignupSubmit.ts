@@ -1,4 +1,4 @@
-import { signupResponse } from "@/Auth/types/common";
+import { successResponse } from "@/Auth/types/common";
 import { SignupSchemaType } from "@/Auth/types/SignupSchema";
 import UserServices from "@/services/UserServices";
 import { AxiosError } from "axios";
@@ -11,7 +11,7 @@ const useSignupSubmit = () => {
   const { handleSubmit, formState, setError } =
     useFormContext<SignupSchemaType>();
   const onSubmit: SubmitHandler<SignupSchemaType> = async (data) => {
-    const newPromise: Promise<signupResponse> = new Promise(
+    const newPromise: Promise<successResponse> = new Promise(
       async (resolve, reject) => {
         try {
           const response = await UserServices.registerUser(data);

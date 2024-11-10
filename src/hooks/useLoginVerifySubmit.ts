@@ -1,4 +1,4 @@
-import { verifyOtpResponse } from "@/Auth/types/common";
+import { successResponse } from "@/Auth/types/common";
 import { LoginVerifySchemaType } from "@/Auth/types/LoginVerifySchema";
 import UserServices from "@/services/UserServices";
 import { AxiosError } from "axios";
@@ -12,7 +12,7 @@ const useLoginVerifySubmit = () => {
     useFormContext<LoginVerifySchemaType>();
 
   const onSubmit: SubmitHandler<LoginVerifySchemaType> = async (data) => {
-    const newPromise: Promise<verifyOtpResponse> = new Promise(
+    const newPromise: Promise<successResponse> = new Promise(
       async (resolve, reject) => {
         try {
           const response = await UserServices.verifyLoginOtp(data);

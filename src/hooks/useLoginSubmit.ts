@@ -1,4 +1,4 @@
-import { loginResponse } from "@/Auth/types/common";
+import { successResponse } from "@/Auth/types/common";
 import { LoginSchemaType } from "@/Auth/types/LoginSchema";
 import UserServices from "@/services/UserServices";
 import { AxiosError } from "axios";
@@ -12,7 +12,7 @@ const useLoginSubmit = () => {
     useFormContext<LoginSchemaType>();
 
   const onSubmit: SubmitHandler<LoginSchemaType> = async (data) => {
-    const newPromise: Promise<loginResponse> = new Promise(
+    const newPromise: Promise<successResponse> = new Promise(
       async (resolve, reject) => {
         try {
           const response = await UserServices.loginUser(data);
@@ -34,7 +34,7 @@ const useLoginSubmit = () => {
     );
     await toast.promise(newPromise, {
       loading: "Logging in...",
-      success: (response: loginResponse) => {
+      success: (response) => {
         let msg;
         if (response?.otp_created_at) {
           sessionStorage.setItem("email", data.email);
