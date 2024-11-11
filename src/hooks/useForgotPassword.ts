@@ -17,7 +17,6 @@ const useForgotPassword = () => {
       async (resolve, reject) => {
         try {
           const response = await UserServices.forgotPassword(data);
-          console.log(response);
           resolve(response);
         } catch (error) {
           console.log("error", error);
@@ -35,16 +34,9 @@ const useForgotPassword = () => {
     await toast.promise(newPromise, {
       loading: "Logging in...",
       success: (response) => {
-        let msg;
-        if (response?.otp_created_at) {
-          sessionStorage.setItem("email", data.email);
-          msg = response?.success || "OTP sent to your email!";
-          router.push("/auth/login?verifyOtp=true");
-        } else {
-          msg = response?.success || "Login successful!";
-          router.push("/");
-        }
-        return msg;
+        sessionStorage.setItem("email", data.email);
+        router.push("/auth/login?verifyOtp=true&&forgotPassword=true");
+        return response?.success || "OTP sent successfully!";
       },
       error: (err) => err,
     });

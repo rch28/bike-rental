@@ -3,17 +3,18 @@ import Layout from "@/components/global/Layout";
 import Image from "next/image";
 import React from "react";
 import LoginPorvider from "@/Auth/components/LoginPorvider";
-import VerifyLoginOtpProvider from "@/Auth/components/VerifyLoginOtpProvider";
 import ForgotPasswordProvider from "@/Auth/components/ForgotPasswordProvider";
+import VerifyOtpProvider from "@/Auth/components/VerifyOtpProvider";
 
 type LoginPageProps = Promise<{
   [searchParams: string]: {
-    verifyOtp: boolean;
-    forgotPassword: boolean;
+    verifyOtp?: boolean;
+    forgotPassword?: boolean;
   };
 }>;
 const LoginPage = async (props: { searchParams: LoginPageProps }) => {
   const { verifyOtp, forgotPassword } = await props.searchParams;
+
   return (
     <div className="relative  mb-16">
       <div className=" h-screen w-full overflow-hidden">
@@ -33,9 +34,11 @@ const LoginPage = async (props: { searchParams: LoginPageProps }) => {
             {verifyOtp ? (
               <div className="md:flex-1 ">
                 <p className="text-center text-gray-800 text-2xl font-semibold">
-                  Email Verification OTP
+                  {forgotPassword
+                    ? "Forgot Password  OTP"
+                    : " Login Verification OTP"}
                 </p>
-                <VerifyLoginOtpProvider />
+                <VerifyOtpProvider />
               </div>
             ) : forgotPassword ? (
               <div className="md:flex-1 flex flex-col justify-center items-center  ">
