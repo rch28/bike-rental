@@ -9,7 +9,7 @@ import {
 } from "../types/LoginVerifySchema";
 import VerifyOtp from "./VerifyOtp";
 
-const VerifyLoginOtpProvider = () => {
+const VerifyOtpProvider = () => {
   const methods = useForm({
     mode: "all",
     resolver: zodResolver(LoginVerifySchema),
@@ -23,4 +23,4 @@ const VerifyLoginOtpProvider = () => {
   );
 };
 
-export default VerifyLoginOtpProvider;
+export default VerifyOtpProvider;
