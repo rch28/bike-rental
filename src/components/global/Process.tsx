@@ -39,8 +39,9 @@ export const Process = () => {
       <Layout>
         <header className="w-full text-center  font-bold text-neutral-800">
           <span className="uppercase text-gray-600 ">Process</span>
-          <h1 className="text-5xl ">How it  <span className="text-primary  ">Works</span></h1>
-         
+          <h1 className=" text-4xl md:text-5xl ">
+            How it <span className="text-primary  ">Works</span>
+          </h1>
         </header>
 
         <div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Blog } from "../global/Blog";
 
-export const  OurBlog =()=> {
+export const OurBlog = () => {
   const blogInfo = [
     {
       id: 1,
@@ -35,22 +35,21 @@ export const  OurBlog =()=> {
     <div className=" my-16 py-12">
       <header className="w-full text-center  font-bold text-neutral-800">
         <span className="uppercase text-primary ">Our Blog</span>
-        <h1 className="text-5xl ">
+        <h1 className="text-4xl  md:text-5xl ">
           Latest News & <span className="text-primary  ">Blog</span>
         </h1>
       </header>
       <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6 ">
         {blogInfo.map((blog) => (
           <Blog
-          key={blog.id}
-          title={blog.title}
-          description={blog.description}
-          date={blog.date}
-          image={blog.image}
-        />
-
+            key={blog.id}
+            title={blog.title}
+            description={blog.description}
+            date={blog.date}
+            image={blog.image}
+          />
         ))}
       </div>
     </div>
   );
-}
+};

@@ -8,7 +8,11 @@ export const FeaturedBikes = () => {
       rating: 4.5,
       image:
         "https://c4.wallpaperflare.com/wallpaper/777/979/707/5c1ce0f3d5e7e-wallpaper-preview.jpg",
-      features:{start:"SELF START ONLY", engine:"313 cc Engine", distance:"200 km/day"},
+      features: {
+        start: "SELF START ONLY",
+        engine: "313 cc Engine",
+        distance: "200 km/day",
+      },
       price: "1200",
     },
     {
@@ -17,7 +21,11 @@ export const FeaturedBikes = () => {
       rating: 4.2,
       image:
         "https://c4.wallpaperflare.com/wallpaper/78/34/548/enfield-himalayan-royal-wallpaper-preview.jpg",
-      features:{start:"SELF START ONLY", engine:"411 cc Engine", distance:"250 km/day"},
+      features: {
+        start: "SELF START ONLY",
+        engine: "411 cc Engine",
+        distance: "250 km/day",
+      },
       price: "1500",
     },
     {
@@ -26,7 +34,11 @@ export const FeaturedBikes = () => {
       rating: 4.3,
       image:
         "https://c4.wallpaperflare.com/wallpaper/961/40/938/yamaha-yamaha-mt-09-motorcycle-wallpaper-preview.jpg",
-      features:{start:"SELF START ONLY", engine:"155 cc Engine", distance:"180 km/day"},
+      features: {
+        start: "SELF START ONLY",
+        engine: "155 cc Engine",
+        distance: "180 km/day",
+      },
       price: "900",
     },
     {
@@ -35,7 +47,11 @@ export const FeaturedBikes = () => {
       rating: 4.6,
       image:
         "https://c4.wallpaperflare.com/wallpaper/600/317/133/2015-cb500x-honda-wallpaper-preview.jpg",
-      features:{start:"SELF START ONLY", engine:"471 cc Engine", distance:"220 km/day"},
+      features: {
+        start: "SELF START ONLY",
+        engine: "471 cc Engine",
+        distance: "220 km/day",
+      },
       price: "1800",
     },
     {
@@ -44,7 +60,11 @@ export const FeaturedBikes = () => {
       rating: 5.0,
       image:
         "https://c4.wallpaperflare.com/wallpaper/544/655/653/2017-ktm-390-duke-4k-8k-wallpaper-preview.jpg",
-      features:{start:"SELF START ONLY", engine:"249 cc Engine", distance:"200 km/day"},
+      features: {
+        start: "SELF START ONLY",
+        engine: "249 cc Engine",
+        distance: "200 km/day",
+      },
       price: "1100",
     },
     {
@@ -53,21 +73,19 @@ export const FeaturedBikes = () => {
       rating: 4.7,
       image:
         "https://c4.wallpaperflare.com/wallpaper/712/250/346/2015-300-kawasaki-ninja-wallpaper-preview.jpg",
-      features:
-        {
-          start: "SELF START ONLY",
-          engine: "296 cc Engine",
-          distance: "180 km/day",
-        },
-      
+      features: {
+        start: "SELF START ONLY",
+        engine: "296 cc Engine",
+        distance: "180 km/day",
+      },
+
       price: "1600",
     },
   ];
 
-
   return (
     <div className="my-12">
-      <header className="w-full text-center text-5xl font-bold text-neutral-800">
+      <header className="w-full text-center text-4xl md:text-5xl font-bold text-neutral-800">
         <span>Featured</span>
         <span className="text-primary ">Bikes</span>
       </header>
