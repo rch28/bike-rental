@@ -9,7 +9,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import ForgotPassword from "./ForgotPassword";
 
-const ForgotPasswordProvider = ({ mode }: { mode: string }) => {
+const ForgotPasswordProvider = () => {
   const methods = useForm<ForgotPasswordSchemaType>({
     mode: "all",
     resolver: zodResolver(ForgotPasswordSchema),
@@ -17,7 +17,7 @@ const ForgotPasswordProvider = ({ mode }: { mode: string }) => {
   });
   return (
     <FormProvider {...methods}>
-      <ForgotPassword mode={mode} />
+      <ForgotPassword />
     </FormProvider>
   );
 };

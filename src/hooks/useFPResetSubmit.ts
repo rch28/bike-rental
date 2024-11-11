@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const useForgotPassword = () => {
+const useFPResetSubmit = () => {
   const router = useRouter();
 
   const { handleSubmit, setValue, formState } =
@@ -35,8 +35,8 @@ const useForgotPassword = () => {
       loading: "Logging in...",
       success: (response) => {
         sessionStorage.setItem("email", data.email);
-        router.push("/auth/login?verifyOtp=true&&forgotPassword=true");
-        return response?.success || "OTP sent successfully!";
+        router.push("/auth/login");
+        return response?.success || "Password reset successfully!";
       },
       error: (err) => err,
     });
@@ -45,4 +45,4 @@ const useForgotPassword = () => {
   return { onSubmit, handleSubmit, setValue, formState };
 };
 
-export default useForgotPassword;
+export default useFPResetSubmit;

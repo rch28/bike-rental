@@ -3,6 +3,7 @@ import Layout from "@/components/global/Layout";
 import Image from "next/image";
 import React from "react";
 import ForgotPasswordProvider from "@/Auth/components/ForgotPasswordProvider";
+import FPVerifyProvider from "@/Auth/components/FPVerifyProvider";
 
 type LoginPageProps = Promise<{
   [searchParams: string]: {
@@ -28,12 +29,21 @@ const ForgotPasswordPage = async (props: { searchParams: LoginPageProps }) => {
                 alt=""
               />
             </div>
-            <div className="md:flex-1   ">
-              <p className="text-center text-gray-800 text-2xl font-semibold">
-                Enter New Password
-              </p>
-              <ForgotPasswordProvider mode="resetPassword" />
-            </div>
+            {forgotPassword ? (
+              <div className="md:flex-1  flex flex-col justify-center items-center ">
+                <p className="text-center text-gray-800 text-2xl font-semibold">
+                  Forgot Password
+                </p>
+                <FPVerifyProvider />
+              </div>
+            ) : (
+              <div className="md:flex-1   ">
+                <p className="text-center text-gray-800 text-2xl font-semibold">
+                  Enter New Password
+                </p>
+                <ForgotPasswordProvider />
+              </div>
+            )}
           </div>
         </Layout>
       </div>

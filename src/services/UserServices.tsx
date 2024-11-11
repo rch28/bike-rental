@@ -3,6 +3,7 @@ import configureAxios from "./axiosConfig";
 import { SignupSchemaType } from "@/Auth/types/SignupSchema";
 import { getCookies } from "./getCookies";
 import { VerifyOtpSchemaType } from "@/Auth/types/LoginVerifySchema";
+import { FPVerifySchemaType } from "@/Auth/types/FPVerifySchema";
 import { ForgotPasswordSchemaType } from "@/Auth/types/ForgotPasswordSchema";
 
 const requests = configureAxios();
@@ -30,10 +31,13 @@ const UserServices = {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
-  // Forgot password
-
-  forgotPassword: (data: ForgotPasswordSchemaType) => {
+  // Forgot password verify
+  FPVerify: (data: FPVerifySchemaType) => {
     return requests.post("/auth/forgot-password/", data);
+  },
+  // Forgot password verify
+  forgotPassword: (data: ForgotPasswordSchemaType) => {
+    return requests.post("/auth/forgot-password/change-password/", data);
   },
 
   // get user data

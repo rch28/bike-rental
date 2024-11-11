@@ -1,11 +1,13 @@
+"use client";
 import RHFTextField from "@/components/RHFComponents/RHFTextField";
 import { ForgotPasswordSchemaType } from "../types/ForgotPasswordSchema";
 import Link from "next/link";
 import Loading from "@/components/utils/Loading";
 import { useSearchParams } from "next/navigation";
-import useFPResetSubmit from "@/hooks/useFPResetSubmit";
+import { useEffect } from "react";
+import useFPVerifySubmit from "@/hooks/useFPVerifySubmit";
 
-const ForgotPassword = () => {
+const FPVerify = () => {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
 
@@ -14,10 +16,12 @@ const ForgotPassword = () => {
     onSubmit,
     setValue,
     formState: { isSubmitting },
-  } = useFPResetSubmit();
-  if (email) {
-    setValue("email", email);
-  }
+  } = useFPVerifySubmit();
+  useEffect(() => {
+    if (email) {
+      setValue("email", email);
+    }
+  }, [email]);
   return (
     <>
       <form
@@ -26,18 +30,6 @@ const ForgotPassword = () => {
       >
         <RHFTextField<ForgotPasswordSchemaType> name="email" label="Email" />
 
-        <>
-          <RHFTextField<ForgotPasswordSchemaType>
-            name="new_password"
-            label="New Password"
-            type="password"
-          />
-          <RHFTextField<ForgotPasswordSchemaType>
-            name="confirm_password"
-            label="Confirm Password"
-            type="password"
-          />
-        </>
         <div className="flex items-center justify-end">
           <button
             type="submit"
@@ -73,4 +65,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default FPVerify;
