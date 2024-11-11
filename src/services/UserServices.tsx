@@ -16,12 +16,11 @@ const UserServices = {
   },
 
   // verify otp
-  verifyLoginOtp: (data: VerifyOtpSchemaType) => {
-    return requests.post("/auth/login/user/verify-otp/", data);
-  },
-  // verify otp
-  verifyForgotPasswordOtp: (data: VerifyOtpSchemaType) => {
-    return requests.post("/auth/forgot-password/verify-otp/", data);
+  verifyOtp: (data: VerifyOtpSchemaType, isloginOtpMode: boolean) => {
+    return requests.post(
+      `/auth/${isloginOtpMode ? "login/user" : "forgot-password"}/verify-otp/`,
+      data
+    );
   },
 
   // logout user

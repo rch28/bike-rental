@@ -6,16 +6,15 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const useLoginVerifySubmit = (verifyLoginOtpMode: boolean) => {
+const useVerifyOtpSubmit = (isloginOtpMode: boolean) => {
   const router = useRouter();
   const { register, handleSubmit, setError, setValue, formState } =
     useFormContext<VerifyOtpSchemaType>();
-  console.log(verifyLoginOtpMode);
   const onSubmit: SubmitHandler<VerifyOtpSchemaType> = async (data) => {
     const newPromise: Promise<successResponse> = new Promise(
       async (resolve, reject) => {
         try {
-          const response = await UserServices.verifyLoginOtp(data);
+          const response = await UserServices.verifyOtp(data, isloginOtpMode);
           resolve(response);
         } catch (error) {
           if (error instanceof AxiosError && error.response?.data) {
@@ -54,4 +53,4 @@ const useLoginVerifySubmit = (verifyLoginOtpMode: boolean) => {
   return { register, handleSubmit, onSubmit, setValue, setError, formState };
 };
 
-export default useLoginVerifySubmit;
+export default useVerifyOtpSubmit;

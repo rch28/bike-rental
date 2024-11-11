@@ -3,10 +3,10 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import RHFTextField from "../../components/RHFComponents/RHFTextField";
 import Loading from "@/components/utils/Loading";
-import useLoginVerifySubmit from "@/hooks/useLoginVerifySubmit";
 import RHFNumberField from "@/components/RHFComponents/RHFNumberField";
 import { useSearchParams } from "next/navigation";
 import { VerifyOtpSchemaType } from "../types/LoginVerifySchema";
+import useVerifyOtpSubmit from "@/hooks/useVerifyOtpSubmit";
 
 const VerifyOtp = () => {
   const searchParams = useSearchParams();
@@ -18,7 +18,7 @@ const VerifyOtp = () => {
     onSubmit,
     setValue,
     formState: { isSubmitting },
-  } = useLoginVerifySubmit(verifyLoginOtpMode);
+  } = useVerifyOtpSubmit(verifyLoginOtpMode);
   useEffect(() => {
     setVerifyLoginOtpMode(true);
     if (verifyOtp && forgotPassword) {
