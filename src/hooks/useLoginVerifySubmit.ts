@@ -1,17 +1,17 @@
 import { successResponse } from "@/Auth/types/common";
-import { LoginVerifySchemaType } from "@/Auth/types/LoginVerifySchema";
+import { VerifyOtpSchemaType } from "@/Auth/types/LoginVerifySchema";
 import UserServices from "@/services/UserServices";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const useLoginVerifySubmit = () => {
+const useLoginVerifySubmit = (verifyLoginOtpMode: boolean) => {
   const router = useRouter();
   const { register, handleSubmit, setError, setValue, formState } =
-    useFormContext<LoginVerifySchemaType>();
-
-  const onSubmit: SubmitHandler<LoginVerifySchemaType> = async (data) => {
+    useFormContext<VerifyOtpSchemaType>();
+  console.log(verifyLoginOtpMode);
+  const onSubmit: SubmitHandler<VerifyOtpSchemaType> = async (data) => {
     const newPromise: Promise<successResponse> = new Promise(
       async (resolve, reject) => {
         try {

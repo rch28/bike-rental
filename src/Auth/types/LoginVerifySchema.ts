@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const LoginVerifySchema = z.object({
+export const VerifyOtpSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
   otp: z
     .string()
@@ -8,9 +8,9 @@ export const LoginVerifySchema = z.object({
     .regex(/^\d{6}$/, "Please enter a valid OTP."),
 });
 
-export type LoginVerifySchemaType = z.infer<typeof LoginVerifySchema>;
+export type VerifyOtpSchemaType = z.infer<typeof VerifyOtpSchema>;
 
-export const defaultLoginVerifyValues: LoginVerifySchemaType = {
+export const defaultOtpVerifyValues: VerifyOtpSchemaType = {
   email: "",
   otp: "",
 };

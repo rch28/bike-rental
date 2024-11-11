@@ -4,16 +4,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
-  defaultLoginVerifyValues,
-  LoginVerifySchema,
+  defaultOtpVerifyValues,
+  VerifyOtpSchema,
 } from "../types/LoginVerifySchema";
 import VerifyOtp from "./VerifyOtp";
 
 const VerifyOtpProvider = () => {
   const methods = useForm({
     mode: "all",
-    resolver: zodResolver(LoginVerifySchema),
-    defaultValues: defaultLoginVerifyValues,
+    resolver: zodResolver(VerifyOtpSchema),
+    defaultValues: defaultOtpVerifyValues,
   });
   return (
     <FormProvider {...methods}>

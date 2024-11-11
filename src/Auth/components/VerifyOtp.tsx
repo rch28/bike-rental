@@ -1,18 +1,30 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import RHFTextField from "../../components/RHFComponents/RHFTextField";
 import Loading from "@/components/utils/Loading";
 import useLoginVerifySubmit from "@/hooks/useLoginVerifySubmit";
-import { LoginVerifySchemaType } from "../types/LoginVerifySchema";
 import RHFNumberField from "@/components/RHFComponents/RHFNumberField";
-const VerifyOtp: React.FC = () => {
+import { useSearchParams } from "next/navigation";
+import { VerifyOtpSchemaType } from "../types/LoginVerifySchema";
+
+const VerifyOtp = () => {
+  const searchParams = useSearchParams();
+  const verifyOtp = searchParams.get("verifyOtp");
+  const forgotPassword = searchParams.get("forgotPassword");
+  const [verifyLoginOtpMode, setVerifyLoginOtpMode] = useState(true);
   const {
     handleSubmit,
     onSubmit,
     setValue,
     formState: { isSubmitting },
-  } = useLoginVerifySubmit();
+  } = useLoginVerifySubmit(verifyLoginOtpMode);
+  useEffect(() => {
+    setVerifyLoginOtpMode(true);
+    if (verifyOtp && forgotPassword) {
+      setVerifyLoginOtpMode(false);
+    }
+  }, [verifyOtp, forgotPassword]);
   useEffect(() => {
     const email = sessionStorage.getItem("email");
     if (email) {
@@ -26,8 +38,8 @@ const VerifyOtp: React.FC = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* Username field */}
-        <RHFTextField<LoginVerifySchemaType> name="email" label="Email" />
-        <RHFNumberField<LoginVerifySchemaType> name="otp" label="Otp" />
+        <RHFTextField<VerifyOtpSchemaType> name="email" label="Email" />
+        <RHFNumberField<VerifyOtpSchemaType> name="otp" label="Otp" />
 
         <div className="flex items-center justify-end">
           <button
