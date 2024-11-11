@@ -3,7 +3,6 @@ import Layout from "@/components/global/Layout";
 import Image from "next/image";
 import React from "react";
 import LoginPorvider from "@/Auth/components/LoginPorvider";
-import ForgotPasswordProvider from "@/Auth/components/ForgotPasswordProvider";
 import VerifyOtpProvider from "@/Auth/components/VerifyOtpProvider";
 
 type LoginPageProps = Promise<{
@@ -39,13 +38,6 @@ const LoginPage = async (props: { searchParams: LoginPageProps }) => {
                     : " Login Verification OTP"}
                 </p>
                 <VerifyOtpProvider />
-              </div>
-            ) : forgotPassword ? (
-              <div className="md:flex-1 flex flex-col justify-center items-center  ">
-                <p className="text-center text-gray-800 text-2xl font-semibold">
-                  Forgot Password
-                </p>
-                <ForgotPasswordProvider mode="verifyOtp" />
               </div>
             ) : (
               <div className="md:flex-1">
