@@ -28,7 +28,7 @@ const Login: React.FC = () => {
         {/* Forgot Password */}
         <div className="flex justify-end items-center text-sm mt-2 text-gray-600 font-medium">
           <Link
-            href={`/auth/login?forgotPassword=true${
+            href={`/auth/forgot-password?forgotPassword=true${
               email ? `&email=${email}` : ""
             } `}
             className="underline hover:text-primary/75"
