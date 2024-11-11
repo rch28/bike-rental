@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const useLoginSubmit = () => {
   const router = useRouter();
-  const { register, handleSubmit, setError, formState } =
+  const { register, watch, handleSubmit, setError, formState } =
     useFormContext<LoginSchemaType>();
 
   const onSubmit: SubmitHandler<LoginSchemaType> = async (data) => {
@@ -49,7 +49,7 @@ const useLoginSubmit = () => {
       error: (err) => err,
     });
   };
-  return { register, handleSubmit, formState, onSubmit };
+  return { register, handleSubmit, watch, formState, onSubmit };
 };
 
 export default useLoginSubmit;

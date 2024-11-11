@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 const useForgotPassword = () => {
   const router = useRouter();
 
-  const { handleSubmit, formState } =
+  const { handleSubmit, setValue, formState } =
     useFormContext<ForgotPasswordSchemaType>();
 
   const onSubmit: SubmitHandler<ForgotPasswordSchemaType> = async (data) => {
@@ -42,7 +42,7 @@ const useForgotPassword = () => {
     });
   };
 
-  return { onSubmit, handleSubmit, formState };
+  return { onSubmit, handleSubmit, setValue, formState };
 };
 
 export default useForgotPassword;

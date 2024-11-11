@@ -3,14 +3,22 @@ import useForgotPassword from "@/hooks/useForgotPassword";
 import { ForgotPasswordSchemaType } from "../types/ForgotPasswordSchema";
 import Link from "next/link";
 import Loading from "@/components/utils/Loading";
+import { useSearchParams } from "next/navigation";
 
 const ForgotPassword = () => {
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+
   const {
     handleSubmit,
     onSubmit,
+    setValue,
     formState: { isSubmitting },
   } = useForgotPassword();
 
+  if (email) {
+    setValue("email", email);
+  }
   return (
     <>
       <form

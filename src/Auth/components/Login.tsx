@@ -8,8 +8,10 @@ const Login: React.FC = () => {
   const {
     handleSubmit,
     onSubmit,
+    watch,
     formState: { isSubmitting },
   } = useLoginSubmit();
+  const email = watch("email");
   return (
     <>
       <form
@@ -26,7 +28,9 @@ const Login: React.FC = () => {
         {/* Forgot Password */}
         <div className="flex justify-end items-center text-sm mt-2 text-gray-600 font-medium">
           <Link
-            href="/auth/login?forgotPassword=true"
+            href={`/auth/login?forgotPassword=true${
+              email ? `&email=${email}` : ""
+            } `}
             className="underline hover:text-primary/75"
           >
             Forgot Password?
