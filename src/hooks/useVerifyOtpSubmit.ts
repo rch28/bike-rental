@@ -3,12 +3,14 @@ import { VerifyOtpSchemaType } from "@/Auth/types/LoginVerifySchema";
 import UserServices from "@/services/UserServices";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const useVerifyOtpSubmit = (isloginOtpMode: boolean) => {
+  const [otpExpired, setOtpExpired] = useState(false);
   const router = useRouter();
-  const { register, handleSubmit, setError, setValue, formState } =
+  const { register, handleSubmit, setError, setValue, setFocus, formState } =
     useFormContext<VerifyOtpSchemaType>();
   const onSubmit: SubmitHandler<VerifyOtpSchemaType> = async (data) => {
     const newPromise: Promise<successResponse> = new Promise(
@@ -43,6 +45,9 @@ const useVerifyOtpSubmit = (isloginOtpMode: boolean) => {
         return response.success || "OTP verified!";
       },
       error: (error) => {
+        if (error === "OTP expired" || error === "OTP Tried too many times") {
+          setOtpExpired(true);
+        }
         setError("otp", {
           type: "manual",
           message: error,
@@ -52,7 +57,17 @@ const useVerifyOtpSubmit = (isloginOtpMode: boolean) => {
     });
   };
 
-  return { register, handleSubmit, onSubmit, setValue, setError, formState };
+  return {
+    register,
+    handleSubmit,
+    onSubmit,
+    setValue,
+    setError,
+    formState,
+    otpExpired,
+    setOtpExpired,
+    setFocus,
+  };
 };
 
 export default useVerifyOtpSubmit;

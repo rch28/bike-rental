@@ -7,17 +7,26 @@ import RHFNumberField from "@/components/RHFComponents/RHFNumberField";
 import { useSearchParams } from "next/navigation";
 import { VerifyOtpSchemaType } from "../types/LoginVerifySchema";
 import useVerifyOtpSubmit from "@/hooks/useVerifyOtpSubmit";
+import { successResponse } from "../types/common";
+import UserServices from "@/services/UserServices";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 const VerifyOtp = () => {
   const searchParams = useSearchParams();
   const verifyOtp = searchParams.get("verifyOtp");
   const forgotPassword = searchParams.get("forgotPassword");
   const [verifyLoginOtpMode, setVerifyLoginOtpMode] = useState(true);
+  const [email, setEmail] = useState("");
   const {
     handleSubmit,
     onSubmit,
     setValue,
+    setError,
     formState: { isSubmitting },
+    otpExpired,
+    setOtpExpired,
+    setFocus,
   } = useVerifyOtpSubmit(verifyLoginOtpMode);
   useEffect(() => {
     setVerifyLoginOtpMode(true);
@@ -29,8 +38,41 @@ const VerifyOtp = () => {
     const email = sessionStorage.getItem("email");
     if (email) {
       setValue("email", email);
+      setEmail(email);
+      setFocus("otp");
     }
   }, [setValue]);
+  const handleResendLoginOtp = async () => {
+    const newPromise: Promise<successResponse> = new Promise(
+      async (resolve, reject) => {
+        try {
+          const response = await UserServices.resendOtp({ email });
+          resolve(response);
+        } catch (error) {
+          if (error instanceof AxiosError && error.response?.data) {
+            const errMsg = error?.response?.data;
+            reject(errMsg?.detail || errMsg?.error);
+          } else if (error instanceof Error) {
+            reject(error?.message);
+          } else {
+            reject("Network Error!!");
+          }
+        }
+      }
+    );
+    await toast.promise(newPromise, {
+      loading: "Sending OTP...",
+      success: (response) => {
+        setOtpExpired(false);
+        setValue("otp", "");
+        setError("otp", {});
+        return response.success || "OTP sent to your email!";
+      },
+      error: (error) => {
+        return error;
+      },
+    });
+  };
   return (
     <>
       <form
@@ -41,6 +83,16 @@ const VerifyOtp = () => {
         <RHFTextField<VerifyOtpSchemaType> name="email" label="Email" />
         <RHFNumberField<VerifyOtpSchemaType> name="otp" label="Otp" />
 
+        {/* Otp Expired */}
+        {otpExpired && (
+          <div className=" flex justify-end">
+            <button type="button" onClick={handleResendLoginOtp}>
+              <span className="text-primary hover:text-red-500 hover:underline">
+                Resend OTP
+              </span>
+            </button>
+          </div>
+        )}
         <div className="flex items-center justify-end">
           <button
             type="submit"

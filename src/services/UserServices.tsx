@@ -23,6 +23,10 @@ const UserServices = {
       data
     );
   },
+  // verify otp
+  resendOtp: (data: { email: string }) => {
+    return requests.post(`/auth/resend-otp/`, data);
+  },
 
   // logout user
   logoutUser: async () => {
