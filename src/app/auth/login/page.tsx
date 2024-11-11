@@ -45,7 +45,7 @@ const LoginPage = async (props: { searchParams: LoginPageProps }) => {
                 <p className="text-center text-gray-800 text-2xl font-semibold">
                   Forgot Password
                 </p>
-                <ForgotPasswordProvider />
+                <ForgotPasswordProvider mode="verifyOtp" />
               </div>
             ) : (
               <div className="md:flex-1">

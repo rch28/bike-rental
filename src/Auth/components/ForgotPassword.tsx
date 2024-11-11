@@ -5,7 +5,7 @@ import Link from "next/link";
 import Loading from "@/components/utils/Loading";
 import { useSearchParams } from "next/navigation";
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ mode }: { mode: string }) => {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
 
@@ -26,6 +26,21 @@ const ForgotPassword = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <RHFTextField<ForgotPasswordSchemaType> name="email" label="Email" />
+
+        {mode === "resetPassword" && (
+          <>
+            <RHFTextField<ForgotPasswordSchemaType>
+              name="password"
+              label="Password"
+              type="password"
+            />
+            <RHFTextField<ForgotPasswordSchemaType>
+              name="confirm_password"
+              label="Confirm Password"
+              type="password"
+            />
+          </>
+        )}
         <div className="flex items-center justify-end">
           <button
             type="submit"
