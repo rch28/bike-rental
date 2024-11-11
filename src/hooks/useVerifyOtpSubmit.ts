@@ -35,10 +35,12 @@ const useVerifyOtpSubmit = (isloginOtpMode: boolean) => {
 
     await toast.promise(newPromise, {
       loading: "Sending OTP...",
-      success: (data) => {
-        router.push("/");
+      success: (response) => {
+        isloginOtpMode
+          ? router.push("/")
+          : router.push(`/auth/forgot-password?email=${data?.email}`);
         sessionStorage.removeItem("email");
-        return data.success || "OTP verified!";
+        return response.success || "OTP verified!";
       },
       error: (error) => {
         setError("otp", {
