@@ -6,6 +6,7 @@ import Loading from "@/components/utils/Loading";
 import { BikeComponent } from "@/components/global/Bike";
 import { Bike, BikeListResponse } from "../types/bikeApiTypes";
 import { useBikeStore } from "@/store/bikeStore";
+import Notfound from "@/components/global/Notfound";
 
 const BikeList = () => {
   const { searchQuery, bikes, setBikes, isLoading, setIsLoading } =
@@ -40,9 +41,9 @@ const BikeList = () => {
     }
   }, [searchQuery, data]);
   return (
-    <div>
+    <div className="">
       {isLoading ? (
-        <div className="h-32 flex justify-center items-center">
+        <div className="h-32 flex justify-center items-center  mt-12 ">
           <Loading className="text-7xl text-gray-600 !important" />
         </div>
       ) : (
@@ -54,7 +55,9 @@ const BikeList = () => {
               </div>
             ))
           ) : (
-            <div className="text-2xl text-gray-500">No Bikes Found</div>
+            <div className="col-span-3 w-full flex justify-center ">
+              <Notfound msg="Sorry, no bikes found matching your search. Please try different keywords or adjust your filters." />
+            </div>
           )}
         </div>
       )}
