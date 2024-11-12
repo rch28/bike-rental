@@ -22,9 +22,4 @@ export type Bike = {
 };
 
 // Define the API response type
-export type BikeListResponse = {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: Bike[];
-};
+export type BikeListResponse = Bike[];
