@@ -1,7 +1,7 @@
-import { Bike } from "../global/Bike";
+import { BikeComponent } from "../global/Bike";
 
 export const FeaturedBikes = () => {
-  const BikeData: Bike[] = [
+  const BikeData = [
     {
       id: new Date().getTime(),
       name: "BMW G 310 R",
@@ -93,7 +93,7 @@ export const FeaturedBikes = () => {
       {/* Mapping Features Bikes */}
       <div className="grid place-items-center md:grid-cols-2 xl:grid-cols-3 py-12 gap-4">
         {BikeData.map((bike, index) => (
-          <Bike key={index} bike={bike} />
+          <BikeComponent key={index} bike={bike} />
         ))}
       </div>
     </div>
