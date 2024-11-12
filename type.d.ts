@@ -6,25 +6,25 @@ interface ButtonProps {
   onClick?: () => void | undefined;
 }
 
-type feature ={
-  start:string;
-  engine:string;
-  distance:string;
-}
-interface Bike {
-  id?: string;
-  name: string;
-  rating?: number;
-  brand?: string;
-  model?: string;
-  year?: number;
-  color?: string;
-  features: Features;
-  price: number;
-  description?: string;
-  image?: string;
-  date?: string;
-}
+// type feature ={
+//   start:string;
+//   engine:string;
+//   distance:string;
+// }
+// interface Bike {
+//   id?: string;
+//   name: string;
+//   rating?: number;
+//   brand?: string;
+//   model?: string;
+//   year?: number;
+//   color?: string;
+//   features: Features;
+//   price: number;
+//   description?: string;
+//   image?: string;
+//   date?: string;
+// }
 interface BikeResponse {
   count: number;
   next: string | null;
@@ -33,11 +33,11 @@ interface BikeResponse {
 }
 
 interface userData {
-  email:string;
+  email: string;
   first_name: string;
   id: string;
   is_superuser: boolean;
   last_name: string;
   profile_picture: string;
   username: string;
-};
+}

@@ -8,6 +8,9 @@ const BikeServices = {
   getBikeList: (): Promise<BikeListResponse> => {
     return requests.get(`/bike/lists/`);
   },
+  getFeaturedBikes: (): Promise<BikeListResponse> => {
+    return requests.get(`/bike/featured/`);
+  },
 };
 
 export default BikeServices;
