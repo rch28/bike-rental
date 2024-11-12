@@ -222,13 +222,6 @@ const BikeOnRentPage = () => {
           <header className="w-full text-center text-5xl font-bold text-neutral-800">
             <h1 className="text-primary">Bike On Rent</h1>
           </header>
-
-          {/* Mapping Features Bikes */}
-          {/* <div className="grid place-items-center md:grid-cols-2 xl:grid-cols-3 py-12 gap-4">
-            {BikeData.map((bike, index) => (
-              <Bike key={index} bike={bike} />
-            ))}
-          </div> */}
           <BikeList />
         </div>
       </Layout>

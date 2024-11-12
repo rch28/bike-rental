@@ -5,11 +5,13 @@ import BikeServices from "../services/BikeServices";
 import Loading from "@/components/utils/Loading";
 import { BikeComponent } from "@/components/global/Bike";
 import { Bike, BikeListResponse } from "../types/bikeApiTypes";
+import usePaginationHook from "@/hooks/usePaginationHook";
 
 const BikeList = () => {
+  const { offset, limit, setNext, setPrevious } = usePaginationHook();
   const { data, isLoading } = useQuery<BikeListResponse>({
-    queryFn: () => BikeServices.getBikeList(),
-    queryKey: ["get-bike-list"],
+    queryFn: async () => await BikeServices.getBikeList(offset, limit),
+    queryKey: ["get-bike-list", offset, limit],
     select: (res) => res,
   });
   console.log("data", data);

@@ -5,8 +5,11 @@ const requests = configureAxios();
 
 const BikeServices = {
   // Get Bike list
-  getBikeList: (): Promise<BikeListResponse> => {
-    return requests.get("/bike/lists/");
+  getBikeList: (
+    offset: number = 0,
+    limit: number = 10
+  ): Promise<BikeListResponse> => {
+    return requests.get(`/bike/lists/?offset=${offset}&limit=${limit}`);
   },
 };
 
