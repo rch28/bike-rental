@@ -8,8 +8,6 @@ const SearchBikes = () => {
     searchQuery: state.searchQuery,
     setSearchQuery: state.setSearchQuery,
   }));
-
-  console.log(searchQuery);
   return (
     <div className=" mt-12 relative">
       <input

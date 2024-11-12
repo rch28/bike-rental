@@ -11,6 +11,11 @@ const BikeServices = {
   getFeaturedBikes: (): Promise<BikeListResponse> => {
     return requests.get(`/bike/featured/`);
   },
+
+  // Search Bikes
+  searchBikes: (query: string): Promise<BikeListResponse> => {
+    return requests.get(`/bike/search/?search=${query}`);
+  },
 };
 
 export default BikeServices;
