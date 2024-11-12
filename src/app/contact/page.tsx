@@ -18,13 +18,13 @@ const ContactUsPage = () => {
         <div className="absolute top-0 left-0 h-full w-screen bg-black/40  flex items-center">
           <div className=" ml-4 md:ml-24 space-y-3 ">
             <h1 className="text-5xl text-white font-bold  ">Contact Us</h1>
-            <div className="bg-primary flex  font-bold rounded-xl px-6 w-fit  py-4 text-white">
+            {/* <div className="bg-primary flex  font-bold rounded-xl px-6 w-fit  py-4 text-white">
               <Link href={"/"} className="hover:text-black">
                 Home
               </Link>
               <span className="mx-2">//</span>
               <span>Contact Us</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -34,7 +34,6 @@ const ContactUsPage = () => {
         <div className="my-24">
           <ContactInfo />
         </div>
-
 
         {/* Contact Form */}
         <div className=" my-6">

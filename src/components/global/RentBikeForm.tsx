@@ -12,30 +12,34 @@ export const RentBikeForm = () => {
     pickUpDate: "",
     dropOffDate: "",
     bike: "bike",
-  })
+  });
 
   console.log(formData);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const {name, value} = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-   
-  }
+  };
   return (
-    <div className="relative h-auto  lg:min-h-[450px] md:min-h-[500px] xs:min-h-[600px] min-h-[730px] xl:min-h-[330px]" >
+    <div className="relative h-auto  lg:min-h-[450px] md:min-h-[500px] xs:min-h-[600px] min-h-[730px] xl:min-h-[330px]">
       <div className="px-6 py-4 h-full bg-white rounded-xl shadow-sm shadow-neutral-400 absolute -top-6 md:-top-12 lg:-top-8 xl:-top-14 w-full">
         <h1 className="py-4 text-3xl  md:text-4xl font-bold">
           {" "}
-          Let's Find Your Perfect Bike
+          Let&apos;s Find Your Perfect Bike
         </h1>
 
         {/* Form */}
-        <form className="mt-2 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4" onSubmit={handleSubmit} >
+        <form
+          className="mt-2 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4"
+          onSubmit={handleSubmit}
+        >
           {/* Pick Up location */}
           <div className="relative">
             <label
@@ -164,7 +168,10 @@ export const RentBikeForm = () => {
             <FaMotorcycle className="absolute right-5 top-12 text-xl text-gray-600" />
           </div>
           <div className="relative">
-            <label htmlFor="bike" className="font-medium hidden md:inline-block text-neutral-800  invisible">
+            <label
+              htmlFor="bike"
+              className="font-medium hidden md:inline-block text-neutral-800  invisible"
+            >
               Bike
             </label>
             <Button

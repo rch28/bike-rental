@@ -1,7 +1,8 @@
 "use client";
 
+import { Bike } from "@/Bikes/types/bikeApiTypes";
 import BikeTab from "@/components/Admin/BikeTab";
-import { Bike as BikeComponent } from "@/components/global/Bike";
+import { BikeComponent } from "@/components/global/Bike";
 import { useEffect, useState } from "react";
 
 const AdminBikesPage = () => {
@@ -24,11 +25,11 @@ const AdminBikesPage = () => {
   console.log(bikes);
   return (
     <div className="mt-4">
-      <BikeTab/>
+      <BikeTab />
 
       <div className="grid grid-cols-2 place-items-center md:grid-cols-3 xl:grid-cols-4 gap-4">
         {bikes?.map((bike, index) => (
-          <BikeComponent key={index} bike={bike} admin={true} />
+          <BikeComponent key={index} bike={bike} />
         ))}
       </div>
     </div>

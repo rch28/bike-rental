@@ -32,7 +32,7 @@ const FAQComponent = () => {
     <div className="w-full p-4 pt-6">
       <div className="   lg:flex gap-4 justify-between rounded overflow-hidden">
         <div className=" flex-1">
-            <span className="text-base font-bold tracking-widest">FQA'S</span>
+            <span className="text-base font-bold tracking-widest">FQA&apos;S</span>
           <h1 className="text-3xl   lg:text-5xl font-bold my-2 ">
             <span className="text-black">General </span>
             <span className="text-primary">Frequently </span>

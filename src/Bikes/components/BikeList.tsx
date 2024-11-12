@@ -39,7 +39,7 @@ const BikeList = () => {
         setIsLoading(bikeLoading);
       }
     }
-  }, [searchQuery, data]);
+  }, [searchQuery, data, bikeLoading]);
   return (
     <div className="">
       {isLoading ? (

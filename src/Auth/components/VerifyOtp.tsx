@@ -113,7 +113,7 @@ const VerifyOtp = () => {
         {/* Sign In Button */}
         <div className="">
           <span className="inline-flex text-gray-700 dark:text-gray-400 text-sm  ">
-            Don't have an account yet?
+            Don&apos;t have an account yet?
           </span>
           <Link
             href="/auth/register"
