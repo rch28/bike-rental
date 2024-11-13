@@ -1,7 +1,7 @@
 export const sidebarList = [
   {
     _id: 1,
-    title: "Profile",
+    title: "Manage Profile",
     path: "/profile",
   },
   {

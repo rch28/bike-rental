@@ -5,6 +5,7 @@ import { getCookies } from "./getCookies";
 import { VerifyOtpSchemaType } from "@/Auth/types/LoginVerifySchema";
 import { FPVerifySchemaType } from "@/Auth/types/FPVerifySchema";
 import { ForgotPasswordSchemaType } from "@/Auth/types/ForgotPasswordSchema";
+import { UserProfile } from "@/User/types/userTypes";
 
 const requests = configureAxios();
 
@@ -48,6 +49,14 @@ const UserServices = {
   fetchUserData: async (userId: string) => {
     return requests.get(`/auth/user/retrieve/${userId}/`, {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
+  // update user data
+  updateUserData: async (data: UserProfile) => {
+    return requests.patch("/auth/user/details/", data, {
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
