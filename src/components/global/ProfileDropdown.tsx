@@ -6,16 +6,19 @@ import Cookies from "js-cookie";
 import UserServices from "@/services/UserServices";
 import { successResponse } from "@/Auth/types/common";
 import { AxiosError } from "axios";
+import { UserProfile } from "@/User/types/userTypes";
+import { useRouter } from "next/navigation";
 
 type ProfileDropdownProps = {
   setProfileToggle: React.Dispatch<React.SetStateAction<boolean>>;
-  userData: userData;
+  userData: UserProfile;
 };
 
 const ProfileDropdown = ({
   setProfileToggle,
   userData,
 }: ProfileDropdownProps) => {
+  const router = useRouter();
   const handleLogout = () => {
     const newPromise: Promise<successResponse> = new Promise(
       async (resolve, reject) => {
@@ -37,6 +40,7 @@ const ProfileDropdown = ({
     toast.promise(newPromise, {
       loading: "Logging out...",
       success: (data) => {
+        router.push("/");
         Cookies.remove("user_logged_in");
         Cookies.remove("user_id");
         setProfileToggle(false);
