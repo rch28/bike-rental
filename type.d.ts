@@ -32,12 +32,4 @@ interface BikeResponse {
   results: Bike[];
 }
 
-interface userData {
-  email: string;
-  first_name: string;
-  id: string;
-  is_superuser: boolean;
-  last_name: string;
-  profile_picture: string;
-  username: string;
-}
+
