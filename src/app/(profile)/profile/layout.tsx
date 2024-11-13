@@ -8,12 +8,14 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="h-screen px-4">
+    <div className=" ">
       {/* nav */}
       <UserNav />
-      <div className="grid grid-cols-5 mt-4">
+      <div className="grid grid-cols-10">
         <UserSidebar />
-        <div className="col-span-4">{children}</div>
+        <div className=" col-span-10  sm:col-span-6 md:col-span-7 lg:col-span-8 bg-blue-200 p-4">
+          {children}
+        </div>
       </div>
     </div>
   );

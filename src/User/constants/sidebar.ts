@@ -75,19 +75,20 @@ export const sidebarList = [
   },
   {
     _id: 5,
-    title: "Settings",
+    title: "Account Settings",
     // path: "/profile/settings",
-    subLis: [
+    subList: [
       {
         _id: 1,
         title: "Password & Security",
+        path: "/profile/settings/password-security",
       },
     ],
   },
   {
     _id: 6,
     title: "Support & Help",
-    path: "/profile/support-help",
+    // path: "/profile/support-help",
     subList: [
       {
         _id: 1,
