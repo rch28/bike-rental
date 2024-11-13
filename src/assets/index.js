@@ -1,5 +1,5 @@
 import WithMyBike from "./logo/brslogo.png";
-import HeroImg from "./hero.jpg";
+import HeroImg from "./hero1.jpg";
 
 import Money from "./logo/money.svg";
 import QualityService from "./logo/quality-service.svg";
