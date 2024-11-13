@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
+        {/* <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} /> */}
       </head>
       <body className={Style.bgPrimary}>
         <Toaster position="top-center" reverseOrder={false} />

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 const useDarkMode = (): [string, () => void] => {
   const [theme, setTheme] = useState("light");
@@ -6,9 +6,10 @@ const useDarkMode = (): [string, () => void] => {
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: light)"
     ).matches;
-    const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+    const initialTheme = savedTheme || (prefersDark ? "light" : "dark");
+    console.log("initialTheme", initialTheme);
     setTheme(initialTheme);
     document.documentElement.classList.add(initialTheme);
     return () => {
