@@ -46,7 +46,7 @@ const UserNav = () => {
             </h1>
             <p className="text-sm">
               <span className="text-green-500">
-                {profileData?.is_superuser ? "Active" : "Inactive"}
+                {profileData?.is_active ? "Active" : "Inactive"}
               </span>
             </p>
           </div>
