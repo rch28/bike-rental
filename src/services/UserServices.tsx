@@ -6,6 +6,7 @@ import { VerifyOtpSchemaType } from "@/Auth/types/LoginVerifySchema";
 import { FPVerifySchemaType } from "@/Auth/types/FPVerifySchema";
 import { ForgotPasswordSchemaType } from "@/Auth/types/ForgotPasswordSchema";
 import { UserProfile } from "@/User/types/userTypes";
+import { ChangePasswordSchemaType } from "@/User/types/changePasswordSchema";
 
 const requests = configureAxios();
 
@@ -57,6 +58,14 @@ const UserServices = {
   updateUserData: async (data: UserProfile) => {
     return requests.patch("/auth/user/details/", data, {
       "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
+  // change password
+  changePassword: async (data: ChangePasswordSchemaType) => {
+    return requests.post("/auth/change-password/", data, {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
