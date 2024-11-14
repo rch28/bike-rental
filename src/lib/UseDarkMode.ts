@@ -6,16 +6,16 @@ const useDarkMode = (): [string, () => void] => {
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: light)"
+      "(prefers-color-scheme: dark)"
     ).matches;
-    const initialTheme = savedTheme || (prefersDark ? "light" : "dark");
-    console.log("initialTheme", initialTheme);
-    setTheme(initialTheme);
-    document.documentElement.classList.add(initialTheme);
+    // const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+    // console.log("initialTheme", initialTheme);
+    // setTheme(initialTheme);
+    document.documentElement.classList.add(savedTheme || "light");
     return () => {
       document.documentElement.classList.remove("light", "dark");
     };
-  }, []);
+  }, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
