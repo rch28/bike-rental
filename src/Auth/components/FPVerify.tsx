@@ -16,7 +16,7 @@ const FPVerify = () => {
     onSubmit,
     setValue,
     formState: { isSubmitting },
-  } = useFPVerifySubmit({ isLoggedin: false });
+  } = useFPVerifySubmit();
   useEffect(() => {
     if (email) {
       setValue("email", email);
