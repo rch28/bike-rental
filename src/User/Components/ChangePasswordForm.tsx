@@ -3,15 +3,13 @@ import useChangePasswordSubmit from "@/hooks/useChangePasswordSubmit";
 import { useUserStore } from "@/store/userStore";
 import { ChangePasswordSchemaType } from "../types/changePasswordSchema";
 import Loading from "@/components/utils/Loading";
-import useFPVerifySubmit from "@/hooks/useFPVerifySubmit";
 import { useModal } from "@/hooks/useModalStore";
 import Modal from "@/components/Model/Model";
-import { Button } from "@mui/material";
+import ForgotPasswordProvider from "@/Auth/components/ForgotPasswordProvider";
 
 const ChangePasswordForm = () => {
   const { isOpen, openModal, closeModal } = useModal();
-  const { handleSubmit: handleFPSubmit, onSubmit: onFPSubmit } =
-    useFPVerifySubmit({ isLoggedin: true });
+
   const { showChangePassword, email } = useUserStore((state) => ({
     showChangePassword: state.showChangePassword,
     email: state.email,
@@ -26,12 +24,6 @@ const ChangePasswordForm = () => {
     openModal();
   };
 
-  const handleSubmitModel = () => {
-    onFPSubmit({
-      email: email,
-    });
-    closeModal();
-  };
   if (!showChangePassword) return null;
   return (
     <div className="mt-4">
@@ -90,19 +82,7 @@ const ChangePasswordForm = () => {
 
       {/* Model */}
       <Modal isOpen={isOpen} title="Forgot Password" onClose={closeModal}>
-        <h2>
-          We will send a verification code to
-          <span className="font-semibold pl-1">{email}</span>
-        </h2>
-        <div className="flex items-center justify-end mt-4">
-          <Button
-            variant="outlined"
-            onClick={handleSubmitModel}
-            className="px-4 py-2 !border-orange-400 hover:border-primary !text-primary "
-          >
-            Send
-          </Button>
-        </div>
+        <ForgotPasswordProvider />
       </Modal>
     </div>
   );
