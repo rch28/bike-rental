@@ -6,11 +6,7 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 
-type FPProps = {
-  isLoggedin?: boolean;
-};
-
-const useFPVerifySubmit = ({ isLoggedin }: FPProps) => {
+const useFPVerifySubmit = () => {
   const router = useRouter();
 
   const { handleSubmit, setValue, formState } =
@@ -39,11 +35,7 @@ const useFPVerifySubmit = ({ isLoggedin }: FPProps) => {
       loading: "Sending...",
       success: (response) => {
         sessionStorage.setItem("email", data.email);
-        if (isLoggedin) {
-          router.push("/profile/settings/password-security/forgot-password");
-        } else {
-          router.push("/auth/login?verifyOtp=true&&forgotPassword=true");
-        }
+        router.push("/auth/login?verifyOtp=true&&forgotPassword=true");
         return response?.success || "OTP sent successfully!";
       },
       error: (err) => err,

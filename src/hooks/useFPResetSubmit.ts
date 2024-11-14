@@ -1,6 +1,7 @@
 import { successResponse } from "@/Auth/types/common";
 import { ForgotPasswordSchemaType } from "@/Auth/types/ForgotPasswordSchema";
 import UserServices from "@/services/UserServices";
+import { useUserStore } from "@/store/userStore";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useFormContext } from "react-hook-form";
@@ -8,7 +9,9 @@ import toast from "react-hot-toast";
 
 const useFPResetSubmit = () => {
   const router = useRouter();
-
+  const { email } = useUserStore((state) => ({
+    email: state.email,
+  }));
   const { handleSubmit, setValue, formState } =
     useFormContext<ForgotPasswordSchemaType>();
 
@@ -35,7 +38,9 @@ const useFPResetSubmit = () => {
       loading: "Logging in...",
       success: (response) => {
         sessionStorage.setItem("email", data.email);
-        router.push("/auth/login");
+        if (!email) {
+          router.push("/auth/login");
+        }
         return response?.success || "Password reset successfully!";
       },
       error: (err) => err,
