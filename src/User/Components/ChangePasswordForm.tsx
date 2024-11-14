@@ -4,8 +4,12 @@ import { useUserStore } from "@/store/userStore";
 import { ChangePasswordSchemaType } from "../types/changePasswordSchema";
 import Loading from "@/components/utils/Loading";
 import useFPVerifySubmit from "@/hooks/useFPVerifySubmit";
+import { useModal } from "@/hooks/useModalStore";
+import Modal from "@/components/Model/Model";
+import { Button } from "@mui/material";
 
 const ChangePasswordForm = () => {
+  const { isOpen, openModal, closeModal } = useModal();
   const { handleSubmit: handleFPSubmit, onSubmit: onFPSubmit } =
     useFPVerifySubmit({ isLoggedin: true });
   const { showChangePassword, email } = useUserStore((state) => ({
@@ -19,14 +23,25 @@ const ChangePasswordForm = () => {
     onSubmit,
   } = useChangePasswordSubmit();
   const handleClick = () => {
+    openModal();
+  };
+
+  const handleSubmitModel = () => {
     onFPSubmit({
       email: email,
     });
+    closeModal();
   };
-
   if (!showChangePassword) return null;
   return (
     <div className="mt-4">
+      {/* <button
+        onClick={openModal}
+        className="px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Open Modal
+      </button> */}
+
       {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div className="md:grid grid-cols-2">
@@ -72,6 +87,23 @@ const ChangePasswordForm = () => {
           </div>
         </div>
       </form>
+
+      {/* Model */}
+      <Modal isOpen={isOpen} title="Forgot Password" onClose={closeModal}>
+        <h2>
+          We will send a verification code to
+          <span className="font-semibold pl-1">{email}</span>
+        </h2>
+        <div className="flex items-center justify-end mt-4">
+          <Button
+            variant="outlined"
+            onClick={handleSubmitModel}
+            className="px-4 py-2 !border-orange-400 hover:border-primary !text-primary "
+          >
+            Send
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 };
