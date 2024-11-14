@@ -2,9 +2,14 @@ import { z } from "zod";
 
 export const changePasswordSchema = z
   .object({
-    old_password: z.string().min(8),
-    new_password: z.string().min(8),
-    confirm_password: z.string().min(8),
+    old_password: z.string().min(1, "Old Password is required."),
+    new_password: z
+      .string()
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/,
+        "Password must be 8-24 characters, with one uppercase, one lowercase, one number, and one special character (!@#$%)."
+      ),
+    confirm_password: z.string(),
   })
   .refine((data) => data.new_password === data.confirm_password, {
     path: ["confirm_password"],
