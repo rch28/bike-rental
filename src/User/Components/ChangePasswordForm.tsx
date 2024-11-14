@@ -51,8 +51,8 @@ const ChangePasswordForm = () => {
             type="password"
           />
         </div>
-        <div className="md:grid grid-cols-2">
-          <div className="flex  items-center gap-4 ">
+        <div className="md:grid grid-cols-3">
+          <div className="flex  items-center gap-4  col-span-2">
             <button
               type="submit"
               disabled={isSubmitting}
