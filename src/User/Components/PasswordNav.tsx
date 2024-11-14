@@ -19,7 +19,7 @@ const PasswordNav = () => {
         className="!text-black  !text-xs md:!text-sm  !capitalize "
         onClick={() => setShowChangePassword(!showChangePassword)}
       >
-        Change Password
+        {showChangePassword ? "Hide" : "Change Password"}
       </Button>
     </div>
   );
