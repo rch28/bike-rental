@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa6";
@@ -8,6 +9,7 @@ import { successResponse } from "@/Auth/types/common";
 import { AxiosError } from "axios";
 import { UserProfile } from "@/User/types/userTypes";
 import { useRouter } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 type ProfileDropdownProps = {
   setProfileToggle: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,6 +21,7 @@ const ProfileDropdown = ({
   userData,
 }: ProfileDropdownProps) => {
   const router = useRouter();
+  const profileDropdownRef = useRef<HTMLDivElement>(null);
   const handleLogout = () => {
     const newPromise: Promise<successResponse> = new Promise(
       async (resolve, reject) => {
@@ -51,9 +54,27 @@ const ProfileDropdown = ({
       },
     });
   };
+  //  SetProfile toggle false when clicked outside the dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        profileDropdownRef.current &&
+        !profileDropdownRef.current.contains(event.target as Node)
+      ) {
+        setProfileToggle(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [profileDropdownRef, setProfileToggle]);
 
   return (
-    <div className="min-w-48 p-2 z-50 relative bg-white">
+    <div
+      ref={profileDropdownRef}
+      className="min-w-48 p-2 z-50 relative bg-white"
+    >
       <div className="border-b border-gray-400">
         <h1 className="text-lg font-semibold text-neutral-800 ">
           <span className="pr-2 capitalize">{userData.first_name}</span>
@@ -65,7 +86,11 @@ const ProfileDropdown = ({
       <div className="mt-2  font-medium space-y-2 text-neutral-800">
         <div className="flex gap-2 items-center hover:text-primary">
           <FaRegUser className="pb-0.5" />
-          <Link href="/profile" className="">
+          <Link
+            href="/profile"
+            onClick={() => setProfileToggle(false)}
+            className=""
+          >
             Your Profile
           </Link>
         </div>
