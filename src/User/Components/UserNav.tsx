@@ -4,16 +4,24 @@ import React, { useEffect, useState } from "react";
 import { UserProfile } from "../types/userTypes";
 import { FaRegUser } from "react-icons/fa";
 import Loading from "@/components/utils/Loading";
+import { useUserStore } from "@/store/userStore";
 
 const UserNav = () => {
   const [profileData, setProfileData] = useState<UserProfile | null>(null);
   const me = localStorage.getItem("me");
-
+  const { setEmail } = useUserStore((state) => ({
+    setEmail: state.setEmail,
+  }));
   useEffect(() => {
     if (me && !profileData) {
       setProfileData(JSON.parse(me));
     }
   }, [me, profileData]);
+  useEffect(() => {
+    if (profileData) {
+      setEmail(profileData?.email);
+    }
+  }, [profileData]);
   if (!profileData) {
     return (
       <div>
@@ -29,7 +37,7 @@ const UserNav = () => {
           {profileData && profileData?.profile_picture ? (
             <div>
               <Image
-                src={profileData?.profile_picture}
+                src={profileData?.profile_picture as string}
                 alt="profile"
                 width={200}
                 height={200}
