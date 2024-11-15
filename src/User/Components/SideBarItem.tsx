@@ -31,9 +31,9 @@ const SideBarItem = ({ item }: { item: sidebarItem }) => {
             <span>{item.title}</span>
             <span>
               {showSubMenu ? (
-                <LuChevronDown size={20} />
-              ) : (
                 <LuChevronUp size={20} />
+              ) : (
+                <LuChevronDown size={20} />
               )}
             </span>
           </div>
