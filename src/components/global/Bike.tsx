@@ -5,7 +5,7 @@ import { Button } from "../utils/Button";
 import { Bike } from "@/Bikes/types/bikeApiTypes";
 
 export const BikeComponent = ({ bike }: { bike: Bike }) => {
-  const { id, name, rating, image, features, price } = bike;
+  const { id, name, rating, image, start, engine, distance, price } = bike;
 
   return (
     <div
@@ -29,15 +29,15 @@ export const BikeComponent = ({ bike }: { bike: Bike }) => {
       <div className={`flex flex-wrap gap-4 mt-4 text-gray-600 font-medium   `}>
         <span className="flex items-center gap-2">
           <FaBiking className="text-primary" />
-          <span className="uppercase">{features.start}</span>
+          <span className="uppercase">{start}</span>
         </span>
         <span className="flex items-center gap-2">
           <RiSteeringFill className="text-primary" />
-          <span className="uppercase">{features.engine}</span>
+          <span className="uppercase">{engine}</span>
         </span>
         <span className="flex items-center gap-2">
           <FaRoad className="text-primary" />
-          <span>{features.distance}</span>
+          <span>{distance}</span>
         </span>
       </div>
       <div className="flex items-center justify-between my-3  border-t border-neutral-400 pt-2">

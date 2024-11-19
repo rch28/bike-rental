@@ -15,9 +15,12 @@ export type Bike = {
   year: number;
   color: string;
   price: number;
+  isFeatured: boolean;
   description: string;
   image: string | null;
-  features: BikeFeatures;
+  start: string;
+  engine: string;
+  distance: string;
   date: string;
 };
 
