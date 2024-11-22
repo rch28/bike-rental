@@ -3,6 +3,7 @@ import { FaRoad, FaStar } from "react-icons/fa6";
 import { RiSteeringFill } from "react-icons/ri";
 import { Button } from "../utils/Button";
 import { Bike } from "@/Bikes/types/bikeApiTypes";
+import Link from "next/link";
 
 export const BikeComponent = ({ bike }: { bike: Bike }) => {
   const { id, name, rating, image, start, engine, distance, price } = bike;
@@ -20,7 +21,12 @@ export const BikeComponent = ({ bike }: { bike: Bike }) => {
       </div>
 
       <div className="flex justify-between items-center my-2 ">
-        <h1 className={` "text-xl"} font-bold capitalize`}>{name}</h1>
+        <Link
+          href={`/bike/${id}`}
+          className={` "text-xl"} font-bold capitalize`}
+        >
+          {name}
+        </Link>
         <span className="flex items-center gap-1">
           <FaStar className="inline-block text-primary pb-0.5" />
           <span className="text-sm font-medium">{rating}</span>
