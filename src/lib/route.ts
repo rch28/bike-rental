@@ -1,21 +1,21 @@
 /**
  * @description Public routes
  * An array of routes that are public and do not require authentication
- * 
+ *
  * @type {string[]}
  */
 export const publicRoutes = [
-    "/",
-    "/bike-on-rent",
-    /^\/bike-on-rent\/[a-zA-Z0-9]+$/,
-    "/about",
-    "/contact",
-    "/privacy-policy",
-    "/terms-conditions",
-    "cancellation-policy",
-    "/blog",
-    /^\/blog\/[^/]+$/,
-
+  "/",
+  "/bike-on-rent",
+  /^\/bike-on-rent\/[a-zA-Z0-9]+$/,
+  "/about",
+  "/contact",
+  "/privacy-policy",
+  "/terms-conditions",
+  "cancellation-policy",
+  "/blog",
+  /^\/blog\/[^/]+$/,
+  /^\/bike\/[^/]+$/,
 ];
 
 /**
@@ -25,13 +25,13 @@ export const publicRoutes = [
  * @type {string[]}
  */
 export const authRoutes = [
-    "/auth/login",
-    "/auth/login/verify-otp",
-    "/auth/register",
-    "/auth/forgot-password",
-    "/auth/reset-password",
-    "/auth/forgot-password/verify-otp",
-    "/auth/error",
+  "/auth/login",
+  "/auth/login/verify-otp",
+  "/auth/register",
+  "/auth/forgot-password",
+  "/auth/reset-password",
+  "/auth/forgot-password/verify-otp",
+  "/auth/error",
 ];
 
 /**
@@ -40,7 +40,7 @@ export const authRoutes = [
  * @type {string}
  */
 
-export const adminPrefix="/admin";
+export const adminPrefix = "/admin";
 
 /**
  * @description Prefix for all auth routes
@@ -48,11 +48,11 @@ export const adminPrefix="/admin";
  * @type {string}
  */
 
-export const apiAuthPrefix="/api/auth";
+export const apiAuthPrefix = "/api/auth";
 
 /**
  * @description Default login redirect
  * The default route to redirect to after a successful login
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT="/";
+export const DEFAULT_LOGIN_REDIRECT = "/";
