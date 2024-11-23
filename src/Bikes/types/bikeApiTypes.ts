@@ -9,7 +9,7 @@ interface BikeFeatures {
 export type Bike = {
   id: string;
   name: string;
-  rating: string;
+  average_rating: string;
   brand: string;
   model: string;
   year: number;
