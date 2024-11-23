@@ -6,6 +6,8 @@ import { defaultRatingValues, RatingSchema } from "../types/RatingSchema";
 import RatingForm from "./RatingForm";
 
 const Rating = ({ bikeId }: { bikeId: string }) => {
+  const me = localStorage.getItem("me");
+  const userId = me ? JSON.parse(me).id : "";
   const methods = useForm({
     mode: "all",
     resolver: zodResolver(RatingSchema),
@@ -20,7 +22,7 @@ const Rating = ({ bikeId }: { bikeId: string }) => {
         </p>
 
         {/* Rating Form */}
-        <RatingForm bikeId={bikeId} />
+        <RatingForm bikeId={bikeId} userId={userId} />
       </div>
     </FormProvider>
   );

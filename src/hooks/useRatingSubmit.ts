@@ -8,14 +8,13 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const useRatingSubmit = (bikeId: string) => {
+const useRatingSubmit = (bikeId: string, userId: string) => {
   const router = useRouter();
   const { handleSubmit, formState, reset } = useFormContext<RatingType>();
-  const me = localStorage.getItem("me");
   const queryClient = useQueryClient();
-  const userId = me ? JSON.parse(me).id : null;
+
   const onSubmit: SubmitHandler<RatingType> = async (data) => {
-    if (!me || !userId) {
+    if (!userId) {
       toast.error("Please login to rate this bike");
       router.push("/auth/login");
       return;

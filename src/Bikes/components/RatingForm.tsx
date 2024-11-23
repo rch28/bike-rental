@@ -5,7 +5,7 @@ import { RatingType } from "../types/RatingSchema";
 import RHFTextArea from "@/components/RHFComponents/RHFTextArea";
 import Loading from "@/components/utils/Loading";
 
-const RatingForm = ({ bikeId }: { bikeId: string }) => {
+const RatingForm = ({ bikeId, userId }: { bikeId: string; userId: string }) => {
   const RatingOPtions = [
     { value: 1, label: "1 - Poor" },
     { value: 2, label: "2 - Fair" },
@@ -16,7 +16,7 @@ const RatingForm = ({ bikeId }: { bikeId: string }) => {
   const {
     handleSubmit,
     formState: { isSubmitting, isSubmitSuccessful },
-  } = useRatingSubmit(bikeId);
+  } = useRatingSubmit(bikeId, userId);
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
