@@ -1,11 +1,23 @@
-// Define the features type
-interface BikeFeatures {
-  start: string;
-  engine: string;
-  distance: string;
+// Define the user type for rating
+interface User {
+  id: string;
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
 }
 
-// Define the individual bike type
+// Define the rating type
+export type Rating = {
+  id: string;
+  user: User;
+  bike_id: string;
+  rating: string;
+  comment: string | null;
+  date: string;
+};
+
+// Define the individual bike type with ratings
 export type Bike = {
   id: string;
   name: string;
@@ -22,6 +34,8 @@ export type Bike = {
   engine: string;
   distance: string;
   date: string;
+  ratings_count: number;
+  ratings: Rating[];
 };
 
 // Define the API response type
