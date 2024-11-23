@@ -34,9 +34,9 @@ export const AboutUs = () => {
           </h1>
           <p className="text-gray-600 font-medium leading-8">
             <span className="font-bold "> With My Bikes </span> offer self-ride
-            two wheelers and four wheelers on rent in Lucknow. If you are
-            looking for bike or car on rent just My Bikes is the best option to
-            make your trip memorable.
+            two wheelers and four wheelers on rent in Nepal. If you are looking
+            for bike or car on rent just My Bikes is the best option to make
+            your trip memorable.
           </p>
 
           {/* list  */}
@@ -56,7 +56,12 @@ export const AboutUs = () => {
           </ul>
 
           {/* url to about */}
-          <Button path="/about" title="Discover More"  icon={<FaArrowRight/>} className="mt-4 text-white w-56"/>
+          <Button
+            path="/about"
+            title="Discover More"
+            icon={<FaArrowRight />}
+            className="mt-4 text-white w-56"
+          />
         </div>
       </div>
     </div>
