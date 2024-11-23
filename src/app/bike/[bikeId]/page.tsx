@@ -5,6 +5,7 @@ import Rating from "@/Bikes/components/Rating";
 import BikeServices from "@/Bikes/services/BikeServices";
 import Layout from "@/components/global/Layout";
 import Loading from "@/components/utils/Loading";
+import Navigate from "@/components/utils/Navigate";
 import Image from "next/image";
 import React from "react";
 
@@ -27,7 +28,8 @@ const BikePage = async ({ params }: BikePageProps) => {
   return (
     <>
       <Layout>
-        <div className="py-16">
+        <div className="py-10">
+          <Navigate />
           <header className="w-full text-center text-5xl font-bold text-neutral-800">
             <h1 className="text-primary">Bike Details</h1>
           </header>
