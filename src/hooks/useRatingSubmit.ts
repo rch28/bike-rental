@@ -1,6 +1,8 @@
+"use client";
 import { successResponse } from "@/Auth/types/common";
 import BikeServices from "@/Bikes/services/BikeServices";
 import { RatingType } from "@/Bikes/types/RatingSchema";
+import { useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useFormContext } from "react-hook-form";
@@ -10,7 +12,7 @@ const useRatingSubmit = (bikeId: string) => {
   const router = useRouter();
   const { handleSubmit, formState, reset } = useFormContext<RatingType>();
   const me = localStorage.getItem("me");
-
+  const queryClient = useQueryClient();
   const userId = me ? JSON.parse(me).id : null;
   const onSubmit: SubmitHandler<RatingType> = async (data) => {
     if (!me || !userId) {
@@ -45,6 +47,7 @@ const useRatingSubmit = (bikeId: string) => {
       loading: "Submitting...",
       success: (response) => {
         if (response?.success) {
+          queryClient.invalidateQueries({ queryKey: ["bike"] });
           reset();
         }
         return response?.success || "Rating submitted successfully";
