@@ -29,8 +29,8 @@ const BikeList = () => {
       setIsLoading(true);
       const timer = setTimeout(async () => {
         const response = await BikeServices.searchBikes(searchQuery);
-        setIsLoading(false);
         setBikes(response);
+        setIsLoading(false);
       }, 500);
       return () => clearTimeout(timer);
     } else {
@@ -42,7 +42,7 @@ const BikeList = () => {
   }, [searchQuery, data, bikeLoading]);
   return (
     <div className="">
-      {isLoading ? (
+      {isLoading || bikeLoading ? (
         <div className="h-32 flex justify-center items-center  mt-12 ">
           <Loading className="text-7xl text-gray-600 !important" />
         </div>
