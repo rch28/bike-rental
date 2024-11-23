@@ -6,7 +6,8 @@ import { Bike } from "@/Bikes/types/bikeApiTypes";
 import Link from "next/link";
 
 export const BikeComponent = ({ bike }: { bike: Bike }) => {
-  const { id, name, rating, image, start, engine, distance, price } = bike;
+  const { id, name, average_rating, image, start, engine, distance, price } =
+    bike;
 
   return (
     <div
@@ -29,7 +30,7 @@ export const BikeComponent = ({ bike }: { bike: Bike }) => {
         </Link>
         <span className="flex items-center gap-1">
           <FaStar className="inline-block text-primary pb-0.5" />
-          <span className="text-sm font-medium">{rating}</span>
+          <span className="text-sm font-medium">{average_rating}</span>
         </span>
       </div>
       <div className={`flex flex-wrap gap-4 mt-4 text-gray-600 font-medium   `}>
