@@ -12,12 +12,14 @@ import { orange } from "@mui/material/colors";
 type Props<T extends FieldValues> = {
   name: Path<T>;
   label: string;
+  size?: "small" | "medium";
   options: { label: string; value: string | number }[];
 };
 
 const RHFSelectField = <T extends FieldValues>({
   name,
   label,
+  size = "small",
   options,
 }: Props<T>) => {
   const {
@@ -30,7 +32,7 @@ const RHFSelectField = <T extends FieldValues>({
       fullWidth
       error={!!errors[name]}
       variant="outlined"
-      size="small"
+      size={size}
       sx={{
         "& label.Mui-focused": {
           color: orange[700],
@@ -39,6 +41,7 @@ const RHFSelectField = <T extends FieldValues>({
           color: errors[name] && "red",
         },
         "& .MuiOutlinedInput-root": {
+          borderRadius: size === "medium" ? "8px" : "4px",
           // "& fieldset": {
           //   borderColor: error ? "red" : orange[500],
           // },
@@ -58,7 +61,7 @@ const RHFSelectField = <T extends FieldValues>({
         render={({ field, fieldState: { error } }) => (
           <>
             <Select {...field} label={label} fullWidth defaultValue="">
-              {options.map((option) => (
+              {options?.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
