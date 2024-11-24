@@ -2,11 +2,11 @@ import { AboutUs } from "@/components/global/AboutUs";
 import FAQComponent from "@/components/global/FQAComponent";
 import Layout from "@/components/global/Layout";
 import { Process } from "@/components/global/Process";
-import { RentBikeForm } from "@/components/global/RentBikeForm";
 import { FeaturedBikes } from "@/components/Home/FeaturedBikes";
 import { Hero } from "@/components/Home/Hero";
 import { OurBlog } from "@/components/Home/OurBlog";
 import { ServicesInfo } from "@/components/Home/ServicesInfo";
+import { RentSearchFormProvider } from "@/BikeRent/components/RentSearchFormProvider";
 export default function Home() {
   return (
     <main className="relative">
@@ -15,7 +15,7 @@ export default function Home() {
 
       <Layout>
         {/* Serach Bike form */}
-        <RentBikeForm />
+        <RentSearchFormProvider />
 
         {/* Services info */}
 

@@ -3,6 +3,7 @@ interface ButtonProps {
   path?: string;
   title: string;
   icon?: any;
+  type?: "button" | "submit" | "reset";
   onClick?: () => void | undefined;
 }
 
@@ -31,5 +32,3 @@ interface BikeResponse {
   previous: string | null;
   results: Bike[];
 }
-
-
