@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 export const RentFormSearchSchema = z.object({
-  pickup_location: z.string(),
-  dropoff_location: z.string(),
-  pickup_date: z.date(),
-  dropoff_date: z.date(),
+  pickup_location: z.string().min(1, "Pickup location is required"),
+  dropoff_location: z.string().min(1, "Dropoff location is required"),
+  pickup_date: z.date().min(new Date(), "Pickup date must be in the future"),
+  dropoff_date: z.date().min(new Date(), "Dropoff date must be in the future"),
   category: z.string(),
 });
 
