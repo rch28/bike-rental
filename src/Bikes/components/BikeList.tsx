@@ -7,8 +7,11 @@ import { BikeComponent } from "@/components/global/Bike";
 import { Bike, BikeListResponse } from "../types/bikeApiTypes";
 import { useBikeStore } from "@/store/bikeStore";
 import Notfound from "@/components/global/Notfound";
+import { useSearchParams } from "next/navigation";
 
 const BikeList = () => {
+  const query = useSearchParams();
+  const locationId = query.get("locationId") || "";
   const { searchQuery, bikes, setBikes, isLoading, setIsLoading } =
     useBikeStore((state) => ({
       searchQuery: state.searchQuery,

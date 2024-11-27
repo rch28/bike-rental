@@ -1,15 +1,19 @@
-import { successResponse } from "@/Auth/types/common";
+import { BikeSearchType } from "@/Auth/types/common";
 import { RentFormSearchSchemaType } from "@/BikeRent/types/RentFormSearchSchema";
 import RentBikeServices from "@/services/RentBikeServices";
 import { AxiosError } from "axios";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "./navigate";
+import { useBikeStore } from "@/store/bikeStore";
 
 const useSearchRentBikeSubmit = () => {
-  const { handleSubmit, formState } =
+  const { goTo } = useNavigate();
+  const { setBikes } = useBikeStore();
+  const { handleSubmit, formState, watch } =
     useFormContext<RentFormSearchSchemaType>();
   const onSubmit: SubmitHandler<RentFormSearchSchemaType> = async (data) => {
-    const newPromise: Promise<successResponse> = new Promise(
+    const newPromise: Promise<BikeSearchType> = new Promise(
       async (resolve, reject) => {
         try {
           const response = await RentBikeServices.searchBikeOnLocation(data);
@@ -33,6 +37,8 @@ const useSearchRentBikeSubmit = () => {
     await toast.promise(newPromise, {
       loading: "Searching for bikes",
       success: (data) => {
+        goTo(`/bike-on-rent/?locationId=${watch("pickup_location")}`);
+        setBikes(data.data);
         return data.success || "Bikes found successfully";
       },
       error: (err) => err || "Failed to find bikes",
