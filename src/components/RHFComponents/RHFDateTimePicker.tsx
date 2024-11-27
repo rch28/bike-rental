@@ -23,31 +23,37 @@ const RHFDateTimePicker = <T extends FieldValues>({
       name={name}
       render={({ field, fieldState: { error } }) => (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DateTimePicker
-            label={label}
-            {...field}
-            sx={{
-              "& label.Mui-focused": {
-                color: orange[700],
-              },
-              "& label": {
-                color: error && "red",
-              },
-              "& .MuiOutlinedInput-root": {
-                borderRadius: size === "medium" ? "8px" : "4px",
-                "& fieldset": {
-                  borderColor: error ? "red" : "gray",
+          <div className="flex flex-col">
+            <DateTimePicker
+              label={label}
+              {...field}
+              sx={{
+                "& label.Mui-focused": {
+                  color: orange[700],
                 },
-                "&:hover fieldset": {
-                  borderColor: orange[700],
+                "& label": {
+                  color: error && "red",
                 },
-                "&.Mui-focused fieldset": {
-                  borderColor: orange[700],
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: size === "medium" ? "8px" : "4px",
+                  "& fieldset": {
+                    borderColor: error ? "red" : "gray",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: orange[700],
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: orange[700],
+                  },
                 },
-              },
-            }}
-          />
-          {error && <FormHelperText>{error.message}</FormHelperText>}
+              }}
+            />
+            {error && (
+              <FormHelperText error className="pl-4">
+                {error.message}
+              </FormHelperText>
+            )}
+          </div>
         </LocalizationProvider>
       )}
     />
