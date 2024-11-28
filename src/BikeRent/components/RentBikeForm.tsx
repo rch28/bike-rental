@@ -1,6 +1,5 @@
 "use client";
 
-import { CiLocationOn } from "react-icons/ci";
 import { FaArrowRight, FaMotorcycle } from "react-icons/fa6";
 import { Button } from "../../components/utils/Button";
 import { useEffect, useState } from "react";
@@ -8,16 +7,22 @@ import { useQuery } from "@tanstack/react-query";
 import LocationService from "@/services/LocationService";
 import RHFSelectField from "@/components/RHFComponents/RHFSelectField";
 import { RentFormSearchSchemaType } from "../types/RentFormSearchSchema";
-import { LocationListResponse } from "@/types/locationType";
-import useSearchRentBikeSubmit from "@/hooks/useSearchRentBikeSubmit";
 import RHFDateTimePicker from "@/components/RHFComponents/RHFDateTimePicker";
-import RHFTextField from "@/components/RHFComponents/RHFTextField";
+import { SubmitHandler, useFormContext } from "react-hook-form";
+import { useNavigate } from "@/hooks/navigate";
 
 export const RentBikeForm = () => {
+  const { goTo } = useNavigate();
+
   const [LocationOptions, setLocationOptions] = useState<
     { label: string; value: string }[]
   >([]);
-  const { handleSubmit } = useSearchRentBikeSubmit();
+  const { handleSubmit } = useFormContext<RentFormSearchSchemaType>();
+  const onSubmit: SubmitHandler<RentFormSearchSchemaType> = (data) => {
+    goTo(
+      `/bike-on-rent/?locationId=${data.pickup_location}&&pickup_date=${data.pickup_date}&&dropoff_date=${data.dropoff_date}`
+    );
+  };
 
   const { data } = useQuery({
     queryKey: ["get-loaction-list"],
@@ -36,7 +41,7 @@ export const RentBikeForm = () => {
   return (
     <form
       className="mt-2 grid grid-cols-1  md:grid-cols-2  lg:grid-cols-3 gap-4"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
     >
       {/* Pick Up location */}
 
