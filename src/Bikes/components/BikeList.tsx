@@ -8,6 +8,8 @@ import { Bike, BikeListResponse } from "../types/bikeApiTypes";
 import { useBikeStore } from "@/store/bikeStore";
 import Notfound from "@/components/global/Notfound";
 import { useSearchParams } from "next/navigation";
+import LocationService from "@/services/LocationService";
+import { LocationListResponse } from "@/types/locationType";
 
 const BikeList = () => {
   const query = useSearchParams();
@@ -26,7 +28,21 @@ const BikeList = () => {
     queryKey: ["get-bike-list"],
     select: (res) => res,
   });
+  const { data: BikesOnLocations, isLoading: bikeListLoading } =
+    useQuery<BikeListResponse>({
+      queryFn: async () => await BikeServices.getBikeByLocation(locationId),
+      queryKey: ["get-bike-on-location", locationId],
+      select: (res) => res,
+      enabled: !!locationId,
+    });
+  const { data: LocationData } = useQuery<LocationListResponse>({
+    queryFn: async () => await LocationService.getLocationById(locationId),
+    queryKey: ["get-location-by-id", locationId],
+    select: (res) => res,
+    enabled: !!locationId,
+  });
 
+  console.log("BikesOnLocations", BikesOnLocations);
   useEffect(() => {
     if (searchQuery) {
       setIsLoading(true);
@@ -36,6 +52,9 @@ const BikeList = () => {
         setIsLoading(false);
       }, 500);
       return () => clearTimeout(timer);
+    } else if (locationId && BikesOnLocations) {
+      setBikes(BikesOnLocations);
+      setIsLoading(bikeListLoading);
     } else {
       if (data) {
         setBikes(data);
@@ -45,12 +64,18 @@ const BikeList = () => {
   }, [searchQuery, data, bikeLoading]);
   return (
     <div className="">
-      {isLoading || bikeLoading ? (
+      {locationId && BikesOnLocations && LocationData && (
+        <h2 className="p-4 font-semibold">
+          {BikesOnLocations?.length} Bikes found in this Pickup location{" "}
+          {LocationData.city}{" "}
+        </h2>
+      )}
+      {isLoading || bikeLoading || bikeListLoading ? (
         <div className="h-32 flex justify-center items-center  mt-12 ">
           <Loading className="text-7xl text-gray-600 !important" />
         </div>
       ) : (
-        <div className="grid place-items-center md:grid-cols-2 xl:grid-cols-3 py-12 gap-4">
+        <div className="grid place-items-center md:grid-cols-2 xl:grid-cols-3 py-6 gap-4">
           {bikes?.length > 0 ? (
             bikes?.map((bike: Bike) => (
               <div key={bike.id}>
