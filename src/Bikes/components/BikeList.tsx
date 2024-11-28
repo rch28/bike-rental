@@ -10,8 +10,12 @@ import Notfound from "@/components/global/Notfound";
 import { useSearchParams } from "next/navigation";
 import LocationService from "@/services/LocationService";
 import { LocationListResponse } from "@/types/locationType";
+import Link from "next/link";
+import { useNavigate } from "@/hooks/navigate";
+import { LuX } from "react-icons/lu";
 
 const BikeList = () => {
+  const { goTo } = useNavigate();
   const query = useSearchParams();
   const locationId = query.get("locationId") || "";
   const { searchQuery, bikes, setBikes, isLoading, setIsLoading } =
@@ -42,7 +46,6 @@ const BikeList = () => {
     enabled: !!locationId,
   });
 
-  console.log("BikesOnLocations", BikesOnLocations);
   useEffect(() => {
     if (searchQuery) {
       setIsLoading(true);
@@ -62,13 +65,28 @@ const BikeList = () => {
       }
     }
   }, [searchQuery, data, bikeLoading]);
+  const handleClick = () => {
+    goTo("/bike-on-rent");
+    if (data) {
+      setBikes(data);
+      setIsLoading(bikeLoading);
+    }
+  };
   return (
     <div className="">
-      {locationId && BikesOnLocations && LocationData && (
-        <h2 className="p-4 font-semibold">
-          {BikesOnLocations?.length} Bikes found in this Pickup location{" "}
-          {LocationData.city}{" "}
-        </h2>
+      {locationId && BikesOnLocations && LocationData && !searchQuery && (
+        <div className="flex p-4 justify-between items-center">
+          <h2 className=" font-semibold">
+            {BikesOnLocations?.length} Bikes found in this Pickup location{" "}
+            {LocationData.city}{" "}
+          </h2>
+          <button
+            onClick={handleClick}
+            className="text-gray-800 hover:text-red-500 border border-gray-300 hover:border-red-400   rounded-md"
+          >
+            <LuX />
+          </button>
+        </div>
       )}
       {isLoading || bikeLoading || bikeListLoading ? (
         <div className="h-32 flex justify-center items-center  mt-12 ">
@@ -78,7 +96,7 @@ const BikeList = () => {
         <div className="grid place-items-center md:grid-cols-2 xl:grid-cols-3 py-6 gap-4">
           {bikes?.length > 0 ? (
             bikes?.map((bike: Bike) => (
-              <div key={bike.id}>
+              <div key={bike.id + bike.image}>
                 <BikeComponent bike={bike} />
               </div>
             ))
