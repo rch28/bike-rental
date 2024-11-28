@@ -1,11 +1,16 @@
 import { LocationListResponse } from "@/types/locationType";
 import configureAxios from "./axiosConfig";
+import { getCookies } from "./getCookies";
 
-const request = configureAxios();
+const requests = configureAxios();
 const LocationService = {
   // get location list
   getLocationList: async (): Promise<LocationListResponse[]> => {
-    return request.get("common/location-list/");
+    return requests.get("common/location-list/");
+  },
+  // Fetch location data by id
+  getLocationById: async (id: string) => {
+    return requests.get(`common/location-retrieve/${id}/`);
   },
 };
 
