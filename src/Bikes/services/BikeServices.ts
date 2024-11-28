@@ -32,6 +32,10 @@ const BikeServices = {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
+  // get bike based on locations
+  getBikeByLocation: (locationId: string): Promise<BikeListResponse> => {
+    return requests.get(`/bike/location/${locationId}/`);
+  },
 };
 
 export default BikeServices;
