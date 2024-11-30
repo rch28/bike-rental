@@ -8,7 +8,7 @@ import {
 } from "../types/RentFormSearchSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
-import { RentBikeForm } from "./RentBikeForm";
+import { RentBikeSearchForm } from "./RentBikeSearchForm";
 
 export const RentSearchFormProvider = () => {
   const methods = useForm<RentFormSearchSchemaType>({
@@ -25,7 +25,7 @@ export const RentSearchFormProvider = () => {
             Let&apos;s Find Your Perfect Bike
           </h1>
 
-          <RentBikeForm />
+          <RentBikeSearchForm />
         </div>
       </div>
     </FormProvider>
