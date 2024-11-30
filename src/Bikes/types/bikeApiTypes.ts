@@ -1,3 +1,5 @@
+import { LocationListResponse } from "@/types/locationType";
+
 // Define the user type for rating
 interface User {
   id: string;
@@ -28,6 +30,7 @@ export type Bike = {
   color: string;
   price: number;
   isFeatured: boolean;
+  isAvailable: boolean;
   description: string;
   image: string | null;
   start: string;
@@ -36,6 +39,7 @@ export type Bike = {
   date: string;
   ratings_count: number;
   ratings: Rating[];
+  locations: LocationListResponse[];
 };
 
 // Define the API response type
