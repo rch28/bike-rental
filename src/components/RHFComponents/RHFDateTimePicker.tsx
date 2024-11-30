@@ -1,7 +1,7 @@
 import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
-import { orange } from "@mui/material/colors";
+import { orange, grey } from "@mui/material/colors";
 import { FormHelperText } from "@mui/material";
 
 type Props<T extends FieldValues> = {
@@ -37,7 +37,7 @@ const RHFDateTimePicker = <T extends FieldValues>({
                 "& .MuiOutlinedInput-root": {
                   borderRadius: size === "medium" ? "8px" : "4px",
                   "& fieldset": {
-                    borderColor: error ? "red" : "gray",
+                    borderColor: error ? "red" : grey[400],
                   },
                   "&:hover fieldset": {
                     borderColor: orange[700],
