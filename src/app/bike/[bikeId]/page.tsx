@@ -7,6 +7,7 @@ import Layout from "@/components/global/Layout";
 import Loading from "@/components/utils/Loading";
 import Navigate from "@/components/utils/Navigate";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React from "react";
 
 type BikePageProps = {
@@ -24,6 +25,9 @@ const BikePage = async ({ params }: BikePageProps) => {
         <Loading />
       </div>
     );
+  }
+  if (bikeId === "rent") {
+    redirect("/bike-on-rent");
   }
   return (
     <>
