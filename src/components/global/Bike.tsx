@@ -52,7 +52,11 @@ export const BikeComponent = ({ bike }: { bike: Bike }) => {
           <span className={`  text-xl font-bold text-primary`}>रु {price}</span>
           <span className="text-xs text-gray-500 font-semibold">/day</span>
         </h2>
-        <Button title="Rent Now" className=" text-white" />
+        <Button
+          path={`/bike/rent/${id}`}
+          title="Rent Now"
+          className=" text-white"
+        />
       </div>
     </div>
   );
