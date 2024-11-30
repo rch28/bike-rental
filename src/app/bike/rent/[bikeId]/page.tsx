@@ -32,7 +32,7 @@ const RentBikePage = async ({ params }: BikePageProps) => {
           <header className="w-full text-center text-5xl font-bold text-neutral-800">
             <h1 className="text-primary">Rent Bike</h1>
           </header>
-          <div className="flex justify-center items-center gap-4 mt-10">
+          <div className="flex  gap-4 mt-10">
             {/* bike Details  */}
             <div className="flex-1">
               <div className="">
@@ -114,7 +114,7 @@ const RentBikePage = async ({ params }: BikePageProps) => {
                 </div>
               </div>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 h-full ">
               <BikeRentalFormProvider />
             </div>
           </div>

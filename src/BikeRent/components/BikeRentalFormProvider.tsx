@@ -17,7 +17,12 @@ const BikeRentalFormProvider = () => {
   });
   return (
     <FormProvider {...methods}>
-      <BikeRentalForm />
+      <div className="shadow-md shadow-gray-400">
+        <h2 className="bg-primary text-white text-xl  p-4 rounded-t-md">
+          Rent a Bike
+        </h2>
+        <BikeRentalForm />
+      </div>
     </FormProvider>
   );
 };
