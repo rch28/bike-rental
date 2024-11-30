@@ -8,6 +8,7 @@ const getBikeList = (bikeId: string) => {
   const { data, isFetching, refetch } = useQuery({
     queryKey: ["bike", bikeId],
     queryFn: async () => await BikeServices.getSingleBike(bikeId),
+    enabled: !!bikeId,
   });
   return {
     data,
