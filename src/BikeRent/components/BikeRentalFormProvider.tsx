@@ -9,7 +9,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import BikeRentalForm from "./BikeRentalForm";
 
-const BikeRentalFormProvider = () => {
+const BikeRentalFormProvider = ({ bikeId }: { bikeId: string }) => {
   const methods = useForm<BikeRentFormSchemaType>({
     mode: "all",
     defaultValues: defaultBikeRentValue,
@@ -21,7 +21,7 @@ const BikeRentalFormProvider = () => {
         <h2 className="bg-primary text-white text-xl  p-4 rounded-t-md">
           Rent a Bike
         </h2>
-        <BikeRentalForm />
+        <BikeRentalForm bikeId={bikeId} />
       </div>
     </FormProvider>
   );
