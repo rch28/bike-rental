@@ -3,12 +3,24 @@ import RHFDateTimePicker from "@/components/RHFComponents/RHFDateTimePicker";
 import RHFSelectField from "@/components/RHFComponents/RHFSelectField";
 import { Button } from "@/components/utils/Button";
 import useRentBikeSubmit from "@/hooks/useRentBikeSubmit";
+import { useEffect } from "react";
 
-export default function BikeRentalForm() {
+export default function BikeRentalForm({ bikeId }: { bikeId: string }) {
   const {
     handleSubmit,
+    watch,
+    setValue,
     formState: { isSubmitting },
   } = useRentBikeSubmit();
+  useEffect(() => {
+    const sub = watch((data) => console.log(data));
+    return () => sub.unsubscribe();
+  }, [watch]);
+  useEffect(() => {
+    setValue("bike", bikeId);
+    const sub = watch((data) => console.log(data));
+    return () => sub.unsubscribe();
+  }, [watch, bikeId]);
   return (
     <>
       <div className="p-4 ">
