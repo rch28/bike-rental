@@ -25,10 +25,10 @@ export const BikeRentFormSchema = z
       .date()
       .min(new Date(), "Dropoff date must be in the future"),
   })
-  .refine(
-    (data) => data.dropoff_date > data.pickup_date,
-    "Dropoff date must be after pickup date"
-  );
+  .refine((data) => data.dropoff_date > data.pickup_date, {
+    path: ["dropoff_date"],
+    message: "Dropoff date must be greater than pickup date",
+  });
 
 export const RentalResponseSchema = z.object({
   id: z.number(),
