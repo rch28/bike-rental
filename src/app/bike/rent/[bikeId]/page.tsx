@@ -115,7 +115,10 @@ const RentBikePage = async ({ params }: BikePageProps) => {
               </div>
             </div>
             <div className="flex-1 h-full ">
-              <BikeRentalFormProvider bikeId={bikeId} />
+              <BikeRentalFormProvider
+                bikeId={bikeId}
+                locationsOptions={bikeData?.locations}
+              />
             </div>
           </div>
         </div>
