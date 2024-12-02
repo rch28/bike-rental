@@ -3,15 +3,36 @@ import RHFDateTimePicker from "@/components/RHFComponents/RHFDateTimePicker";
 import RHFSelectField from "@/components/RHFComponents/RHFSelectField";
 import { Button } from "@/components/utils/Button";
 import useRentBikeSubmit from "@/hooks/useRentBikeSubmit";
-import { useEffect } from "react";
+import LocationService from "@/services/LocationService";
+import { LocationListResponse } from "@/types/locationType";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
-export default function BikeRentalForm({ bikeId }: { bikeId: string }) {
+export default function BikeRentalForm({
+  bikeId,
+  options,
+}: {
+  bikeId: string;
+  options: LocationListResponse[];
+}) {
+  const [pickUpLocationOptions, setPickUpLocationOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
+  const [dropOffLocationOptions, setDropOffLocationOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
   const {
     handleSubmit,
     watch,
     setValue,
     formState: { isSubmitting },
   } = useRentBikeSubmit();
+  
+  const { data: LocationsList } = useQuery({
+    queryKey: ["get-loaction-list"],
+    queryFn: async () => LocationService.getLocationList(),
+    select: (d) => d,
+  });
   useEffect(() => {
     const sub = watch((data) => console.log(data));
     return () => sub.unsubscribe();
@@ -21,6 +42,23 @@ export default function BikeRentalForm({ bikeId }: { bikeId: string }) {
     const sub = watch((data) => console.log(data));
     return () => sub.unsubscribe();
   }, [watch, bikeId]);
+  useEffect(() => {
+    if (options) {
+      const mappedOptions = options.map((item) => ({
+        label: item.city,
+        value: item.id,
+      }));
+      setPickUpLocationOptions(mappedOptions);
+    }
+    if (LocationsList) {
+      const mappedOptions = LocationsList.map((item) => ({
+        label: item.city,
+        value: item.id,
+      }));
+      setDropOffLocationOptions(mappedOptions);
+    }
+  }, [options, LocationsList]);
+
   return (
     <>
       <div className="p-4 ">
@@ -32,10 +70,7 @@ export default function BikeRentalForm({ bikeId }: { bikeId: string }) {
             name="pickup_location"
             label="Pick Up Location"
             size="medium"
-            options={[
-              { label: "Kathmandu", value: "1" },
-              { label: "Pokhara", value: "2" },
-            ]}
+            options={pickUpLocationOptions}
           />
           <RHFDateTimePicker<BikeRentFormSchemaType>
             name="pickup_date"
@@ -45,10 +80,7 @@ export default function BikeRentalForm({ bikeId }: { bikeId: string }) {
             name="dropoff_location"
             label="Drop off Location"
             size="medium"
-            options={[
-              { label: "Kathmandu", value: "1" },
-              { label: "Pokhara", value: "2" },
-            ]}
+            options={dropOffLocationOptions}
           />
           <RHFDateTimePicker<BikeRentFormSchemaType>
             name="dropoff_date"
