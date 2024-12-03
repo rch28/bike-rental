@@ -7,7 +7,8 @@ export const Button: React.FC<ButtonProps> = ({
   path,
   title,
   icon,
-  onClick
+  disabled,
+  onClick,
 }) => {
   return (
     <>
@@ -21,7 +22,8 @@ export const Button: React.FC<ButtonProps> = ({
         </Link>
       ) : (
         <button
-          className={`relative z-10 px-[22px] py-[10px] overflow-hidden min-w-20 bg-primary flex justify-center items-center rounded-xl  font-medium hover:text-white before:z-10  before:absolute before:w-0 before:h-0 before:bg-orange-500 before:transition-all before:ease-linear before:duration-300 hover:before:w-60 hover:before:h-60 before:rounded-full group  ${className}`}
+          disabled={disabled}
+          className={`relative z-10 px-[22px] py-[10px] overflow-hidden min-w-20 bg-primary flex justify-center items-center rounded-xl  font-medium hover:text-white before:z-10  before:absolute before:w-0 before:h-0 before:bg-orange-500 before:transition-all before:ease-linear before:duration-300 hover:before:w-60 hover:before:h-60 before:rounded-full group disabled:cursor-not-allowed disabled:bg-slate-300 disabled:hover:before:w-0 disabled:text-gray-600  ${className}`}
           onClick={onClick}
         >
           <span className="relative z-10">{title}</span>

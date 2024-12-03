@@ -6,8 +6,17 @@ import { Bike } from "@/Bikes/types/bikeApiTypes";
 import Link from "next/link";
 
 export const BikeComponent = ({ bike }: { bike: Bike }) => {
-  const { id, name, average_rating, image, start, engine, distance, price } =
-    bike;
+  const {
+    id,
+    name,
+    average_rating,
+    image,
+    start,
+    engine,
+    distance,
+    price,
+    isAvailable,
+  } = bike;
 
   return (
     <div
@@ -45,6 +54,11 @@ export const BikeComponent = ({ bike }: { bike: Bike }) => {
         <span className="flex items-center gap-2">
           <FaRoad className="text-primary" />
           <span>{distance}</span>
+        </span>
+        <span className="flex items-center gap-2 bg-purple-300 px-4 py-1 rounded-full text-sm font-semibold">
+          <span className={isAvailable ? "text-primary" : "text-red-500"}>
+            {isAvailable ? "Available" : "Not Available"}
+          </span>
         </span>
       </div>
       <div className="flex items-center justify-between my-3  border-t border-neutral-400 pt-2">

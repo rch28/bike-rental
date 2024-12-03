@@ -8,15 +8,9 @@ import {
 } from "../types/BikeRentFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import BikeRentalForm from "./BikeRentalForm";
-import { LocationListResponse } from "@/types/locationType";
+import { Bike } from "@/Bikes/types/bikeApiTypes";
 
-const BikeRentalFormProvider = ({
-  bikeId,
-  locationsOptions,
-}: {
-  bikeId: string;
-  locationsOptions: LocationListResponse[];
-}) => {
+const BikeRentalFormProvider = ({ bikeData }: { bikeData: Bike }) => {
   const methods = useForm<BikeRentFormSchemaType>({
     mode: "all",
     defaultValues: defaultBikeRentValue,
@@ -28,7 +22,7 @@ const BikeRentalFormProvider = ({
         <h2 className="bg-primary text-white text-xl  p-4 rounded-t-md">
           Rent a Bike
         </h2>
-        <BikeRentalForm bikeId={bikeId} options={locationsOptions} />
+        <BikeRentalForm bikeData={bikeData}  />
       </div>
     </FormProvider>
   );

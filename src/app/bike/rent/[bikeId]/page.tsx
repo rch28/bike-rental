@@ -22,7 +22,6 @@ const RentBikePage = async ({ params }: BikePageProps) => {
     );
   }
   const bikeData = await BikeServices.getSingleBike(bikeId);
-  console.log(bikeData);
 
   return (
     <>
@@ -116,8 +115,7 @@ const RentBikePage = async ({ params }: BikePageProps) => {
             </div>
             <div className="flex-1 h-full ">
               <BikeRentalFormProvider
-                bikeId={bikeId}
-                locationsOptions={bikeData?.locations}
+                bikeData={bikeData}
               />
             </div>
           </div>

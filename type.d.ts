@@ -4,6 +4,7 @@ interface ButtonProps {
   title: string;
   icon?: any;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
   onClick?: () => void | undefined;
 }
 

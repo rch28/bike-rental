@@ -1,20 +1,14 @@
+import { Bike } from "@/Bikes/types/bikeApiTypes";
 import { BikeRentFormSchemaType } from "../types/BikeRentFormSchema";
 import RHFDateTimePicker from "@/components/RHFComponents/RHFDateTimePicker";
 import RHFSelectField from "@/components/RHFComponents/RHFSelectField";
 import { Button } from "@/components/utils/Button";
 import useRentBikeSubmit from "@/hooks/useRentBikeSubmit";
 import LocationService from "@/services/LocationService";
-import { LocationListResponse } from "@/types/locationType";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
-export default function BikeRentalForm({
-  bikeId,
-  options,
-}: {
-  bikeId: string;
-  options: LocationListResponse[];
-}) {
+export default function BikeRentalForm({ bikeData }: { bikeData: Bike }) {
   const [pickUpLocationOptions, setPickUpLocationOptions] = useState<
     { label: string; value: string }[]
   >([]);
@@ -27,7 +21,7 @@ export default function BikeRentalForm({
     setValue,
     formState: { isSubmitting },
   } = useRentBikeSubmit();
-  
+
   const { data: LocationsList } = useQuery({
     queryKey: ["get-loaction-list"],
     queryFn: async () => LocationService.getLocationList(),
@@ -38,13 +32,13 @@ export default function BikeRentalForm({
     return () => sub.unsubscribe();
   }, [watch]);
   useEffect(() => {
-    setValue("bike", bikeId);
+    setValue("bike", bikeData.id);
     const sub = watch((data) => console.log(data));
     return () => sub.unsubscribe();
-  }, [watch, bikeId]);
+  }, [watch, bikeData]);
   useEffect(() => {
-    if (options) {
-      const mappedOptions = options.map((item) => ({
+    if (bikeData?.locations) {
+      const mappedOptions = bikeData?.locations.map((item) => ({
         label: item.city,
         value: item.id,
       }));
@@ -57,7 +51,7 @@ export default function BikeRentalForm({
       }));
       setDropOffLocationOptions(mappedOptions);
     }
-  }, [options, LocationsList]);
+  }, [bikeData, LocationsList]);
 
   return (
     <>
@@ -89,6 +83,7 @@ export default function BikeRentalForm({
 
           <Button
             type="submit"
+            disabled={bikeData?.isAvailable ? false : true}
             title={isSubmitting ? "Submitting..." : "Rent Now"}
             className="bg-primary text-white"
           />
