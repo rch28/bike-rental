@@ -2,11 +2,11 @@
 import Image from "next/image";
 import React from "react";
 import { HeroImg } from "@/assets";
-import getBikeList from "../services/getBikeList";
 import Loading from "@/components/utils/Loading";
+import useBikeList from "../services/getBikeList";
 
 const BikeDetails = ({ bikeId }: { bikeId: string }) => {
-  const { data, isFetching } = getBikeList(bikeId);
+  const { data, isFetching } = useBikeList(bikeId);
   if (isFetching)
     return (
       <p className="h-96 flex justify-center items-center">

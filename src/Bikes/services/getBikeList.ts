@@ -1,15 +1,15 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-
 import BikeServices from "./BikeServices";
 
-const getBikeList = (bikeId: string) => {
+const useBikeList = (bikeId: string) => {
   const { data, isFetching, refetch } = useQuery({
     queryKey: ["bike", bikeId],
     queryFn: async () => await BikeServices.getSingleBike(bikeId),
-    enabled: !!bikeId,
+    enabled: !!bikeId, // Ensure query only runs if bikeId is provided
   });
+
   return {
     data,
     isFetching,
@@ -17,4 +17,4 @@ const getBikeList = (bikeId: string) => {
   };
 };
 
-export default getBikeList;
+export default useBikeList;

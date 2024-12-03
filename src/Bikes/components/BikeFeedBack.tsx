@@ -1,9 +1,9 @@
 "use client";
 import { Rating } from "../types/bikeApiTypes";
-import getBikeList from "../services/getBikeList";
+import useBikeList from "../services/getBikeList";
 
 const BikeFeedBack = ({ bikeId }: { bikeId: string }) => {
-  const { data, isFetching } = getBikeList(bikeId);
+  const { data, isFetching } = useBikeList(bikeId);
   return (
     <div className="mt-10 bg-gray-100 p-6 rounded-md shadow-md">
       <h2 className="text-2xl font-bold text-primary mb-4">User Feedback</h2>

@@ -8,15 +8,16 @@ import { useUserStore } from "@/store/userStore";
 
 const UserNav = () => {
   const [profileData, setProfileData] = useState<UserProfile | null>(null);
-  const me = localStorage.getItem("me");
   const { setEmail } = useUserStore((state) => ({
     setEmail: state.setEmail,
   }));
   useEffect(() => {
+    const me = localStorage.getItem("me");
+
     if (me && !profileData) {
       setProfileData(JSON.parse(me));
     }
-  }, [me, profileData]);
+  }, [profileData]);
   useEffect(() => {
     if (profileData) {
       setEmail(profileData?.email);
