@@ -17,6 +17,14 @@ const RentBikeServices = {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
+
+  // get rent detail
+  getSingleRent: async (id: string) => {
+    return request.get(`rent/bike/${id}/`, {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
 };
 
 export default RentBikeServices;
