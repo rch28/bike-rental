@@ -1,3 +1,6 @@
+import OnlinePayment from "@/BikeRent/components/payment/OnlinePayment";
+import PartialPayment from "@/BikeRent/components/payment/PartialPayment";
+import PayAtPickup from "@/BikeRent/components/payment/PayAtPickup";
 import Layout from "@/components/global/Layout";
 import {
   Card,
@@ -8,36 +11,41 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Loading from "@/components/utils/Loading";
+import RentBikeServices from "@/services/RentBikeServices";
 import React from "react";
-import { LuClock } from "react-icons/lu";
 
 type PaymentPageProps = {
   params: Promise<{
+    bikeId: string;
     rentId: string;
   }>;
 };
-const rentalDetails = {
-  bikeId: "BIKE-123",
-  totalAmount: 150.0,
-  duration: "24 hours",
-  startTime: "2024-12-04 10:00 AM",
-  status: "Active",
-};
-const handlePaymentSubmit = (e: any) => {
-  e.preventDefault();
-  // Handle payment submission logic here
-  console.log("Payment submitted");
-};
-const PaymentPage = async ({ params }: PaymentPageProps) => {
-  const { rentId } = await params;
 
-  if (!rentId) {
+const PaymentPage = async ({ params }: PaymentPageProps) => {
+  const { bikeId, rentId } = await params;
+
+  if (!bikeId || !rentId) {
     return (
       <div className="h-96 flex justify-center items-center">
         <Loading />
       </div>
     );
   }
+
+  const rentalDetails = await RentBikeServices.getSingleRent(rentId);
+  const getDays = (start: string, end: string) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  };
+  const getDateTime = (d: string) => {
+    const dateTime = new Date(d);
+    const date = dateTime.toLocaleDateString();
+    const time = dateTime.toLocaleTimeString();
+
+    return `${date} | ${time}`;
+  };
   return (
     <Layout>
       <div className="max-w-3xl mx-auto p-6">
@@ -45,8 +53,9 @@ const PaymentPage = async ({ params }: PaymentPageProps) => {
           <CardHeader>
             <CardTitle>Rental Payment</CardTitle>
             <CardDescription>
-              Bike ID: {rentalDetails.bikeId} | Duration:{" "}
-              {rentalDetails.duration}
+              {rentalDetails.bike_details.name} | Duration:{" "}
+              {getDays(rentalDetails.pickup_date, rentalDetails.dropoff_date)}{" "}
+              days
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -54,12 +63,14 @@ const PaymentPage = async ({ params }: PaymentPageProps) => {
               <div className="space-y-2">
                 <p className="text-sm text-gray-500">Total Amount</p>
                 <p className="text-2xl font-bold">
-                  ${rentalDetails.totalAmount}
+                  रु {rentalDetails.total_amount}
                 </p>
               </div>
               <div className="space-y-2">
                 <p className="text-sm text-gray-500">Rental Start</p>
-                <p className="text-lg">{rentalDetails.startTime}</p>
+                <p className="text-lg text-gray-700">
+                  {getDateTime(rentalDetails.pickup_date)}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -70,120 +81,23 @@ const PaymentPage = async ({ params }: PaymentPageProps) => {
             <CardTitle>Payment Options</CardTitle>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="full" className="w-full">
+            <Tabs defaultValue="online" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="full">Full Payment</TabsTrigger>
+                <TabsTrigger value="online">Online Payment</TabsTrigger>
                 <TabsTrigger value="partial">Partial Payment</TabsTrigger>
                 <TabsTrigger value="pickup">Pay at Pickup</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="full">
-                <form onSubmit={handlePaymentSubmit} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Card Number</label>
-                      <input
-                        type="text"
-                        className="w-full p-2 border rounded"
-                        placeholder="1234 5678 9012 3456"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">
-                        Name on Card
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full p-2 border rounded"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Expiry Date</label>
-                      <input
-                        type="text"
-                        className="w-full p-2 border rounded"
-                        placeholder="MM/YY"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">CVV</label>
-                      <input
-                        type="text"
-                        className="w-full p-2 border rounded"
-                        placeholder="123"
-                      />
-                    </div>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700"
-                  >
-                    Pay ${rentalDetails.totalAmount}
-                  </button>
-                </form>
+              <TabsContent value="online">
+                <OnlinePayment />
               </TabsContent>
 
               <TabsContent value="partial">
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      Payment Amount
-                    </label>
-                    <input
-                      type="number"
-                      className="w-full p-2 border rounded"
-                      placeholder="Enter amount"
-                      max={rentalDetails.totalAmount}
-                    />
-                    <p className="text-sm text-gray-500">
-                      Remaining amount will be due at dropoff
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Card Number</label>
-                      <input
-                        type="text"
-                        className="w-full p-2 border rounded"
-                        placeholder="1234 5678 9012 3456"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">
-                        Name on Card
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full p-2 border rounded"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700"
-                  >
-                    Make Partial Payment
-                  </button>
-                </div>
+                <PartialPayment />
               </TabsContent>
 
               <TabsContent value="pickup">
-                <div className="text-center p-6 space-y-4">
-                  <LuClock className="w-12 h-12 mx-auto text-blue-600" />
-                  <h3 className="text-lg font-medium">Pay at Pickup</h3>
-                  <p className="text-gray-500">
-                    You can make the payment when you pick up the bike. Total
-                    amount due: ${rentalDetails.totalAmount}
-                  </p>
-                  <button
-                    className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700"
-                    onClick={() => console.log("Confirmed pay at pickup")}
-                  >
-                    Confirm Pay at Pickup
-                  </button>
-                </div>
+                <PayAtPickup />
               </TabsContent>
             </Tabs>
           </CardContent>
