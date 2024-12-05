@@ -81,24 +81,24 @@ const PaymentPage = async ({ params }: PaymentPageProps) => {
             <CardTitle>Payment Options</CardTitle>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="online" className="w-full">
+            <Tabs defaultValue="pickup" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="online">Online Payment</TabsTrigger>
-                <TabsTrigger value="partial">Partial Payment</TabsTrigger>
                 <TabsTrigger value="pickup">Pay at Pickup</TabsTrigger>
+                <TabsTrigger value="online">Online Payment</TabsTrigger>
+                {/* <TabsTrigger value="partial">Partial Payment</TabsTrigger> */}
               </TabsList>
+
+              <TabsContent value="pickup">
+                <PayAtPickup rentalDetails={rentalDetails} />
+              </TabsContent>
 
               <TabsContent value="online">
                 <OnlinePayment rentalDetails={rentalDetails} />
               </TabsContent>
 
-              <TabsContent value="partial">
+              {/* <TabsContent value="partial">
                 <PartialPayment />
-              </TabsContent>
-
-              <TabsContent value="pickup">
-                <PayAtPickup />
-              </TabsContent>
+              </TabsContent> */}
             </Tabs>
           </CardContent>
         </Card>

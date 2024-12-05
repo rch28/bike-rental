@@ -1,28 +1,30 @@
 "use client";
-import {
-  esewaIcon,
-  EsewaLogo,
-  KhaltiIconColor,
-  KhaltiIconWhite,
-  KhaltiLogo,
-} from "@/assets";
+import { esewaIcon, KhaltiIconColor, KhaltiIconWhite } from "@/assets";
 import { RentalResponse } from "@/BikeRent/types/BikeRentFormSchema";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useStore } from "@/store/store";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { BsFillCreditCard2FrontFill } from "react-icons/bs";
+import CreditPaymentProvider from "./CreditPaymentProvider";
 
 type OnlinePaymentProps = {
   rentalDetails: RentalResponse;
 };
 
 const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
-  const totalamout = rentalDetails.total_amount;
+  const { setRentDetails } = useStore();
+
+  useEffect(() => {
+    if (rentalDetails) {
+      setRentDetails(rentalDetails);
+    }
+  }, [rentalDetails]);
   return (
     <>
-      <Tabs defaultValue="credit" className="w-full">
+      <Tabs className="w-full">
         <TabsList className="grid w-96 grid-cols-3 h-16 bg-purple-200">
-          <TabsTrigger value="credit" className="flex flex-col">
+          <TabsTrigger value="credit" className="flex ">
             <BsFillCreditCard2FrontFill className="text-blue-500 w-8 h-8" />
           </TabsTrigger>
           <TabsTrigger value="esewa">
@@ -52,48 +54,7 @@ const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
         </TabsList>
 
         <TabsContent value="credit">
-          <form className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Card Number</label>
-                <input
-                  type="text"
-                  className="w-full p-2 border rounded"
-                  placeholder="1234 5678 9012 3456"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Name on Card</label>
-                <input
-                  type="text"
-                  className="w-full p-2 border rounded"
-                  placeholder="John Doe"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Expiry Date</label>
-                <input
-                  type="text"
-                  className="w-full p-2 border rounded"
-                  placeholder="MM/YY"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">CVV</label>
-                <input
-                  type="text"
-                  className="w-full p-2 border rounded"
-                  placeholder="123"
-                />
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700"
-            >
-              Pay ${rentalDetails.total_amount}
-            </button>
-          </form>
+          <CreditPaymentProvider />
         </TabsContent>
         <TabsContent value="esewa">
           <div className="text-center p-6 space-y-4">
