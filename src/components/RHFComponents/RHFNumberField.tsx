@@ -5,13 +5,18 @@ import { orange } from "@mui/material/colors";
 
 type Props<T extends FieldValues> = {
   name: Path<T>;
-} & Pick<TextFieldProps, "label" | "variant" | "type" | "placeholder">;
+} & Pick<TextFieldProps, "label" | "variant" | "placeholder">;
 
 const RHFNumberField = <T extends FieldValues>({
   name,
   ...props
 }: Props<T>) => {
   const { control } = useFormContext<T>();
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value.replace(/\D/g, "");
+    event.target.value = value;
+  };
 
   return (
     <Controller
@@ -21,22 +26,24 @@ const RHFNumberField = <T extends FieldValues>({
         <TextField
           {...field}
           {...props}
-          type={"number"}
+          type="text"
           error={!!error}
-          size="small"
           helperText={error?.message}
-          onWheel={(e) => e.currentTarget.blur()}
+          size="small"
+          autoComplete="off"
+          onInput={handleInputChange}
+          onChange={(e) => {
+            const value = e.target.value ? Number(e.target.value) : "";
+            field.onChange(value);
+          }}
           sx={{
             "& label.Mui-focused": {
               color: orange[700],
             },
             "& label": {
-              color: error && "red",
+              color: error ? "red" : undefined,
             },
             "& .MuiOutlinedInput-root": {
-              // "& fieldset": {
-              //   borderColor: error ? "red" : orange[500],
-              // },
               "&:hover fieldset": {
                 borderColor: orange[700],
               },
