@@ -89,7 +89,7 @@ const PaymentPage = async ({ params }: PaymentPageProps) => {
               </TabsList>
 
               <TabsContent value="online">
-                <OnlinePayment />
+                <OnlinePayment rentalDetails={rentalDetails} />
               </TabsContent>
 
               <TabsContent value="partial">
