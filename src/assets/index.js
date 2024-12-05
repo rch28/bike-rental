@@ -14,7 +14,11 @@ import Contact from "./Contact.jpg";
 import GetInTouch from "./GetInTouch.jpg";
 
 import SignUpBg from "./SignUpBg.jpg";
-
+import KhaltiLogo from "./khalti/Khalti_Logo_Color.png";
+import KhaltiIconWhite from "./khalti/Khalti_icon_white.png";
+import KhaltiIconColor from "./khalti/Khalti_icon_color.png";
+import EsewaLogo from "./esewa/esewa-seeklogo.svg";
+import esewaIcon from "./esewa/esewa.png";
 export {
   WithMyBike,
   HeroImg,
@@ -28,4 +32,9 @@ export {
   Contact,
   GetInTouch,
   SignUpBg,
+  KhaltiLogo,
+  KhaltiIconWhite,
+  KhaltiIconColor,
+  EsewaLogo,
+  esewaIcon,
 };
