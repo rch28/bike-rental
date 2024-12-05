@@ -22,7 +22,7 @@ const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
   }, [rentalDetails]);
   return (
     <>
-      <Tabs className="w-full">
+      <Tabs className="w-full min-h-60">
         <TabsList className="grid w-96 grid-cols-3 h-16 bg-purple-200">
           <TabsTrigger value="credit" className="flex ">
             <BsFillCreditCard2FrontFill className="text-blue-500 w-8 h-8" />
