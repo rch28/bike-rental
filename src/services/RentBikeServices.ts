@@ -25,6 +25,14 @@ const RentBikeServices = {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
+
+  // initiate Khalti Payment
+  initiateKhaltiPayment: async (data: any) => {
+    return request.post("payment/initiate/", data, {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
 };
 
 export default RentBikeServices;
