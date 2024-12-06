@@ -7,6 +7,7 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import { BsFillCreditCard2FrontFill } from "react-icons/bs";
 import CreditPaymentProvider from "./CreditPaymentProvider";
+import useKhaltiPayment from "@/hooks/useKhaltiPayment";
 
 type OnlinePaymentProps = {
   rentalDetails: RentalResponse;
@@ -14,10 +15,12 @@ type OnlinePaymentProps = {
 
 const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
   const { setRentDetails } = useStore();
-
+  const { handleSubmit, setValue, formState } = useKhaltiPayment();
   useEffect(() => {
     if (rentalDetails) {
       setRentDetails(rentalDetails);
+      setValue("total_amount", rentalDetails.total_amount);
+      setValue("paid_amount", rentalDetails.total_amount);
     }
   }, [rentalDetails]);
   return (
@@ -71,7 +74,7 @@ const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
             </h3>
 
             <button className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">
-              Confirm Pay ${rentalDetails.total_amount}
+              Confirm Pay रु {rentalDetails.total_amount}
             </button>
           </div>
         </TabsContent>
@@ -89,12 +92,11 @@ const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
               Pay Via Khalti{" "}
             </h3>
 
-            <button
-              className="w-full bg-purple-700 text-white p-3 rounded-lg hover:bg-purple-800"
-              onClick={() => console.log("Confirmed pay at pickup")}
-            >
-              Confirm Pay ${rentalDetails.total_amount}
-            </button>
+            <form onSubmit={handleSubmit}>
+              <button className="w-full bg-purple-700 text-white p-3 rounded-lg hover:bg-purple-800">
+                Confirm Pay रु {rentalDetails.total_amount}
+              </button>
+            </form>
           </div>
         </TabsContent>
       </Tabs>
