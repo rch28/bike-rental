@@ -20,8 +20,8 @@ const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
     if (rentalDetails) {
       setRentDetails(rentalDetails);
       setValue("rental", rentalDetails.id);
-      setValue("total_amount", rentalDetails.total_amount * 1000);
-      setValue("amount_paid", rentalDetails.total_amount * 1000);
+      setValue("total_amount", rentalDetails.total_amount);
+      setValue("amount_paid", rentalDetails.total_amount);
     }
   }, [rentalDetails]);
 
