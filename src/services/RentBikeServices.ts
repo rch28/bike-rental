@@ -19,6 +19,14 @@ const RentBikeServices = {
     });
   },
 
+  // update payment for payment at pickup
+  updateRentBike: async (id: string, data: any) => {
+    return request.patch(`rent/bike/update/${id}/`, data, {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
   // get rent detail
   getSingleRent: async (id: string) => {
     return request.get(`rent/bike/${id}/`, {
