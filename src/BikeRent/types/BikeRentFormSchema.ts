@@ -31,7 +31,7 @@ export const BikeRentFormSchema = z
   });
 
 export const RentalResponseSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   user: z.number(), // User ID
   bike: bikeSchema,
   pickup_location: z.string(),

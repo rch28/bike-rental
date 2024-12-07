@@ -15,14 +15,16 @@ type OnlinePaymentProps = {
 
 const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
   const { setRentDetails } = useStore();
-  const { handleSubmit, setValue, formState } = useKhaltiPayment();
+  const { handleSubmit, setValue } = useKhaltiPayment();
   useEffect(() => {
     if (rentalDetails) {
       setRentDetails(rentalDetails);
-      setValue("total_amount", rentalDetails.total_amount);
-      setValue("paid_amount", rentalDetails.total_amount);
+      setValue("rental", rentalDetails.id);
+      setValue("total_amount", rentalDetails.total_amount * 1000);
+      setValue("amount_paid", rentalDetails.total_amount * 1000);
     }
   }, [rentalDetails]);
+
   return (
     <>
       <Tabs className="w-full min-h-60">
@@ -93,7 +95,10 @@ const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
             </h3>
 
             <form onSubmit={handleSubmit}>
-              <button className="w-full bg-purple-700 text-white p-3 rounded-lg hover:bg-purple-800">
+              <button
+                type="submit"
+                className="w-full bg-purple-700 text-white p-3 rounded-lg hover:bg-purple-800"
+              >
                 Confirm Pay रु {rentalDetails.total_amount}
               </button>
             </form>
