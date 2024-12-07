@@ -9,8 +9,10 @@ import { AxiosError } from "axios";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "./navigate";
 
 const useKhaltiPayment = () => {
+  const { goTo } = useNavigate();
   const {
     handleSubmit,
     setValue,
@@ -29,10 +31,14 @@ const useKhaltiPayment = () => {
   }, [watch]);
 
   const onSubmit: SubmitHandler<KhaltiSchemaType> = async (data) => {
-    const newPromise = new Promise(async (resolve, reject) => {
+    const newPromise: Promise<string> = new Promise(async (resolve, reject) => {
       try {
         const response = await RentBikeServices.initiateKhaltiPayment(data);
         console.log("response", response);
+        if (response?.status === 200) {
+          goTo(response?.result?.payment_url);
+          resolve("Redirecting to Khalti Payment Gateway");
+        }
         resolve(response);
       } catch (error) {
         if (error instanceof AxiosError && error.response?.data?.detail) {
@@ -48,7 +54,7 @@ const useKhaltiPayment = () => {
 
     await toast.promise(newPromise, {
       loading: "Loading..",
-      success: (s) => s,
+      success: (msg) => msg,
       error: (err) => err,
     });
   };
