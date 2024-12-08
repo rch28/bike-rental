@@ -5,6 +5,7 @@ import Modal from "@/components/Model/Model";
 import { useModal } from "@/hooks/useModalStore";
 import RentBikeServices from "@/services/RentBikeServices";
 import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 import { LuClock } from "react-icons/lu";
 
 type OnlinePaymentProps = {
@@ -14,10 +15,18 @@ const PayAtPickup = ({ rentalDetails }: OnlinePaymentProps) => {
   const { openModal, isOpen, closeModal } = useModal();
 
   const haldleSubmit = async () => {
-    const newPromise = new Promise(async (resolve, reject) => {
+    const updateData = {
+      payment_method: "pickup",
+    };
+    const newPromise: Promise<string> = new Promise(async (resolve, reject) => {
       try {
-        const response = await RentBikeServices.updateRentBike("233", {});
-        console.log("response", response);
+        const response = await RentBikeServices.updateRentBike(
+          rentalDetails.id,
+          updateData
+        );
+        if (response?.status === true) {
+          resolve(response?.message);
+        }
       } catch (error) {
         if (error instanceof AxiosError && error.response?.data?.detail) {
           const errMsg = error?.response?.data?.detail;
@@ -28,6 +37,16 @@ const PayAtPickup = ({ rentalDetails }: OnlinePaymentProps) => {
           reject("Network Error!!");
         }
       }
+    });
+    await toast.promise(newPromise, {
+      loading: "Updating Payment Method...",
+      success: (data) => {
+        closeModal();
+        return data;
+      },
+      error: (err) => {
+        return err;
+      },
     });
   };
 
