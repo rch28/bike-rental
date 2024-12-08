@@ -1,14 +1,14 @@
 import { z } from "zod";
 
-export const KhaltiSchema = z.object({
+export const PaymentSchema = z.object({
   product_id: z.string(),
   total_amount: z.number(),
   amount_paid: z.number(),
 });
 
-export type KhaltiSchemaType = z.infer<typeof KhaltiSchema>;
+export type PaymentSchemaType = z.infer<typeof PaymentSchema>;
 
-export const defaultKhaltiValue: KhaltiSchemaType = {
+export const defaultPaymentValue: PaymentSchemaType = {
   product_id: "",
   total_amount: 0,
   amount_paid: 0,

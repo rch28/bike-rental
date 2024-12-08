@@ -75,9 +75,11 @@ const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
               Pay Via e-sewa
             </h3>
 
-            <button className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">
-              Confirm Pay रु {rentalDetails.total_amount}
-            </button>
+            <form>
+              <button className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">
+                Confirm Pay रु {rentalDetails.total_amount}
+              </button>
+            </form>
           </div>
         </TabsContent>
         <TabsContent value="khalti">

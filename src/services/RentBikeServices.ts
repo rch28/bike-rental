@@ -2,7 +2,7 @@ import { RentFormSearchSchemaType } from "@/BikeRent/types/RentFormSearchSchema"
 import configureAxios from "./axiosConfig";
 import { BikeRentFormSchemaType } from "@/BikeRent/types/BikeRentFormSchema";
 import { getCookies } from "./getCookies";
-import { KhaltiSchemaType } from "@/BikeRent/types/KhaltiSchema";
+import { PaymentSchemaType } from "@/BikeRent/types/PaymentSchema";
 
 const request = configureAxios();
 const RentBikeServices = {
@@ -36,7 +36,7 @@ const RentBikeServices = {
   },
 
   // initiate Khalti Payment
-  initiateKhaltiPayment: async (data: KhaltiSchemaType) => {
+  initiateKhaltiPayment: async (data: PaymentSchemaType) => {
     return request.post("payment/initiate/", data, {
       "Content-Type": "application/json",
       Authorization: `Bearer ${await getCookies()}`,
