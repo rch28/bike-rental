@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const KhaltiSchema = z.object({
-  rental: z.string(),
+  product_id: z.string(),
   total_amount: z.number(),
   amount_paid: z.number(),
 });
@@ -9,7 +9,7 @@ export const KhaltiSchema = z.object({
 export type KhaltiSchemaType = z.infer<typeof KhaltiSchema>;
 
 export const defaultKhaltiValue: KhaltiSchemaType = {
-  rental: "",
+  product_id: "",
   total_amount: 0,
   amount_paid: 0,
 };

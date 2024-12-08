@@ -19,7 +19,7 @@ const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
   useEffect(() => {
     if (rentalDetails) {
       setRentDetails(rentalDetails);
-      setValue("rental", rentalDetails.id);
+      setValue("product_id", rentalDetails.id);
       setValue("total_amount", rentalDetails.total_amount);
       setValue("amount_paid", rentalDetails.total_amount);
     }
