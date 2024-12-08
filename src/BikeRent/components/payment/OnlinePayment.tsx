@@ -8,6 +8,7 @@ import React, { useEffect } from "react";
 import { BsFillCreditCard2FrontFill } from "react-icons/bs";
 import CreditPaymentProvider from "./CreditPaymentProvider";
 import useKhaltiPayment from "@/hooks/useKhaltiPayment";
+import EsewaPayment from "./EsewaPayment";
 
 type OnlinePaymentProps = {
   rentalDetails: RentalResponse;
@@ -62,25 +63,7 @@ const OnlinePayment = ({ rentalDetails }: OnlinePaymentProps) => {
           <CreditPaymentProvider />
         </TabsContent>
         <TabsContent value="esewa">
-          <div className="text-center p-6 space-y-4">
-            <Image
-              src={esewaIcon}
-              alt="esewa-icon"
-              width={80}
-              height={80}
-              priority
-              className="rounded-lg w-20 h-20 mx-auto "
-            />
-            <h3 className="text-lg font-medium text-green-700">
-              Pay Via e-sewa
-            </h3>
-
-            <form>
-              <button className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">
-                Confirm Pay रु {rentalDetails.total_amount}
-              </button>
-            </form>
-          </div>
+          <EsewaPayment rentalDetails={rentalDetails} />
         </TabsContent>
         <TabsContent value="khalti">
           <div className="text-center p-6 space-y-4">
