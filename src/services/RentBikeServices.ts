@@ -4,6 +4,18 @@ import { BikeRentFormSchemaType } from "@/BikeRent/types/BikeRentFormSchema";
 import { getCookies } from "./getCookies";
 import { PaymentSchemaType } from "@/BikeRent/types/PaymentSchema";
 
+interface VerifyPaymentParams {
+  oid: string;
+  amt: string;
+  refId: string;
+  rentalId?: string;
+}
+
+interface VerifyPaymentResponse {
+  success: boolean;
+  message: string;
+  data?: any;
+}
 const request = configureAxios();
 const RentBikeServices = {
   // Function to search  a bike on locations
@@ -38,6 +50,24 @@ const RentBikeServices = {
   // initiate Khalti Payment
   initiateKhaltiPayment: async (data: PaymentSchemaType) => {
     return request.post("payment/initiate/", data, {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
+  // initiate Esewa Payment
+  initiateEsewaPayment: async (data: PaymentSchemaType) => {
+    return request.post("payment/esewa/initiate/", data, {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
+  // Verify Esewa Payment
+  verifyEsewaPayment: async (
+    data: VerifyPaymentParams
+  ): Promise<VerifyPaymentResponse> => {
+    return request.post("payment/esewa/verify/", data, {
       "Content-Type": "application/json",
       Authorization: `Bearer ${await getCookies()}`,
     });
