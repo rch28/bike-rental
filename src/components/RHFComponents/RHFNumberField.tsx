@@ -14,6 +14,7 @@ const RHFNumberField = <T extends FieldValues>({
   const { control } = useFormContext<T>();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // Allow only numeric characters
     const value = event.target.value.replace(/\D/g, "");
     event.target.value = value;
   };
@@ -33,9 +34,10 @@ const RHFNumberField = <T extends FieldValues>({
           autoComplete="off"
           onInput={handleInputChange}
           onChange={(e) => {
-            const value = e.target.value ? Number(e.target.value) : "";
+            const value = e.target.value;
             field.onChange(value);
           }}
+          value={field.value || ""}
           sx={{
             "& label.Mui-focused": {
               color: orange[700],
