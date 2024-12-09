@@ -25,7 +25,7 @@ const User = () => {
 
   const { data, isFetching } = useQuery({
     queryKey: ["user", userId],
-    queryFn: () => UserServices.fetchUserData(userId),
+    queryFn: async () => await UserServices.fetchUserData(userId),
     enabled: !!userId && userLoggedIn,
     select: (data) => data,
   });

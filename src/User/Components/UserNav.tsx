@@ -5,40 +5,38 @@ import { UserProfile } from "../types/userTypes";
 import { FaRegUser } from "react-icons/fa";
 import Loading from "@/components/utils/Loading";
 import { useUserStore } from "@/store/userStore";
+import Cookies from "js-cookie";
+import { useQuery } from "@tanstack/react-query";
+import UserServices from "@/services/UserServices";
 
 const UserNav = () => {
-  const [profileData, setProfileData] = useState<UserProfile | null>(null);
+  // const [profileData, setProfileData] = useState<UserProfile | null>(null);
   const { setEmail } = useUserStore((state) => ({
     setEmail: state.setEmail,
   }));
-  useEffect(() => {
-    const me = localStorage.getItem("me");
+  const userId = Cookies.get("user_id") as string;
+  const { data, isLoading } = useQuery({
+    queryKey: ["user", userId],
+    queryFn: async () => await UserServices.fetchUserData(userId),
+    enabled: !!userId,
+    select: (data) => data,
+  });
 
-    if (me && !profileData) {
-      setProfileData(JSON.parse(me));
-    }
-  }, [profileData]);
   useEffect(() => {
-    if (profileData) {
-      setEmail(profileData?.email);
+    if (data) {
+      setEmail(data?.email);
     }
-  }, [profileData]);
-  if (!profileData) {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
-  }
+  }, [data]);
 
+  if (isLoading) <Loading />;
   return (
     <div className=" p-4 border-b border-orange-400">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
-          {profileData && profileData?.profile_picture ? (
+          {data && data?.profile_picture ? (
             <div>
               <Image
-                src={profileData?.profile_picture as string}
+                src={data?.profile_picture as string}
                 alt="profile"
                 width={200}
                 height={200}
@@ -51,11 +49,11 @@ const UserNav = () => {
           )}
           <div className="ml-4">
             <h1 className="text-xl font-bold capitalize">
-              {profileData?.first_name} {profileData?.last_name}
+              {data?.first_name} {data?.last_name}
             </h1>
             <p className="text-sm">
               <span className="text-green-500">
-                {profileData?.is_active ? "Active" : "Inactive"}
+                {data?.is_active ? "Active" : "Inactive"}
               </span>
             </p>
           </div>

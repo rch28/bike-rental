@@ -2,8 +2,8 @@
 
 import { FormProvider, useForm } from "react-hook-form";
 import { UserProfile } from "../types/userTypes";
-import User from "./User";
-
+import dynamic from "next/dynamic";
+const User = dynamic(() => import("./User"), { ssr: false });
 const UserProvider = () => {
   const methods = useForm<UserProfile>({
     defaultValues: {
