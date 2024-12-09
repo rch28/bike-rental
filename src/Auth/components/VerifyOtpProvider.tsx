@@ -11,7 +11,7 @@ import VerifyOtp from "./VerifyOtp";
 
 const VerifyOtpProvider = () => {
   const methods = useForm({
-    mode: "all",
+    mode: "onBlur",
     resolver: zodResolver(VerifyOtpSchema),
     defaultValues: defaultOtpVerifyValues,
   });

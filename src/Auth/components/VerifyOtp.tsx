@@ -64,7 +64,7 @@ const VerifyOtp = () => {
       loading: "Sending OTP...",
       success: (response) => {
         setOtpExpired(false);
-        setValue("otp", "");
+        setValue("otp", 0);
         setError("otp", {});
         return response.success || "OTP sent to your email!";
       },
