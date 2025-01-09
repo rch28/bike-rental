@@ -2,9 +2,9 @@
 import { useStore } from "@/store/store";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import { LuXCircle } from "react-icons/lu";
 import { Button } from "../utils/Button";
 import toast from "react-hot-toast";
+import { LucideXCircle } from "lucide-react";
 
 const AddBikeDrawer = () => {
   const drawerRef = useRef<HTMLDivElement | null>(null);
@@ -19,7 +19,7 @@ const AddBikeDrawer = () => {
     color: "",
     price: "",
     image: "" as string | File,
-    features:{
+    features: {
       start: "SELF_START_ONLY",
       engine: "",
       distance: "",
@@ -48,19 +48,19 @@ const AddBikeDrawer = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if(!formValue.name){
+    if (!formValue.name) {
       toast.error("Name is required");
       return;
     }
-    if(!formValue.features.engine){
+    if (!formValue.features.engine) {
       toast.error("Engine is required");
       return;
     }
-    if(!formValue.features.distance){
+    if (!formValue.features.distance) {
       toast.error("Distance is required");
       return;
     }
-    if(!formValue.price){
+    if (!formValue.price) {
       toast.error("Price is required");
       return;
     }
@@ -76,16 +76,16 @@ const AddBikeDrawer = () => {
         formData.append("color", formValue.color);
         formData.append("price", formValue.price);
         formData.append("description", formValue.description);
-        
+
         // Append image only if it's selected
         if (formValue.image) {
           formData.append("image", formValue.image as File);
         }
-  
+
         formData.append("features.start", formValue.features.start);
         formData.append("features.engine", formValue.features.engine);
         formData.append("features.distance", formValue.features.distance);
-  
+
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/bike/create/`,
           {
@@ -110,7 +110,7 @@ const AddBikeDrawer = () => {
       } catch (err: any) {
         reject(err.message);
       }
-    })
+    });
     toast.promise(newPromise, {
       loading: "Adding bike...",
       success: (data) => {
@@ -120,7 +120,7 @@ const AddBikeDrawer = () => {
       error: (err) => {
         return err;
       },
-    })
+    });
   };
   return (
     <AnimatePresence>
@@ -136,15 +136,17 @@ const AddBikeDrawer = () => {
         >
           <div className="flex justify-between items-center p-4 mt-3">
             <h1 className="text-2xl font-bold ">Add New Bike</h1>
-            <LuXCircle
+            <LucideXCircle
               size={24}
               onClick={() => setToggleAddBikeDrawer(false)}
               className="cursor-pointer hover:text-primary transition-all duration-300 ease-linear"
             />
           </div>
-          <form className="p-4 pt-0 space-y-4" onSubmit={handleSubmit}
+          <form
+            className="p-4 pt-0 space-y-4"
+            onSubmit={handleSubmit}
             encType="multipart/form-data"
-           >
+          >
             <div className="grid grid-cols-2  w-full gap-4">
               <div>
                 <label htmlFor="name" className="hidden">
@@ -280,12 +282,11 @@ const AddBikeDrawer = () => {
                   type="file"
                   autoComplete="off"
                   name="image"
-                  onChange={(e) =>{
+                  onChange={(e) => {
                     if (e.target.files && e.target.files.length > 0) {
                       setFormValue({ ...formValue, image: e.target.files[0] });
                     }
-                  }
-                  }
+                  }}
                   id="image"
                   placeholder="Image"
                   className="  w-full appearance-none  focus:outline-none focus:ring-0  peer file:mr-4 file:py-2 file:px-4 
@@ -302,20 +303,28 @@ const AddBikeDrawer = () => {
                 id="start"
                 value={formValue.features.start}
                 className=" border  border-neutral-500 rounded-md px-4 py-2 focus:outline-none focus:border-primary text-neutral-700 w-full"
-                onChange={(e) =>setFormValue({ ...formValue, features: { ...formValue.features, start: e.target.value } })}
+                onChange={(e) =>
+                  setFormValue({
+                    ...formValue,
+                    features: { ...formValue.features, start: e.target.value },
+                  })
+                }
               >
                 <option value="SELF_START_ONLY">Self Start Only</option>
                 <option value="KICK_AND_SELF_START">Kick & Self Start</option>
                 <option value="KICK_START_ONLY">Kick Start Only</option>
               </select>
-              
+
               <input
                 type="text"
                 autoComplete="off"
                 name="engine"
                 value={formValue.features.engine}
                 onChange={(e) =>
-                  setFormValue({ ...formValue, features: { ...formValue.features, engine: e.target.value } })
+                  setFormValue({
+                    ...formValue,
+                    features: { ...formValue.features, engine: e.target.value },
+                  })
                 }
                 id="engine"
                 placeholder="Engine"
@@ -327,7 +336,13 @@ const AddBikeDrawer = () => {
                 name="distance"
                 value={formValue.features.distance}
                 onChange={(e) =>
-                  setFormValue({ ...formValue, features: { ...formValue.features, distance: e.target.value } })
+                  setFormValue({
+                    ...formValue,
+                    features: {
+                      ...formValue.features,
+                      distance: e.target.value,
+                    },
+                  })
                 }
                 id="distance"
                 placeholder="Distance per day"
