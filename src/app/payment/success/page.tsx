@@ -16,7 +16,17 @@ interface TransactionDetails {
   amount: number;
 }
 
-export default function PaymentSuccess() {
+import React, { Suspense } from "react";
+
+export default function PaymentSuccessWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PaymentSuccess />
+    </Suspense>
+  );
+}
+
+function PaymentSuccess() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [verifying, setVerifying] = useState(true);
@@ -150,8 +160,8 @@ export default function PaymentSuccess() {
             <Alert variant="destructive">
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>
-                We couldn't verify your payment. Please contact support if the
-                amount has been deducted.
+                We couldn&apos;t verify your payment. Please contact support if
+                the amount has been deducted.
               </AlertDescription>
             </Alert>
             <Button
