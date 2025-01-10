@@ -50,6 +50,23 @@ const configureAxios = (): Requests => {
     return Promise.reject(error);
   };
 
+  instance.interceptors.request.use((config) => {
+    // Add CSRF token for POST, PUT, DELETE, etc.
+    if (typeof document !== "undefined") {
+      // Retrieve CSRF token from cookies
+      const csrfToken = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("csrftoken="))
+        ?.split("=")[1];
+
+      // Add CSRF token to headers for non-GET requests
+      if (csrfToken && config.method !== "get") {
+        config.headers["X-CSRFToken"] = csrfToken;
+      }
+    }
+
+    return config;
+  });
   instance.interceptors.response.use(
     (response: AxiosResponse) => response,
     (error: AxiosError) => errorHandler(error)
