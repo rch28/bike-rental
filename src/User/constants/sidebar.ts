@@ -26,13 +26,8 @@ export const sidebarList = [
     subList: [
       {
         _id: 1,
-        title: "Active Rentals",
-        path: "/profile/rental/active-rentals",
-      },
-      {
-        _id: 2,
-        title: "Rental History",
-        path: "/profile/rental/rental-history",
+        title: "My Rentals",
+        path: "/profile/rental/my-rentals",
       },
       {
         _id: 3,
