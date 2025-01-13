@@ -35,7 +35,7 @@ const PaymentHistory = () => {
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Payment History</h2>
-      <div className="rounded-md border bg-pink-100 min-h-52 flex justify-center items-center">
+      <div className="rounded-md border bg-pink-100  flex justify-center items-center">
         {isLoading ? (
           <Loading />
         ) : (
@@ -79,6 +79,13 @@ const PaymentHistory = () => {
                   </TableCell>
                 </TableRow>
               ))}
+              {MyPayments?.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center">
+                    No payment history found.
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         )}

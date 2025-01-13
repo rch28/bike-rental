@@ -29,12 +29,12 @@ const PaymentFailure = () => {
           </AlertDescription>
         </Alert>
         <div className="space-y-4">
-          <Button
+          {/* <Button
             onClick={handleRetry}
             className="w-full flex items-center justify-center gap-2"
           >
             Try Again
-          </Button>
+          </Button> */}
           <Button
             variant="outline"
             onClick={handleNavigateHome}

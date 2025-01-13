@@ -111,6 +111,13 @@ const MyRentals = () => {
                   </TableCell>
                 </TableRow>
               ))}
+              {MyRentals?.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={8} className="text-center">
+                    No active rentals found.
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         )}
