@@ -1,17 +1,28 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuChevronDown, LuChevronUp } from "react-icons/lu";
 import { sidebarItem } from "../types/sidebar";
 import { usePathname } from "next/navigation";
 
 const SideBarItem = ({ item }: { item: sidebarItem }) => {
-  const [showSubMenu, setShowSubMenu] = useState(true);
+  const [showSubMenu, setShowSubMenu] = useState(false);
 
   const pathname = usePathname();
   const handleClick = () => {
     setShowSubMenu(!showSubMenu);
   };
+  useEffect(() => {
+    if (item?.subList) {
+      const isInclude = item?.subList.some((item) =>
+        item?.path?.includes(pathname)
+      );
+      if (isInclude && pathname !== "/profile") {
+        setShowSubMenu(true);
+      }
+    }
+  }, [item, pathname]);
+
   return (
     <div className="">
       <div
@@ -50,7 +61,7 @@ const SideBarItem = ({ item }: { item: sidebarItem }) => {
               href={subItem.path}
               key={subItem._id}
               className={`text-sm p-2 rounded-md font-medium pl-6 block hover:bg-blue-100 ${
-                pathname === item?.path && "bg-blue-200"
+                pathname === subItem?.path && "bg-blue-200"
               }`}
             >
               {subItem.title}
