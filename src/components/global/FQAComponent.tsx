@@ -1,4 +1,17 @@
+"use client";
+import { useQuery } from "@tanstack/react-query";
 import { FAQItem } from "./FQAItem";
+import CommonServices from "@/services/commonServices";
+import Loading from "../utils/Loading";
+
+export type FAQ = {
+  id?: string; // UUID (optional for creation)
+  question: string;
+  answer: string;
+  status: "draft" | "published";
+  created_at?: string; // ISO timestamp
+  updated_at?: string; // ISO timestamp
+};
 
 const FAQComponent = () => {
   const faqData = [
@@ -27,12 +40,19 @@ const FAQComponent = () => {
         "Prices vary based on vehicle type and rental duration. Contact the rental company for current rates.",
     },
   ];
-
+  const { data: FAQs, isLoading } = useQuery({
+    queryFn: async () => await CommonServices.getFAQS(),
+    queryKey: ["faqs"],
+    select: (data) => data.data,
+    refetchOnWindowFocus: false,
+  });
   return (
     <div className="w-full p-4 pt-6">
       <div className="   lg:flex gap-4 justify-between rounded overflow-hidden">
         <div className=" flex-1">
-            <span className="text-base font-bold tracking-widest">FQA&apos;S</span>
+          <span className="text-base font-bold tracking-widest">
+            FQA&apos;S
+          </span>
           <h1 className="text-3xl   lg:text-5xl font-bold my-2 ">
             <span className="text-black">General </span>
             <span className="text-primary">Frequently </span>
@@ -49,7 +69,9 @@ const FAQComponent = () => {
         </div>
 
         <div className=" md:p-4 flex-1 align-middle  ">
-          {faqData.map((faq, index) => (
+          {
+            isLoading? <Loading/>:
+          FAQs?.map((faq: FAQ, index: number) => (
             <FAQItem key={index} question={faq.question} answer={faq.answer} />
           ))}
         </div>

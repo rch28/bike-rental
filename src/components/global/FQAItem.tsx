@@ -42,7 +42,7 @@ export const FAQItem = ({
         }`}
       >
         <div className="mt-2 text-gray-600 border-t border-primary py-2">
-          {answer}
+          <div dangerouslySetInnerHTML={{ __html: answer }} />
         </div>
       </div>
     </div>
