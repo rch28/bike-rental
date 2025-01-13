@@ -5,14 +5,19 @@ import { Button } from "../utils/Button";
 import { FaArrowRight } from "react-icons/fa6";
 
 export const Blog = ({
+  id,
   title,
   description,
   date,
   image,
 }: {
+  id: string;
   title: string;
   description: string;
-  date: string;
+  date: {
+    date: string;
+    time: string;
+  };
   image: string;
 }) => {
   return (
@@ -26,11 +31,12 @@ export const Blog = ({
       </div>
       <p className="flex gap-2 items-center py-4">
         <MdDateRange className="text-primary pb-0.5 text-xl" />
-        <span className="font-medium">{date}</span>
+        <span className="font-medium">{date.date}</span>
+        <span className="font-medium">{date.time}</span>
       </p>
       <div className="w-full">
         <Link
-          href={`/blog/${title}`}
+          href={`/blog/${id}`}
           className="text-lg md:text-xl font-bold  hover:text-primary cursor-pointer w-full block "
         >
           {title}
@@ -40,7 +46,7 @@ export const Blog = ({
       {/* Button */}
       <Button
         title="Read More"
-        path={`/blog/${title}`}
+        path={`/blog/${id}`}
         icon={<FaArrowRight />}
         className="text-white my-6  lg:py-3 w-40"
       />
