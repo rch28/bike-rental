@@ -87,7 +87,7 @@ function PaymentSuccess() {
   }, [searchParams]);
 
   const handleNavigateHome = () => {
-    router.push("/profile/rental-management/active-rentals");
+    router.push("/profile/rental/my-rentals");
   };
 
   return (
