@@ -125,13 +125,14 @@ const MyRentals = () => {
                       {rental.payment_status}
                     </div>
                     {rental.payment_status !== "paid" && (
-                      <button className="bg-purple-600 px-2 py-1 rounded-md text-white"></button>
+                      <button className="bg-purple-600 px-2 py-1 rounded-md text-white">
+                        <Link
+                          href={`/bike/rent/${rental.bike_details.id}/${rental.id}`}
+                        >
+                          Pay Now
+                        </Link>
+                      </button>
                     )}
-                    <Link
-                      href={`/bike/rent/${rental.bike_details.id}/${rental.id}`}
-                    >
-                      Pay Now
-                    </Link>
                   </TableCell>
                 </TableRow>
               ))}

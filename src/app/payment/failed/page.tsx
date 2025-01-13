@@ -9,7 +9,7 @@ const PaymentFailure = () => {
 
   const handleRetry = () => {
     // Navigate back to payment initiation page
-    goTo("/payment"); // TODO: Chage this to the correct URL
+    goTo("/profile/rental/my-rentals");
   };
 
   const handleNavigateHome = () => {
@@ -29,12 +29,12 @@ const PaymentFailure = () => {
           </AlertDescription>
         </Alert>
         <div className="space-y-4">
-          {/* <Button
+          <Button
             onClick={handleRetry}
             className="w-full flex items-center justify-center gap-2"
           >
             Try Again
-          </Button> */}
+          </Button>
           <Button
             variant="outline"
             onClick={handleNavigateHome}
