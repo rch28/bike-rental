@@ -61,6 +61,7 @@ const useEsewaPayment = () => {
         }
       } catch (error) {
         if (error instanceof AxiosError && error.response?.data?.detail) {
+          console.log("error", error);
           const errMsg = error?.response?.data?.detail;
           reject(errMsg);
         } else if (error instanceof Error) {

@@ -28,8 +28,9 @@ const PayAtPickup = ({ rentalDetails }: OnlinePaymentProps) => {
           resolve(response?.message);
         }
       } catch (error) {
-        if (error instanceof AxiosError && error.response?.data?.detail) {
-          const errMsg = error?.response?.data?.detail;
+        if (error instanceof AxiosError && error) {
+          const errMsg =
+            error?.response?.data?.detail || error?.response?.data?.error;
           reject(errMsg);
         } else if (error instanceof Error) {
           reject(error?.message);
