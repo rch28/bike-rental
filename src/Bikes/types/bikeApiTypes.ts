@@ -40,6 +40,7 @@ export type Bike = {
   ratings_count: number;
   ratings: Rating[];
   locations: LocationListResponse[];
+  status: "AVAILABLE" | "MAINTENANCE" | "RESERVED" | "IN_USE";
 };
 
 // Define the API response type

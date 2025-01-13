@@ -16,6 +16,7 @@ export const BikeComponent = ({ bike }: { bike: Bike }) => {
     distance,
     price,
     isAvailable,
+    status,
   } = bike;
 
   return (
@@ -55,9 +56,9 @@ export const BikeComponent = ({ bike }: { bike: Bike }) => {
           <FaRoad className="text-primary" />
           <span>{distance}</span>
         </span>
-        <span className="flex items-center gap-2 bg-purple-300 px-4 py-1 rounded-full text-sm font-semibold">
+        <span className="flex items-center gap-2 bg-purple-300 px-4 py-1 rounded-full text-sm font-semibold capitalize">
           <span className={isAvailable ? "text-primary" : "text-red-500"}>
-            {isAvailable ? "Available" : "Not Available"}
+            {status.toLocaleLowerCase()}
           </span>
         </span>
       </div>
