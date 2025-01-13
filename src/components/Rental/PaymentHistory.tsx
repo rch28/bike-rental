@@ -1,20 +1,26 @@
+"use client";
 import { Calendar, CreditCard } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+import { useQuery } from "@tanstack/react-query";
+import RentalServices from "@/services/RentalServices";
+import Loading from "../utils/Loading";
 type Status = "pending" | "paid" | "failed" | "refunded";
 
 const PaymentHistory = () => {
-  // In a real app, this would come from an API
-  const payments = [
-    {
-      id: "123e4567-e89b-12d3-a456-426614174000",
-      bike: "Mountain Bike Pro",
-      payment_date: "2025-01-13T10:00:00",
-      payment_status: "paid",
-      payment_method: "online",
-      total_amount: "45.00",
-    },
-  ];
+  const { data: MyPayments, isLoading } = useQuery({
+    queryFn: async () => await RentalServices.getMyPayments(),
+    queryKey: ["my-payments"],
+    refetchOnWindowFocus: false,
+  });
 
   const getPaymentStatusColor = (status: Status) => {
     const colors: Record<Status, string> = {
@@ -27,39 +33,56 @@ const PaymentHistory = () => {
   };
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Payment History</h2>
-      {payments.map((payment) => (
-        <Card key={payment.id} className="w-full">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-xl">{payment.bike}</CardTitle>
-            <Badge className={getPaymentStatusColor(payment.payment_status)}>
-              {payment.payment_status.toUpperCase()}
-            </Badge>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex items-center space-x-2">
-                <Calendar className="h-4 w-4" />
-                <div>
-                  <p className="text-sm text-gray-500">Payment Date</p>
-                  <p>{new Date(payment.payment_date).toLocaleDateString()}</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CreditCard className="h-4 w-4" />
-                <div>
-                  <p className="text-sm text-gray-500">Payment Method</p>
-                  <p>{payment.payment_method.toUpperCase()}</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end items-center pt-4 border-t">
-              <p className="font-bold">${payment.total_amount}</p>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+      <div className="rounded-md border bg-pink-100 min-h-52 flex justify-center items-center">
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Bike</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Payment Date</TableHead>
+                <TableHead>Payment Method</TableHead>
+                <TableHead className="text-right">Amount</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {MyPayments?.map((payment: any) => (
+                <TableRow key={payment.id}>
+                  <TableCell className="font-medium">
+                    {payment.product.bike_details.name}
+                  </TableCell>
+                  <TableCell>
+                    <Badge className={getPaymentStatusColor(payment.status)}>
+                      {payment.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="h-4 w-4" />
+                      <span>
+                        {new Date(payment.payment_date).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center space-x-2">
+                      <CreditCard className="h-4 w-4" />
+                      <span>{payment.payment_via.toUpperCase()}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-right font-bold">
+                    ${payment.total_amount}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+      </div>
     </div>
   );
 };

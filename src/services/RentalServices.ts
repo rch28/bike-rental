@@ -10,5 +10,12 @@ const RentalServices = {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
+
+  // get my payment history
+  getMyPayments: async () => {
+    return requests.get("payment/my-payments/", {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
 };
 export default RentalServices;
