@@ -27,20 +27,15 @@ type PaymentPageProps = {
 const PaymentPage = ({ params }: PaymentPageProps) => {
   const { bikeId, rentId } = use(params);
 
-  if (!bikeId || !rentId) {
-    return (
-      <div className="h-96 flex justify-center items-center">
-        <Loading />
-      </div>
-    );
-  }
   const { data: rentalDetails, isLoading } = useQuery({
-    queryFn: async () => RentBikeServices.getSingleRent(rentId),
+    queryFn: async () => {
+      if (!rentId) return null; // Handle invalid rentId
+      return RentBikeServices.getSingleRent(rentId);
+    },
     queryKey: ["rental", rentId],
     refetchOnWindowFocus: false,
+    enabled: Boolean(rentId), // Disable the query if rentId is missing
   });
-  console.log("rentalDetails", rentalDetails);
-
   // const rentalDetails = await RentBikeServices.getSingleRent(rentId);
   const getDays = (start: string, end: string) => {
     const startDate = new Date(start);
@@ -55,6 +50,13 @@ const PaymentPage = ({ params }: PaymentPageProps) => {
 
     return `${date} | ${time}`;
   };
+  if (!bikeId || !rentId) {
+    return (
+      <div className="h-96 flex justify-center items-center">
+        <Loading />
+      </div>
+    );
+  }
   return (
     <Layout>
       {isLoading ? (
