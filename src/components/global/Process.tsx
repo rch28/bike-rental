@@ -17,7 +17,7 @@ export const Process = () => {
     {
       id: 2,
       title: "Choose Perfect  Bike",
-      description: "Select your required car and bike for your journey.",
+      description: "Select your required bike for your journey.",
       icon: <FaBiking />,
     },
     {

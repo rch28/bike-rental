@@ -35,8 +35,8 @@ export const AboutUs = () => {
           <p className="text-gray-600 font-medium leading-8">
             <span className="font-bold "> With My Bikes </span> offer self-ride
             two wheelers and four wheelers on rent in Nepal. If you are looking
-            for bike or car on rent just My Bikes is the best option to make
-            your trip memorable.
+            for bike on rent with My Bikes is the best option to make your trip
+            memorable.
           </p>
 
           {/* list  */}
